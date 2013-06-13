@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet Quick Start Guide Example</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+	<!--[if lte IE 8]>
+	    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+	<![endif]-->
+	<style>
+		body {
+    		padding: 0;
+    		margin: 0;
+		}
+		html, body, #map {
+    		height: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+
+	<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+	<script>
+
+		var map = L.map('map');
+
+		L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+		}).addTo(map);
+
+		var soft_serve = L.marker([49.8322, 23.9986]).addTo(map);
+		soft_serve.bindPopup('Here is Lviv3 office of SoftServe').openPopup();
+
+		function onLocationFound(e) {
+		    var radius = e.accuracy / 2;
+
+		    L.marker(e.latlng).addTo(map)
+		        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+		    L.circle(e.latlng, radius).addTo(map);
+		}
+		map.on('locationfound', onLocationFound);
+
+		map.locate({setView: true, maxZoom: 16});
+		var popup = L.popup();
+
+		function onMapClick(e) {
+			popup
+				.setLatLng(e.latlng)
+				.setContent("You clicked the map at " + e.latlng.toString())
+				.openOn(map);
+		}
+
+		map.on('click', onMapClick);
+
+	</script>
+</body>
+</html>
