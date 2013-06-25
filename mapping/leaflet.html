@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet Quick Start Guide Example</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+	<!--[if lte IE 8]>
+	    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+	<![endif]-->
+	<style>
+		body {
+    		padding: 0;
+    		margin: 0;
+		}
+		html, body, #map, #sidebar {
+    		height: 100%;
+		}
+		
+  		#sidebar {
+			position: absolute;
+			left: 0;
+			width: 30em;
+			background-color:black;
+			color: white;
+		}
+		#log {
+			overflow-y: scroll;
+		}
+
+		#map {
+			margin-left: 30em;
+		}
+	</style>
+</head>
+<body>
+	<div id="sidebar">
+		<p>Впишіть в поле нижче назву якогось об’єкту опис якого є на українській вікіпедії та натисніть Enter</p>
+		<input type="text" id="text_input"></input>
+		<pre id="log"></pre>
+	</div>
+	<div id="map"></div>
+	<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+	<script>
+	(function ($) {
+		var map = L.map('map', {
+			center: [50.45, 30.52],
+			zoom: 12
+		});
+
+		var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+		var osmAttrib='Map data © OpenStreetMap contributors';
+		var osm = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 12, attribution: osmAttrib});
+
+		var cloudmade = new L.TileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+			maxZoom: 18,
+			attribution: 'Дані карти &copy; учасники проекту <a href="http://openstreetmap.org">OpenStreetMap</a>, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, зображення © <a href="http://cloudmade.com">CloudMade</a>'
+		});
+		map.addLayer(osm);
+
+		function minutes2decimal(coord) {
+			var deg = coord.slice(0, 2),
+				min = coord.slice(3, 5),
+				sec = coord.slice(6, 8);
+			return parseInt(deg) + (parseInt(min) + parseInt(sec) / 60.0) / 60.0;
+		}
+
+		$(function(){
+			var $text_input = $('#text_input'),
+				$log = $('#log');
+
+			var add_wiki_object_to_map = function(wiki_obj) {
+				$log.append('Шукаю "' + wiki_obj + '"\n');
+				$.getJSON("http://uk.wikipedia.org/w/api.php?action=parse&format=json&callback=?", 
+					{page:wiki_obj, prop:"text"},
+					 function(data) {
+					 	if(!data.parse) {
+					 		$log.append('Нема даних\n');
+					 		return;
+					 	}
+					 	var html = $('<div>' + data.parse.text['*'] + '</div>'); // adding parent element for .find to work
+					 	var info = html.find('p').first();
+					 	debugger;
+					 	var geo = html.find('span.geo-dms');
+					 	if(geo.length == 0) {
+					 		$log.append('Нема координат на сторінці "' + wiki_obj + '"\n');
+					 		return;
+					 	};
+					 	var lat = $(geo[0]).find('.latitude').html();
+					 	var lon = $(geo[0]).find('.longitude').html();
+					 	var coord = new L.LatLng(minutes2decimal(lat), minutes2decimal(lon));
+					 	$log.append('Завантажуємо координати ' + coord + '\n')
+					 	map.panTo(coord);
+					 	L.marker(coord).addTo(map).bindPopup(
+					 		'<h2><a href="http://uk.wikipedia.org/wiki/' + wiki_obj + '">' +
+					 		wiki_obj + '</a></h2>' + info.html()
+					 	).openPopup();
+					 }
+				);
+			};
+			$text_input.keypress(function(e) {
+				if(e.which == 13) {
+					add_wiki_object_to_map($text_input.val());
+				}
+			})
+			$text_input.val('Івано-Франківськ');
+			var e = jQuery.Event('keypress');
+			e.which = 13;
+			$text_input.trigger(e);
+		})
+	})(jQuery);
+
+	</script>
+</body>
+</html>
