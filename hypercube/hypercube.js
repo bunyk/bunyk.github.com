@@ -1,5 +1,5 @@
 
-define(['svglib'], function(svg) {
+define(['hypercube/svglib'], function(svg) {
     var Point = svg.Point;
 	var Hypercube = function (DIMENSIONS) {
 		VERTEXES = 1 << DIMENSIONS;
