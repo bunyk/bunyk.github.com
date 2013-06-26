@@ -1,5 +1,5 @@
 
-define(['hypercube/svglib'], function(svg) {
+define(['svglib', 'matrix'], function(svg, Matrix) {
     var Point = svg.Point;
 	var Hypercube = function (DIMENSIONS) {
 		VERTEXES = 1 << DIMENSIONS;
@@ -7,24 +7,16 @@ define(['hypercube/svglib'], function(svg) {
         console.log(DIMENSIONS,'-dimensional cube have ', VERTEXES, 'vertexes and', EDGES, 'edges');
 
         function Vertex(number) {
-            this.coords = [];
-			for(var i = 0; i < DIMENSIONS; i++) {
-				this.coords[i] = (0.5 - (number & 1));
+            this.coords = new Matrix(DIMENSIONS, 1, function (x, y) {
+                var res = 0.5 - (number & 1);
 				number >>= 1;
-			}
-            this.point = new Point(this.coords[0], this.coords[1]);
+                return res;
+            });
+            this.point = new Point(this.coords.data[0], this.coords.data[1]);
         }
         Vertex.prototype.project_with_matrix = function (matrix) {
-            console.log(matrix);
-            var res = [];
-            for(var j = 0; j < 2; j++) {
-                res[j] = 0;
-                for(var i = 0; i < DIMENSIONS; i++) {
-                    res[j] += this.coords[i] * matrix[j][i];
-                };
-            };
-            console.log(this.coords, '->', res);
-            this.point.x = res[0]
+            var res = this.coords.mult(matrix);
+            this.point.x = res.data[0]
             this.point.y = res[1];
         };
 
@@ -48,6 +40,7 @@ define(['hypercube/svglib'], function(svg) {
 			for(var i = 0; i < VERTEXES; i++) {
                 this.vertexes[i] = new Vertex(i);
             }
+
             this.lines = [];
             for(var i = 0; i < EDGES; i++)
             {
@@ -57,15 +50,9 @@ define(['hypercube/svglib'], function(svg) {
             	);
             }
 
-            this.matrix = [];
-            this.matrix[0] = [];
-            this.matrix[1] = [];
-            for(var i = 0; i < DIMENSIONS; i++) {
-                this.matrix[0][i] = 0;
-                this.matrix[1][i] = 0;
-            }
-            this.matrix[0][0] = 1;
-            this.matrix[1][1] = 1;
+            this.matrix = new Matrix(2, DIMENSIONS, function(x, y) {
+                return x == y ? 1 : 0;
+            });
 		}
 
 		this.rotate_matrix = function (a, b, angle) { // rotates cube inside plane ab
@@ -73,7 +60,7 @@ define(['hypercube/svglib'], function(svg) {
             var c = Math.cos(angle),
                 s = Math.sin(angle);
 
-            var rot_m = function (x, y) { // sparse rotational matrix
+            var rot_f = function (x, y) {
                 if (x == a) {
                     if (y == a) return c;
                     if (y == b) return -s;
@@ -83,24 +70,8 @@ define(['hypercube/svglib'], function(svg) {
                     if (y == b) return c;
                 };
                 return 0;
-            };
-            console.log(this.matrix);
-
-            var new_matrix = [];
-            for(var row = 0; row < 2; row ++) {
-                new_matrix[row] = [];
-                for(var i = 0; i < DIMENSIONS; i++) {
-                    var res = 0;
-                    for(var j = 0; j < DIMENSIONS; j++) {
-                        res += this.matrix[row][j] * rot_m(j, i);
-                    }
-                    new_matrix[row][i] = res;
-                }
-                console.log(new_matrix[row]);
-            };
-            console.log('');
-            this.matrix = new_matrix;
-
+            }; // sparse rotation matrix
+            var rot_m = new Matrix(DIMENSIONS, DIMENSIONS, rot_f, true);
         };
         this.update_projection = function() {
         	for(var i = 0; i < VERTEXES; i++)

@@ -1,16 +1,22 @@
 define([], function() {
-    var Matrix = function(width, height, indicator_function, sparse=false) {
+    var Matrix = function(width, height, data, sparse) {
+        if(typeof(data) === 'undefined')
+            data = function() { return 0; };
         this.width = width;
         this.height = height;
         if(sparse) {
-            this.indicator = indicator_function;
+            this.indicator = data;
         } else { // sparse matrices don't use arrays, and are not mutable
-            this.data = [];
-            for(var i = 0; i < height; i++) {
-                this.data[i] = [];
-                for(var j = 0; j < width; j++) {
-                    this.data[i][j] = indicator_function(j, i);
+            if(typeof(data) === 'function') {
+                this.data = [];
+                for(var i = 0; i < height; i++) {
+                    this.data[i] = [];
+                    for(var j = 0; j < width; j++) {
+                        this.data[i][j] = data(j, i);
+                    };
                 };
+            } else {
+                this.data = data;
             };
         };
     };
@@ -23,16 +29,17 @@ define([], function() {
     Matrix.prototype.html = function() {
         var html = ['<table class="matrix">'];
         for(var i = 0; i < this.height; i++) {
-            html.append('<tr>');
+            html.push('<tr>');
             for(var j = 0; j < this.width; j++) {
-                html.append('<td>' + this.data[i][j] + '</td>');
+                html.push('<td>' + this.data[i][j] + '</td>');
             };
-            html.append('</tr>');
+            html.push('</tr>');
         };
         return html.join('');
     };
     Matrix.prototype.mult = function(other) {
         if (this.width != other.height) {
+            console.log(this, other);
             throw "error: incompatible matrix sizes for multiplication";
         }
         var result = [];
@@ -46,7 +53,7 @@ define([], function() {
                 result[i][j] = sum;
             }
         }
-        return new Matrix(result); 
+        return new Matrix(other.width, this.height, result); 
     };
     return Matrix;
 });

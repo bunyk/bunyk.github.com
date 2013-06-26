@@ -3,7 +3,11 @@ require.config({
     paths: {
         QUnit: 'jslibs/qunit/qunit',
         jquery: ['http://code.jquery.com/jquery-1.10.0.min', '../jslibs/jquery-2.0.2.min'],
-        radio: ['jslibs/radio.min']
+        radio: ['jslibs/radio.min'],
+        hypercube_test: 'hypercube/tests',
+        hypercube: 'hypercube/hypercube',
+        matrix: 'hypercube/matrix',
+        svglib: 'hypercube/svglib'
     },
     shim: {
         'QUnit': {
@@ -18,7 +22,7 @@ require.config({
 
 require([
     'QUnit',
-    'hypercube/tests'
+    'hypercube_test'
 ], function(QUnit, hypercube_test) {
     hypercube_test.run();
 
