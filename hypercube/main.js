@@ -1,16 +1,17 @@
 require.config({
     paths: {
-        jquery: ['http://code.jquery.com/jquery-1.10.0.min', 'jslibs/jquery-2.0.2.min'],
+        jquery: ['http://code.jquery.com/jquery-1.10.0.min', '../jslibs/jquery-2.0.2.min'],
+        radio: ['../jslibs/radio.min']
     }
 });
 
 require([
-    "svg_bind",
+    "svglib",
     "hypercube"
-], function(svg_bind, hypercube) {
+], function(svglib, hypercube) {
     // the app is loaded...
 	$(function() {
-		var svg = new svg_bind.SVG('#surface', 500, 500);
+		var svg = new svglib.SVG('#surface', 500, 500);
         var dimensions = 3;
 		var cube = new hypercube.Hypercube(dimensions);
 		cube.reset(svg);
@@ -18,7 +19,6 @@ require([
         cube.rotate(a_d, b_d, 45);
 
 
-        /*
 		setInterval(function() {
             cube.rotate(a_d, b_d, 5);
             if (Math.random() < 0.01) {
@@ -26,7 +26,6 @@ require([
                 b_d = (b_d + 1) % dimensions;
             };
         }, 200);
-        */
 	});
 
 });

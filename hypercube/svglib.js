@@ -1,4 +1,4 @@
-define(['jquery'], function($) {
+define(['jquery', 'radio'], function($, radio) {
 	var Point = function (x, y) {
 		this._x = x;
 		this._y = y;
@@ -7,7 +7,7 @@ define(['jquery'], function($) {
 			get: function () { return this._x },
 			set: function (value) {
                 this._x = value;
-                this.onMoveX(); 
+                radio('move_x').broadcast(this);
             }
 		})
 		Object.defineProperty(this, 'y', {
@@ -15,12 +15,22 @@ define(['jquery'], function($) {
 			get: function () { return this._y },
 			set: function (value) {
                 this._y = value;
-                this.onMoveY();
+                radio('move_y').broadcast(this);
             }
 		})
 	};
-	Point.prototype.onMoveX = function () {};
-	Point.prototype.onMoveY = function () {};
+	Point.prototype.onMoveX = function (cb) {
+        var that = this;
+        radio('move_x').subscribe(function(point) {
+            if(point == that) cb();
+        });
+    };
+	Point.prototype.onMoveY = function (cb) {
+        var that = this;
+        radio('move_y').subscribe(function(point) {
+            if(point == that) cb();
+        });
+    };
 
 	var Line = function (svg, a, b) {
 		this.a = a;
@@ -32,28 +42,20 @@ define(['jquery'], function($) {
 		this.element.setAttribute('x2', svg.x(this.b.x));
 		this.element.setAttribute('y2', svg.y(this.b.y));
 
-        that_a_mx = this.a.onMoveX.bind(this);
-		this.a.onMoveX = (function () {
-            this.element.setAttribute('x1', svg.x(this.a.x));
-            //that_a_mx();
-        }).bind(this);
+        var that = this;
 
-        that_a_my = this.a.onMoveY.bind(this);
-		this.a.onMoveY = (function () {
-            this.element.setAttribute('y1', svg.y(this.a.y));
-            //that_a_my();
-        }).bind(this);
-
-        that_b_mx = this.b.onMoveX.bind(this);
-		this.b.onMoveX = (function () {
-            this.element.setAttribute('x2', svg.x(this.b.x));
-            //that_b_mx();
-        }).bind(this);
-        that_b_my = this.b.onMoveY.bind(this);
-		this.b.onMoveY = (function () {
-            this.element.setAttribute('y2', svg.y(this.b.y));
-            //that_b_my();
-        }).bind(this);
+        this.a.onMoveX(function() {
+            that.element.setAttribute('x1', svg.x(that.a.x));
+        });
+        this.a.onMoveY(function() {
+            that.element.setAttribute('y1', svg.y(that.a.y));
+        });
+        this.b.onMoveX(function() {
+            that.element.setAttribute('x2', svg.x(that.b.x));
+        });
+        this.b.onMoveY(function() {
+            that.element.setAttribute('y2', svg.y(that.b.y));
+        });
 
 		svg.$element.append(this.element);
 	};
