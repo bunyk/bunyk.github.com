@@ -1,13 +1,13 @@
-
-define(['svglib', 'matrix'], function(svg, Matrix) {
+"use strict";
+define(['svglib', 'matrix'], function(svg, matrix) {
     var Point = svg.Point;
 	var Hypercube = function (DIMENSIONS) {
-		VERTEXES = 1 << DIMENSIONS;
-		EDGES = DIMENSIONS * (1 << (DIMENSIONS - 1));
+		var VERTEXES = 1 << DIMENSIONS,
+		    EDGES = DIMENSIONS * (1 << (DIMENSIONS - 1));
         console.log(DIMENSIONS,'-dimensional cube have ', VERTEXES, 'vertexes and', EDGES, 'edges');
 
         function Vertex(number) {
-            this.coords = new Matrix(DIMENSIONS, 1, function (x, y) {
+            this.coords = new matrix.Matrix(DIMENSIONS, 1, function (x, y) {
                 var res = 0.5 - (number & 1);
 				number >>= 1;
                 return res;
@@ -15,8 +15,8 @@ define(['svglib', 'matrix'], function(svg, Matrix) {
             this.point = new Point(this.coords.data[0], this.coords.data[1]);
         }
         Vertex.prototype.project_with_matrix = function (matrix) {
-            var res = this.coords.mult(matrix);
-            this.point.x = res.data[0]
+            var res = this.coords.mult(matrix).data[0];
+            this.point.x = res[0]
             this.point.y = res[1];
         };
 
@@ -50,9 +50,7 @@ define(['svglib', 'matrix'], function(svg, Matrix) {
             	);
             }
 
-            this.matrix = new Matrix(2, DIMENSIONS, function(x, y) {
-                return x == y ? 1 : 0;
-            });
+            this.matrix = new matrix.Matrix(DIMENSIONS, DIMENSIONS, matrix.identity); 
 		}
 
 		this.rotate_matrix = function (a, b, angle) { // rotates cube inside plane ab
@@ -60,18 +58,12 @@ define(['svglib', 'matrix'], function(svg, Matrix) {
             var c = Math.cos(angle),
                 s = Math.sin(angle);
 
-            var rot_f = function (x, y) {
-                if (x == a) {
-                    if (y == a) return c;
-                    if (y == b) return -s;
-                };
-                if (x == b) {
-                    if (y == a) return s;
-                    if (y == b) return c;
-                };
-                return 0;
-            }; // sparse rotation matrix
-            var rot_m = new Matrix(DIMENSIONS, DIMENSIONS, rot_f, true);
+            // rotation matrix
+            var rot_m = new matrix.Matrix(DIMENSIONS, DIMENSIONS, matrix.identity);
+            rot_m.set(a, a, c); rot_m.set(a, b, -s);
+            rot_m.set(b, a, s); rot_m.set(b, b, c);
+
+            this.matrix = this.matrix.mult(rot_m);
         };
         this.update_projection = function() {
         	for(var i = 0; i < VERTEXES; i++)

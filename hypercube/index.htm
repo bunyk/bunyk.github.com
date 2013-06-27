@@ -5,9 +5,39 @@
 	<meta charset="utf-8" />    
     <script type="text/javascript" src="../jslibs/require.js" data-main="main.js"></script>
 	<link rel="stylesheet" href="../styles/matrix.css" />
+    <style>
+#surface, #matrix {
+    float: left;
+    margin: 30px;
+}
+#surface {
+    background-color: #DDFFDD;
+    border: solid black 1px;
+}
+    </style>
 </head>
 <body>
+    <p>Чи знаєте ви, що <a href="http://uk.wikipedia.org/wiki/%D0%9C%D0%B0%D1%82%D1%80%D0%B8%D1%86%D1%8F_%D0%BF%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D1%82%D1%83">матриця повороту</a> може мати розмір не тільки 2 &times; 2 та 3 &times; 3, а загалом довільного n &times n? Так от, виявляється може, самі погляньте:</p>
 	<div id="surface"></div>
 	<div id="matrix"></div>
+    <br clear="left"/>
+    <h2>TODO:</h2>
+    <ul>
+        <li>Додати контролери зручного редагування матриці повороту: зміни її розмірностей, вибору площин повертання, ручного повороту, та й взагалі, ручного редагування, це ж не обов’язково тільки матриця повороту. :)</li>
+        <li>Заюзати якийсь фреймворк для класів та MVC.</li>
+        <li>Більше модульного тестування!</li>
+        <li>Придумати якусь топологію окрім кубика... <a href="http://bunyk.wordpress.com/2009/04/27/n-dimensional-cube/">Кубик я вже дуже давно придумав...</a></li>
+    </ul>
+
+    <h2>Використані технології:</h2>
+    <ul>
+        <li>Вбудовуваний в HTML5 SVG для промальовування.</li>
+        <li>Require.js для модульності.</li>
+        <li>jQuery для зміни DOM.</li>
+        <li>radio.js для реалізації події переміщення точки.</li>
+        <li>QUnit для невеличкого модульного тестування.</li>
+    </ul>
+    <hr />
+    <a href="http://bunyk.wordpress.com/2009/04/27/n-dimensional-cube/">Буник Тарас</a>, 2013. 
 </body>
 </html>

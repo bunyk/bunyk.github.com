@@ -1,3 +1,4 @@
+"use strict";
 define([], function() {
     var Matrix = function(width, height, data, sparse) {
         if(typeof(data) === 'undefined')
@@ -26,12 +27,15 @@ define([], function() {
     Matrix.prototype.set = function(x, y, value) {
         this.data[y][x] = value;
     };
+    var cell = function (x) {
+        return (x > 0 ? '&nbsp;' : '') + x.toFixed(2);
+    };
     Matrix.prototype.html = function() {
         var html = ['<table class="matrix">'];
         for(var i = 0; i < this.height; i++) {
             html.push('<tr>');
             for(var j = 0; j < this.width; j++) {
-                html.push('<td>' + this.data[i][j] + '</td>');
+                html.push('<td>' + cell(this.data[i][j]) + '</td>');
             };
             html.push('</tr>');
         };
@@ -55,5 +59,11 @@ define([], function() {
         }
         return new Matrix(other.width, this.height, result); 
     };
-    return Matrix;
+    var identity = function(x, y) {
+        return x == y ? 1 : 0;
+    };
+    return {
+        'Matrix': Matrix,
+        'identity': identity
+    };
 });

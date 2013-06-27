@@ -60,7 +60,8 @@ define(['jquery', 'radio'], function($, radio) {
 		svg.$element.append(this.element);
 	};
 
-	var SVG = function (selector, width, height) {
+	var SVG = function (selector, width, height, a) {
+        this.a = a || 2.0; // default side of square is 2, from -1 to 1
 		this.width = width;
 		this.height = height;
 		this.$element = $('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" ' + 
@@ -82,10 +83,10 @@ define(['jquery', 'radio'], function($, radio) {
             return this.line4.apply(this, arguments);
     };
 	SVG.prototype.x = function (val) {
-		return (val + 1) * this.width / 2.0;
+		return (val / this.a + 0.5) * this.width;
 	};
 	SVG.prototype.y = function (val) {
-		return (val + 1) * this.height / 2.0;
+		return (val / this.a + 0.5) * this.height;
 	};
 
     return {

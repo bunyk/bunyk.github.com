@@ -26,4 +26,6 @@
 .matrix td {
     padding: 5px;    
     text-align: center;
+    font-family: monospace;
+    font-weight: bold;
 }
