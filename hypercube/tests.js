@@ -1,8 +1,9 @@
 "use strict";
 
-define(['matrix', 'hypercube'], function(Matrix, hypercube) {
+define(['matrix', 'hypercube'], function(matrix, hypercube) {
     var run = function () {
         module("Matrix tests");
+        var Matrix = matrix.Matrix;
         test("Zero filled matrix can be created", function() {
             var m = new Matrix(2, 2);
             deepEqual(m.data, [[0, 0], [0, 0]]);
@@ -24,8 +25,6 @@ define(['matrix', 'hypercube'], function(Matrix, hypercube) {
                 c = a.mult(b);
             deepEqual(c.data, [[22, 28], [49, 64]]);
         });
-
-
     };
     return {run: run};
 });

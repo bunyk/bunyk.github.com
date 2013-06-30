@@ -70,6 +70,9 @@ define(['jquery', 'radio'], function($, radio) {
 		);
 		$(selector).append(this.$element);
 	};
+    SVG.prototype.clear = function () {
+        this.$element.html('');
+    };
 	SVG.prototype.line4 = function(ax, ay, bx, by) {
 		return this.line2(new Point(ax, ay), new Point(bx, by));
 	};

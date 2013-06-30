@@ -4,6 +4,7 @@ define(['svglib', 'matrix'], function(svg, matrix) {
 	var Hypercube = function (DIMENSIONS) {
 		var VERTEXES = 1 << DIMENSIONS,
 		    EDGES = DIMENSIONS * (1 << (DIMENSIONS - 1));
+
         console.log(DIMENSIONS,'-dimensional cube have ', VERTEXES, 'vertexes and', EDGES, 'edges');
 
         function Vertex(number) {
@@ -35,6 +36,7 @@ define(['svglib', 'matrix'], function(svg, matrix) {
 		}
 
 		this.reset = function (svg) { // sets cube into orthogonal position
+            svg.clear();
 			this.svg = svg;
 			this.vertexes = [];
 			for(var i = 0; i < VERTEXES; i++) {
@@ -51,6 +53,7 @@ define(['svglib', 'matrix'], function(svg, matrix) {
             }
 
             this.matrix = new matrix.Matrix(DIMENSIONS, DIMENSIONS, matrix.identity); 
+            this.update_projection();
 		}
 
 		this.rotate_matrix = function (a, b, angle) { // rotates cube inside plane ab
