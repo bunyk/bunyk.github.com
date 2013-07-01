@@ -1,0 +1,10 @@
+body {
+    padding: 1px 25px;
+    margin: 10px 50px;
+}
+
+/* hidden by default block with widgets to show after js is loaded */
+.widget_block {
+    display: none;
+    overflow: hidden; /* to turn off floating of elements outside of this block around elements inside */
+}

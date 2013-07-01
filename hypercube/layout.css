@@ -1,0 +1,14 @@
+#surface, #matrix {
+    float: left;
+    margin: 30px;
+}
+#surface {
+    background-color: #DDFFDD;
+    border: solid black 1px;
+    position: relative;
+}
+#panel {
+    margin: 3px;
+    height: 32px;
+    left: 0px; top: 0px;
+}

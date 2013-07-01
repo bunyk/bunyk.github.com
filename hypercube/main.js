@@ -54,6 +54,6 @@ require([
             };
         });
         $('#play_pause .play').hide();
-        $('.demo').show();
+        $('.widget_block').show();
 	});
 });
