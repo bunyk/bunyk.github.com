@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <title><%block name="title" /></title>
 
-        <link rel="stylesheet" href="styles/global_layout.css" />
+        <link rel="stylesheet" href="/styles/global_layout.css" />
         <%block name="head" />
     </head>
 <body>
@@ -15,6 +15,7 @@
 <%block name="footer">
     <hr />
     <a href="http://bunyk.wordpress.com/">Bunyk Taras</a>, ${u.current_year()}. 
+    ${u.google_analytics()}
 </%block>
 
 </body>

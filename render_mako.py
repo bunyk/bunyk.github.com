@@ -16,4 +16,4 @@ def render(filename):
 if __name__ == '__main__':
     if(len(sys.argv) < 2):
         print('You should pass template name')
-    print(render(sys.argv[1]))
+    render(sys.argv[1])
