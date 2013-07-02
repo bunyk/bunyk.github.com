@@ -5,12 +5,27 @@
         <meta charset="utf-8" />
         <title>Bunyk's humble home page</title>
 
-        <link rel="stylesheet" href="/styles/global_layout.css" />
+        <link rel="stylesheet" href="./styles/global_layout.css" />
+        <link rel="stylesheet" href="../styles/bootstrap.min.css" />
         
     </head>
 <body>
-    <h1>Bunyk's humble home page</h1>
-    
+    <div class="navbar">
+    <div class="navbar-inner">
+        <span class="brand">Bunyk: </span>
+        <ul class="nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/resume/">CV</a></li>
+        <li><a href="/hypercube/">Hypercube hack</a></li>
+        <li><a href="/deutsch/">Німецька сторіночка</a></li>
+        <li><a href="http://bunyk.wordpress.com/">Блоґ</a></li>
+        </ul>
+    </div>
+    </div>
+
+    <div class="container">
+        <h1>Bunyk's humble home page</h1>
+        
 
 
 
@@ -28,6 +43,7 @@ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www')
 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();</script>
 
 
+    </div>
 
 
     <hr />
