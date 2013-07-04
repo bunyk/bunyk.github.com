@@ -8,3 +8,9 @@ body {
     display: none;
     overflow: hidden; /* to turn off floating of elements outside of this block around elements inside */
 }
+
+@media print {
+    .navbar {
+        display: none !important;
+    }
+}

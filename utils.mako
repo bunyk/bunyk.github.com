@@ -7,6 +7,14 @@
     ${datetime.datetime.now().strftime('%Y %B %d, %H:%M')}
 </%def>
 
+<%def name="li_menu(page)" filter="trim">
+    %if page == filename:
+        <li class = "active">
+    % else:
+        <li>
+    %endif
+</%def>
+
 <%def name="google_analytics()">
 <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-42001280-1']); _gaq.push(['_trackPageview']);
 (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

@@ -11,7 +11,7 @@ def render(filename):
     filename = filename[:-len('.mako')]
 
     with open(filename + '.html', 'w') as f:
-        f.write(template.render())
+        f.write(template.render(filename=filename))
 
 if __name__ == '__main__':
     if(len(sys.argv) < 2):

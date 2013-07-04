@@ -1,32 +1,32 @@
 
 <!DOCTYPE html>
-<html><!-- this html is generated from mako! -->
+<html><!-- this html is generated from resume/index.mako! -->
     <head>
         <meta charset="utf-8" />
         <title>Taras Bunyk</title>
 
-        <link rel="stylesheet" href="./styles/global_layout.css" />
-        <link rel="stylesheet" href="../styles/bootstrap.min.css" />
+        <link rel="stylesheet" href="/styles/global_layout.css" />
+        <link rel="stylesheet" href="/styles/bootstrap.min.css" />
         
 	<link rel="stylesheet" href="style.css" />
 
     </head>
 <body>
-    <div class="navbar">
-    <div class="navbar-inner">
-        <span class="brand">Bunyk: </span>
-        <ul class="nav">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="/resume/">CV</a></li>
-        <li><a href="/hypercube/">Hypercube hack</a></li>
-        <li><a href="/deutsch/">Німецька сторіночка</a></li>
-        <li><a href="http://bunyk.wordpress.com/">Блоґ</a></li>
-        </ul>
-    </div>
-    </div>
-
     <div class="container">
         <h1>Taras Bunyk</h1>
+
+        <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+            <li><a href="/">Home</a></li>
+            <li class = "active"><a href="/resume/">CV</a></li>
+            <li><a href="/hypercube/">Hypercube hack</a></li>
+            <li><a href="/deutsch/">Німецька сторіночка</a></li>
+            <li><a href="http://bunyk.wordpress.com/">Блоґ</a></li>
+            </ul>
+        </div>
+        </div>
+
         
 
 
@@ -42,9 +42,9 @@
         <li><strong>Phone</strong>: +380973162190</li>
         <li><strong>Skype</strong>: tbunyk</li>
         <li><strong>Address</strong>: Lviv</li>
-        <li><strong>Personal blog</strong>: <a href="http://bunyk.wordpress.com/">http://bunyk.wordpress.com/</a></li>
-        <li><strong>Google code profile</strong>: <a href="http://code.google.com/u/tbunyk/">http://code.google.com/u/tbunyk/</a> (my code samples)</li>
-        <li><strong>GitHub profile</strong>: <a href="https://github.com/bunyk">https://github.com/bunyk</a> (a lot less code samples)</li>
+        <li><a href="http://bunyk.wordpress.com/"><strong>Personal blog</strong></a></li>
+        <li><a href="http://code.google.com/u/tbunyk/"><strong>Google code profile</strong></a> (my code samples)</li>
+        <li><a href="https://github.com/bunyk"><strong>GitHub profile</strong></a> (a little more code samples)</li>
         <li><a href="http://ua.linkedin.com/pub/taras-bunyk/22/487/3a5"><img border="0" height="15" width="80" alt="View Taras Bunyk's profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.png" style="vertical-align:middle;"></a></li>
         </ul>
     </dd>
@@ -63,33 +63,43 @@
 
     <dt>Work experience</dt>
     <dd><ul>
-        <li><p>(2013 &ndash; till now) <a href="http://softserve.ua/">SoftServe</a>, as a JavaScript developer.</p>
-        <h3>Technologies:</h3>
-        <ul>
-            <li>Leaflet</li>
-        </ul>
+        <li><p>(2013 &ndash; till now) <a href="http://softserve.ua/">SoftServe</a>,
+            as a intermediate web-developer.</p>
+            <ul>
+                <li><strong>Technologies:</strong>
+                    <ul>
+                        <li>Leaflet</li>
+                        <li>Flask</li>
+                    </ul>
+                </li>
+            </ul>
         </li>
-        <li><p>(2011 &ndash; 2012) <a href="http://prom.ua/">Prom.ua</a>, as a <strong>junior web-developer</strong> in CRM team.</p>
+        <li><p>(2011 &ndash; 2012) <a href="http://prom.ua/">Prom.ua</a>,
+            as a <strong>junior web-developer</strong> in CRM team.</p>
 
-        <h3>Main duties:</h3>
-        <ul>
-            <li>Billing,</li>
-            <li>automation of Yandex Direct and Google AdWords,</li>
-            <li>site internal context advertising system,</li>
-            <li>search in client database,</li>
-            <li>emails to certain groups of subscribers,</li>
-            <li>functional testing framework (Mocking data in database and SMTP protocol).</li>
-        </ul>
-        <h3>Technologies:</h3>
-        <ul>
-            <li>Pylons,</li>
-            <li>SqlAlchemy,</li>
-            <li>PostgreSQL,</li>
-            <li>WTForms,</li>
-            <li>Celery,</li>
-            <li>Yandex Direct API,</li>
-            <li>jQuery</li>
-        </ul>
+            <ul>
+                <li><strong>Main duties:</strong>
+                    <ul>
+                        <li>Billing,</li>
+                        <li>automation of Yandex Direct and Google AdWords,</li>
+                        <li>site internal context advertising system,</li>
+                        <li>search in client database,</li>
+                        <li>emails to certain groups of subscribers,</li>
+                        <li>functional testing framework (Mocking data in database and SMTP protocol).</li>
+                    </ul>
+                </li>
+                <li><strong>Technologies:</strong>
+                    <ul>
+                        <li>Pylons,</li>
+                        <li>SqlAlchemy,</li>
+                        <li>PostgreSQL,</li>
+                        <li>WTForms,</li>
+                        <li>Celery,</li>
+                        <li>Yandex Direct API,</li>
+                        <li>jQuery</li>
+                    </ul>
+                </li>
+            </ul>
         </li>
     </ul></dd>
 
@@ -98,12 +108,19 @@
     <dt>Home experience</dt>
     <dd><p>Before was years of small hacks in different programming languages and technologies. For example:</p>
         <ul>
-            <li>Scripting Blender to draw some function graphs in 3D. Main work was to learn how to create script GUI, and how to create and manipulate objects inside Blender. (Full story: <a href="http://bunyk.wordpress.com/2010/05/05/blender-scripting-2/">bunyk.wordpress.com/2010/05/05/blender-scripting-2/</a>)</li>
-            <li>Freebase queries. Exploring ontology, collecting information about movies. (<a href="http://bunyk.wordpress.com/2011/03/31/hands-on-freebase/">bunyk.wordpress.com/2011/03/31/hands-on-freebase/</a>)</li>
-            <li>3D model of rubics cube. One variant was with GUI on Qt. (<a href="http://bunyk.wordpress.com/2009/04/12/cubik/">bunyk.wordpress.com/2009/04/12/cubik/</a>)</li>
-            <li>Rendering of n-dimensional cubes. Wireframes in orthogonal projection. (<a href="http://bunyk.wordpress.com/2009/04/27/n-dimensional-cube/">bunyk.wordpress.com/2009/04/27/n-dimensional-cube/</a>)</li>
-            <li>Grabbing well-formated content from Mediawiki sites to wordpress. (<a href="http://bunyk.wordpress.com/2011/02/11/wiki-to-wordpress/">bunyk.wordpress.com/2011/02/11/wiki-to-wordpress/</a>)</li>
-            <li>SVG planimetrics animation with JavaScript. (<a href="http://bunykprogs.googlecode.com/hg/anim.svg">bunykprogs.googlecode.com/hg/anim.svg</a>)</li>
+            <li>Scripting Blender to draw some function graphs in 3D.
+                Main work was to learn how to create script GUI, and how to
+                create and manipulate objects inside Blender.
+                (<a href="http://bunyk.wordpress.com/2010/05/05/blender-scripting-2/">Full story</a>)</li>
+            <li>Freebase queries. Exploring ontology, collecting information about movies.
+                (<a href="http://bunyk.wordpress.com/2011/03/31/hands-on-freebase/">Blog entry</a>)</li>
+            <li>3D model of rubics cube. One variant was with GUI on Qt.
+                (<a href="http://bunyk.wordpress.com/2009/04/12/cubik/">Blog entry.</a>)</li>
+            <li>Rendering of n-dimensional cubes. Wireframes in orthogonal projection.
+                (<a href="/hypercube/">See online here</a>)</li>
+            <li>Grabbing well-formated content from Mediawiki sites to wordpress.
+                (<a href="http://bunyk.wordpress.com/2011/02/11/wiki-to-wordpress/">Blog entry.</a>)
+            </li>
             <li>And many more, not so interesting…</li>
         </ul>
     </dd>
@@ -130,8 +147,10 @@
         <li><strong>XML</strong> &ndash; DOM, SAX, XPath</li>
         <li><strong>HTML</strong> &ndash; able to create this CV</li>
         <li><img class="latex" title="\LaTeX" alt="\LaTeX" src="http://s0.wp.com/latex.php?latex=%5CLaTeX&amp;bg=ffffff&amp;fg=1c1c1c&amp;s=0"> &ndash; sometimes I blog about math. Sometimes I need to publish my thesis</li>
-        <li><strong>MediaWiki</strong> &ndash; deep wikimarkup knowledge, and administration skills. I am administrator of Ukrainian wikibooks project. (<a href="http://uk.wikibooks.org/wiki/%D0%9A%D0%BE%D1%80%D0%B8%D1%81%D1%82%D1%83%D0%B2%D0%B0%D1%87:Bunyk">uk.wikibooks.org/wiki/Користувач:Bunyk</a>)</li>
-        <li><strong>Mercurial</strong>. Able to fix my own wrong merges. <img class="wp-smiley" alt=":)" src="http://s0.wp.com/wp-includes/images/smilies/icon_smile.gif?m=1129645325g"> </li>
+        <li><strong>MediaWiki</strong> &ndash; deep wikimarkup knowledge, and administration skills.
+            I am administrator of Ukrainian wikibooks project.
+            (<a href="http://uk.wikibooks.org/wiki/%D0%9A%D0%BE%D1%80%D0%B8%D1%81%D1%82%D1%83%D0%B2%D0%B0%D1%87:Bunyk">uk.wikibooks.org/wiki/Користувач:Bunyk</a>)</li>
+        <li><strong>Mercurial</strong>. Able to fix my own wrong merges. :)</li>
         <li><strong>Unix shell</strong>. Basic knowledge of common filters and piping.
     </ul></dd>
 
@@ -151,7 +170,7 @@
     <dt>Other:</dt>
     <dd><ul>
         <li><strong>Experienced editor</strong> &ndash; passionate wikipedian and blogger, Vim user.</li>
-        <li><strong>High English to Ukrainian translation skills</strong> &ndash; not so bad even in fiction translation. (<a href="http://bunyk.wordpress.com/2011/04/28/martin-eden/">bunyk.wordpress.com/2011/04/28/martin-eden/</a>)</li>
+        <li><strong>High English to Ukrainian translation skills</strong> &ndash; not so bad even in fiction translation. (<a href="http://bunyk.wordpress.com/2011/04/28/martin-eden/">My favourite part from Martin Eden.</a>)</li>
     </ul></dd>
 </dl>
 
@@ -167,12 +186,11 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 
 
 
+
+        
+<p>2013 July 04, 19:38. Last version of this document you can find on page <a href="http://bunyk.github.io/resume/">http://bunyk.github.io/resume/</a>.</p>
+
     </div>
-
-
-<p>2013 July 02, 09:54. Last version of this document you can find on page <a href="http://bunyk.github.io/resume/">http://bunyk.github.io/resume/</a>.</p>
-
-
 </body>
 </html>
 
