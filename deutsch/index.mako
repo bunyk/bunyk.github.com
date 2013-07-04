@@ -16,6 +16,7 @@ ol {
 }
 ol > li {
     display: inline;
+    cursor: move;
 }
 .droppable {
     border-bottom: 1px solid;

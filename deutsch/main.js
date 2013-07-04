@@ -13,16 +13,24 @@ require([
     $('li').draggable();
     $('.droppable').droppable({
         drop: function(evt, elem) {
-            var $this = $(this);
-            console.log($(elem.draggable).html(), $this.data('correct'));
-            if($(elem.draggable).html() == $this.data('correct')) {
-                $this.css('background-color', 'green');
+            var $this = $(this), content = $(elem.draggable).html();
+            console.log(content, $this.data('correct'));
+            if($this.data('content')){
+                return false;
+            };
+            $this.data('content', content);
+            if(content == $this.data('correct')) {
+                $this.css('background-color', '#CFC');
             } else {
-                $this.css('background-color', 'red');
+                $this.css('background-color', '#FAA');
             };
         },
-        out: function() {
-            $(this).css('background-color', 'white');
+        out: function(evt, elem) {
+            var $this = $(this), content = $(elem.draggable).html();
+            if($this.data('content') == content) {
+                $this.css('background-color', 'white');
+                $this.data('content', '');
+            };
         }
     });
 });
