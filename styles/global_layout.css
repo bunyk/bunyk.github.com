@@ -10,7 +10,7 @@ body {
 }
 
 @media print {
-    .navbar {
+    .navbar, #disqus_thread {
         display: none !important;
     }
 }

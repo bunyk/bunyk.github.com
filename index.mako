@@ -9,4 +9,4 @@
 	<li><a href="hypercube">HTML5 SVG Hypercube animation hack</a></li>
 </ul>
 
-${u.google_analytics()}
+${u.disqus_thread('index')}

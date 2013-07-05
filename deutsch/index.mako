@@ -46,3 +46,5 @@ ol > li {
 Wie <span class="droppable" data-correct="heißen"></span> Sie?</p>
 <p>- Ich bin Ben. Und wie ist <span class="droppable" data-correct="Ihr Name"></span>?</p>
 <p>- Ich bin Anna.</p>
+
+${u.disqus_thread('deutsch')}
