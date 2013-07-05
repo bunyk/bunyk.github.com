@@ -1,0 +1,29 @@
+.exercise {
+    margin: 20px;
+    padding: 20px;
+}
+.exercise ol > li {
+    /*display: inline;*/
+    position: relative;
+}
+.exercise ol {
+    list-style-type: lower-alpha;
+}
+.exercise h2 {
+    width: 100px;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    float: left;
+    background-color: black;
+    margin-right: 50px;
+}
+.draggable {
+    cursor: move;
+}
+.droppable {
+    border-bottom: 1px solid;
+    width: 10em;
+    display: inline-block;
+    height: 1em;
+}
