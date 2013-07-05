@@ -21,8 +21,10 @@ require([
             $this.data('content', content);
             if(content == $this.data('correct')) {
                 $this.css('background-color', '#CFC');
+                $(elem.draggable).css('color', 'green');
             } else {
                 $this.css('background-color', '#FAA');
+                $(elem.draggable).css('color', 'red');
             };
         },
         out: function(evt, elem) {
@@ -30,6 +32,7 @@ require([
             if($this.data('content') == content) {
                 $this.css('background-color', 'white');
                 $this.data('content', '');
+                $(elem.draggable).css('color', 'black');
             };
         }
     });
