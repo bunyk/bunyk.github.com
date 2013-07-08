@@ -4,7 +4,20 @@
     //var c = function() {}; // for production
     var c = console.log.bind(console); // for debug
 
-    $.fn.dragExcercise = function() {
+    $.fn.checkContent = function(visual) {
+        var $this = $(this),
+            correct = $this.data('content') == $this.data('correct');
+        if(visual) {
+            if(correct) {
+                $this.css('background-color', '#CFC');
+            } else {
+                $this.css('background-color', '#FAA');
+            };
+        };
+        return correct;
+    };
+
+    $.fn.dragExcercise = function(check_instantly) {
         c('dragExcercise plugin started for', this);
         /*
          * Inside exercise element elements with class "draggable" should be 
@@ -13,29 +26,22 @@
          * data-correct attribute of droppable element, then draggable and
          * droppable become green. Else red.
         */
+
         $('.draggable', this).draggable();
-        $('.droppable', this).droppable({
+        var $droppables = $('.droppable', this).droppable({
             tolerance: 'pointer',
             drop: function(evt, elem) {
                 var $this = $(this),
                     $elem = $(elem.draggable);
-                c($elem.html(), $this.data('correct'));
+                c($elem.html(), '- data put into container');
+                c($this.data('correct'), '- data which should be put into container');
                 if($this.data('content')) {
                     c('element already occupied');
-
                     return false;
                 };
                 $this.data('content', $elem.html()); c('content put into element');
-                if($elem.html() == $this.data('correct')) {
-                    c('correct variant');
-
-                    $this.css('background-color', '#CFC');
-                    $elem.css('color', 'green');
-                } else {
-                    c('incorrect variant');
-
-                    $this.css('background-color', '#FAA');
-                    $elem.css('color', 'red');
+                if(check_instantly) {
+                    $this.checkContent(true);
                 };
             },
             out: function(evt, elem) {

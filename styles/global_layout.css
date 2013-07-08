@@ -13,4 +13,7 @@ body {
     .navbar, #disqus_thread {
         display: none !important;
     }
+    .body {
+        margin: 50px;
+    }
 }
