@@ -1,4 +1,7 @@
-define(['jquery', 'radio'], function($, radio) {
+// REQUIRE /jslibs/jquery-2.0.2.min.js
+// REQUIRE /jslibs/radio.min.js
+
+(function() {
 	var Point = function (x, y) {
 		this._x = x;
 		this._y = y;
@@ -92,8 +95,8 @@ define(['jquery', 'radio'], function($, radio) {
 		return (val / this.a + 0.5) * this.height;
 	};
 
-    return {
+    window.svglib = {
         'SVG': SVG,
         'Point': Point
     };
-});
+}());

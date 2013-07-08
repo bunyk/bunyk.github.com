@@ -1,5 +1,5 @@
 "use strict";
-define([], function() {
+(function() {
     var Matrix = function(width, height, data, sparse) {
         if(typeof(data) === 'undefined')
             data = function() { return 0; };
@@ -62,8 +62,8 @@ define([], function() {
     var identity = function(x, y) {
         return x == y ? 1 : 0;
     };
-    return {
+    window.matrix = {
         'Matrix': Matrix,
         'identity': identity
     };
-});
+}());

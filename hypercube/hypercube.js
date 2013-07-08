@@ -1,5 +1,10 @@
 "use strict";
-define(['svglib', 'matrix'], function(svg, matrix) {
+
+// REQUIRE svglib.js
+// REQUIRE matrix.js
+
+(function() {
+    var svg = window.svglib;
     var Point = svg.Point;
 	var Hypercube = function (DIMENSIONS) {
 		var VERTEXES = 1 << DIMENSIONS,
@@ -80,7 +85,7 @@ define(['svglib', 'matrix'], function(svg, matrix) {
         };
 	};
 
-    return {
+    window.hypercube = {
         'Hypercube': Hypercube,
     };
-});
+}());

@@ -12,7 +12,7 @@ def render(filename, lookup=['.']):
 
     with open(filename + '.html', 'w', newline='\n', encoding='utf-8') as f:
         html = template.render(filename=filename)
-        f.write(html)
+        f.write(html.replace('\r\n', '\n').strip())
 
 if __name__ == '__main__':
     if(len(sys.argv) < 2):

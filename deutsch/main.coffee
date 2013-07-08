@@ -3,6 +3,8 @@
 
 $ = jQuery
 
-$('.drag_exercise').each(()->
-   $(this).dragExcercise()
+$(()->
+    $('.drag_exercise').each(()->
+       $(this).dragExcercise()
+    )
 )

@@ -2,9 +2,9 @@
 <%namespace name="u" file="../utils.mako"/>
 
 <%block name="head">
-    <script type="text/javascript" src="../jslibs/require.js" data-main="main.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="exercises.css" />
+    ${u.requirejs('main.coffee')}
 </%block>
 
 <%block name="title">Моє бачення інтерактивного підручника німецької</%block>

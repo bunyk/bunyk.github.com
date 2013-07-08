@@ -1,3 +1,13 @@
+<%def name="requirejs(file)" filter="trim">
+    <%
+        import os
+        import requirejs
+    %>
+    ${requirejs.include(os.path.join(
+        os.path.dirname(filename), file
+    ), '.')}
+</%def>
+
 <%def name="current_year()" filter="trim">
     <% import datetime  %>
     ${datetime.date.today().year}

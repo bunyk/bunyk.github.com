@@ -27,8 +27,8 @@ def get_tag(src, root):
 def coffee2js(asset):
     if file_type(asset) == 'coffee':
         js = asset[:-len('coffee')] + 'js'
-        # subprocess.call(['coffee', '-c', asset])
-        print ['coffee', '-c', asset]
+        print('Compiling %s' % asset)
+        subprocess.call(['coffee', '-c', asset])
         return js
     elif file_type(asset) == 'js':
         return asset
@@ -98,7 +98,7 @@ def topo_sort(graph):
     res = []
     marks = { k: None for k in graph.keys() }
     def unmarked():
-        for k, v in marks.iteritems():
+        for k, v in marks.items():
             if v is None:
                 return k
 

@@ -2,10 +2,10 @@
 <%namespace name="u" file="../utils.mako"/>
 
 <%block name="head">
-    <script type="text/javascript" src="../jslibs/require.js" data-main="main.js"></script>
 	<link rel="stylesheet" href="../styles/matrix.css" />
 	<link rel="stylesheet" href="../styles/global_layout.css" />
 	<link rel="stylesheet" href="layout.css" />
+    ${u.requirejs('main.coffee')}
 </%block>
 
 <%block name="title">HTML5 SVG graphics test</%block>
