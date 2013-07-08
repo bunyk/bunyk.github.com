@@ -1,3 +1,4 @@
+# REQUIRE /jslibs/jquery-2.0.2.min.js
 $ = jQuery
 
 c = console.log.bind console

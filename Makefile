@@ -6,3 +6,6 @@ html:
 
 love:
 	python -m SimpleHTTPServer 8080
+
+test:
+	python test.py

@@ -12,7 +12,7 @@ require.config({
 });
 
 require([
-    'jquery', 'jqueryui', 'exercises2'
+    'jquery', 'jqueryui', 'exercises'
 ], function($) {
    $('.drag_exercise').each(function() {
        $(this).dragExcercise();
