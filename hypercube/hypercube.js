@@ -1,7 +1,7 @@
 "use strict";
 
 // REQUIRE svglib.js
-// REQUIRE matrix.js
+// REQUIRE matrix.coffee
 
 (function() {
     var svg = window.svglib;
