@@ -26,7 +26,7 @@ dictionary = {}
 save_dictionary = () ->
     localStorage.setItem('dictionary', JSON.stringify(dictionary))
 load_dictionary = () ->
-    dictionary = JSON.parse(localStorage.getItem('dictionary'))
+    dictionary = JSON.parse(localStorage.getItem('dictionary')) or {}
 
 add_to_dictionary = (key, value, $elements) ->
     console.log 'adding to dictionary:', key, value

@@ -28,7 +28,7 @@
   };
 
   load_dictionary = function() {
-    return dictionary = JSON.parse(localStorage.getItem('dictionary'));
+    return dictionary = JSON.parse(localStorage.getItem('dictionary')) || {};
   };
 
   add_to_dictionary = function(key, value, $elements) {
