@@ -1,6 +1,5 @@
 body {
-    padding: 1px 25px;
-    margin: 10px 50px;
+    padding-top: 60px;
 }
 
 /* hidden by default block with widgets to show after js is loaded */
@@ -12,8 +11,5 @@ body {
 @media print {
     .navbar, #disqus_thread {
         display: none !important;
-    }
-    .body {
-        margin: 50px;
     }
 }

@@ -3,9 +3,43 @@
         import os
         import requirejs
     %>
-    ${requirejs.include(os.path.join(
-        os.path.dirname(filename), file
-    ), '.')}
+    ${requirejs.include(file, filename, '.')}
+</%def>
+
+<%def name="li_menu(page)" filter="trim">
+    %if page == filename:
+        <li class = "active">
+    % else:
+        <li>
+    %endif
+</%def>
+
+<%def name="menu_item(location, caption)" filter="trim">
+    %if location is None:
+        <li class="dropdown ${'active' if current_location in (i[0] for i in caption[1:]) else ''}">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">${caption[0]}<b class="caret"></b></a>  
+            <ul class="dropdown-menu">  
+            %for l2, c2 in caption[1:]:
+                ${menu_item(l2, c2)}
+            %endfor
+            </ul>
+        </li>
+    %else:
+        %if current_location == location:
+            <li class="active">
+        %else:
+            <li>
+        %endif
+        <a href="${location}">${caption}</a></li>
+    %endif
+</%def>
+
+<%def name="main_menu(items)" filter="trim">
+    <ul class="nav">
+    % for location, caption in items:
+        ${menu_item(location, caption)}
+    % endfor
+    </ul>
 </%def>
 
 <%def name="current_year()" filter="trim">
@@ -17,13 +51,6 @@
     ${datetime.datetime.now().strftime('%Y %B %d, %H:%M')}
 </%def>
 
-<%def name="li_menu(page)" filter="trim">
-    %if page == filename:
-        <li class = "active">
-    % else:
-        <li>
-    %endif
-</%def>
 
 <%def name="google_analytics()">
 <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-42001280-1']); _gaq.push(['_trackPageview']);

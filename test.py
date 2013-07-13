@@ -53,11 +53,13 @@ class TestAbsolute(unittest.TestCase):
             ),
             '/home/user/project/module/assets/script.js'
         )
+
 class TestRequireJS(unittest.TestCase):
     def test_include(self):
         self.assertEqual(
             include(
-                './deutsch/main.coffee', 
+                '/deutsch/main.coffee', 
+                './deutsch/',
                 '.', 
             ),
             ''

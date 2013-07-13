@@ -6,14 +6,22 @@ import os
 import subprocess
 import re
 
-def include(asset, root):
+included = set()
+
+def include(asset, from_file, root):
     '''
         Returns a set of <script src="... tags for asset with dependencies.
-        If relative_to is not empty string - all assets will be printed
-        relative to path in that string.
+        from_file - file from which asset is included
+        root - root of the project
     '''
     root = os.path.abspath(root)
-    asset = os.path.abspath(asset)
+    dir = os.path.abspath(os.path.dirname(from_file))
+    asset = absolute(asset, dir, root)
+    if (asset, from_file) in included:
+        print('"{}" already included in {}'.format(asset, from_file))
+        return
+    included.add((asset, from_file))
+        
     return '\n'.join(
         get_tag(coffee2js(src), root)
         for src in topo_sort(get_graph(asset, root))
@@ -28,6 +36,9 @@ def get_tag(src, root):
 def coffee2js(asset):
     if file_type(asset) == 'coffee':
         js = asset[:-len('coffee')] + 'js'
+        if os.path.getmtime(asset) <= os.path.getmtime(js):
+            print('%s is up to date' % js)
+            return js
         print('Compiling %s' % asset)
         subprocess.call(['coffee', '-c', asset])
         return js
