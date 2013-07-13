@@ -1,19 +1,9 @@
-<%inherit file="base.mako" />
-<%namespace name="u" file="utils.mako"/>
+<%inherit file="/base.mako" />
+<%namespace name="u" file="/utils.mako"/>
 
 <%block name="head">
-    <script type="text/javascript" src="../jslibs/jquery-2.0.2.min.js"></script>
-    <script type="text/javascript" src="reading.js"></script>
-    <style>
-        .word:hover {
-            text-decoration: underline;
-        }
-        .popup {
-            background-color: white;
-            border: solid 1px black;
-            padding: 5px;
-        }
-    </style>
+    ${u.requirejs('reading.coffee')}
+    <link rel="stylesheet" href="reading.css" />
 </%block>
 
 <%block name="title">Die unendliche Geschichte</%block>

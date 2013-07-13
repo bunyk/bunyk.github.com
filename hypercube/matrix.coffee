@@ -1,4 +1,3 @@
-
 fmt_cell = (x) ->
     (if x > 0 then '&nbsp;' else '') + x.toFixed(2)
 

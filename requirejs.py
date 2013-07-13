@@ -20,8 +20,9 @@ def include(asset, root):
     )
 
 def get_tag(src, root):
-    assert src.startswith(root)
-    src = src[len(root):]
+    if not external(src):
+        assert src.startswith(root)
+        src = src[len(root):]
     return '<script type="text/javascript" src="%s"></script>' % src
 
 def coffee2js(asset):
@@ -38,6 +39,9 @@ def coffee2js(asset):
 def file_type(filename):
     return filename.rsplit('.', 1)[1]
 
+def external(asset):
+    return asset.startswith('http://')
+
 def absolute(filename, path, root):
     ''' filename - path to the requirement
             absolute from root of project or 
@@ -45,6 +49,8 @@ def absolute(filename, path, root):
         dir - absolute path to directory of file which require the requirement
         root - absolute path to root of the project
     '''
+    if external(filename):
+        return filename # don't touch URLs
     j = lambda a, b: os.path.normpath(os.path.join(a, b))
     if filename.startswith('/'):
         return j(root, filename[1:])
@@ -57,6 +63,8 @@ def requirements(asset, root):
         root - absolute path of root of project
         returns list of absolute paths.
     '''
+    if external(asset):
+        return # assume external libs have no requirements
     tp = file_type(asset)
     try:
         requirement_re = re.compile({

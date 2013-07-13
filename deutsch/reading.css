@@ -1,0 +1,30 @@
+.word {
+    text-decoration: underline;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+}
+.word:hover {
+    text-decoration-style: solid;
+}
+
+.popup, .modal_window {
+    background-color: white;
+    border: solid 1px black;
+    padding: 5px;
+}
+.popup {
+    position: absolute;
+}
+.modal_window {
+    position: fixed;
+    left: 50%;
+    width: 400px;
+    margin-left:-200px;
+    bottom: 30px;
+}
+.modal_window textarea {
+    width: 385px;
+}
+button {
+    margin: 3px;
+}
