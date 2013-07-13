@@ -27,6 +27,7 @@
                 ('/deutsch/', 'Übungen'),
                 ('/deutsch/unendliche_geschichte.html', 'Die unendliche Geschichte'),
             )),
+            ('/todo/', 'TODO app'),
             ('http://bunyk.wordpress.com/', 'Блоґ'),
         ))}
       </div>

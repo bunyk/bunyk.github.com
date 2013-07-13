@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html><!-- this html is generated from index.mako! -->
+<html><!-- this html is generated from todo/index.mako! -->
     <head>
         <meta charset="utf-8" />
-        <title>Bunyk's humble home page</title>
+        <title>TODO list</title>
 
         <link rel="stylesheet" href="/styles/global_layout.css" />
         <link rel="stylesheet" href="/styles/bootstrap.min.css" />
         <link rel="stylesheet" href="/styles/bootstrap-responsive.css" />
         <script type="text/javascript" src="/jslibs/jquery-2.0.2.min.js"></script>
         
+    <script type="text/javascript" src="/jslibs/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="/jslibs/underscore-min.js"></script>
+<script type="text/javascript" src="/jslibs/backbone-min.js"></script>
+<script type="text/javascript" src="/jslibs/backbone.localStorage-min.js"></script>
+<script type="text/javascript" src="/todo/todos.js"></script>
+    <link rel="stylesheet" href="todo.css" />
+
     </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top"><div class="navbar-inner"><div class="container">
@@ -19,7 +26,7 @@
       </button>
       <div class="nav-collapse collapse">
         <ul class="nav">
-        <li class="active">
+        <li>
         <a href="/">Home</a></li>
         <li>
         <a href="/resume/">CV</a></li>
@@ -34,7 +41,7 @@
         <a href="/deutsch/unendliche_geschichte.html">Die unendliche Geschichte</a></li>
             </ul>
         </li>
-        <li>
+        <li class="active">
         <a href="/todo/">TODO app</a></li>
         <li>
         <a href="http://bunyk.wordpress.com/">Блоґ</a></li>
@@ -42,37 +49,27 @@
       </div>
     </div></div></div>
     <div class="container">
-        <h1>Bunyk's humble home page</h1>
+        <h1>TODO list</h1>
 
         
 
 
 
 
-<a href="resume/">Resume</a>
-<h2>Hacks:</h2>
-<ul>
-	<li><a href="hypercube">HTML5 SVG Hypercube animation hack</a></li>
-</ul>
 
 
-    <hr />
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'bunykshumblehomepage'; // required: replace example with your forum shortname
-        var disqus_identifier = 'index'; 
+<p>Created for learning backbone and may be for personal management</p>
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
+<div id="todoapp">
+    <div class="content">
+        <div id="create-todo">
+            <input id="new-todo" placeholder="What else needs to be done?" type="text" />
+        </div>
+        <div id="todos">
+            <ul id="todo-list"></ul>
+        </div>
+    </div>
+</div>
 
 
         

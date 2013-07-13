@@ -36,7 +36,7 @@ def get_tag(src, root):
 def coffee2js(asset):
     if file_type(asset) == 'coffee':
         js = asset[:-len('coffee')] + 'js'
-        if os.path.getmtime(asset) <= os.path.getmtime(js):
+        if os.path.exists(js) and os.path.getmtime(asset) <= os.path.getmtime(js):
             print('%s is up to date' % js)
             return js
         print('Compiling %s' % asset)
