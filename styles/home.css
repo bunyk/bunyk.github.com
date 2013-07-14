@@ -1,0 +1,11 @@
+
+body {
+    background: url('http://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Furnadoia_de_Seceda_y_Resciesa.JPG/1280px-Furnadoia_de_Seceda_y_Resciesa.JPG') no-repeat center center fixed;
+    background-size: cover;
+}
+
+body > .container {
+    padding: 30px;
+    background: white;
+    opacity: 0.85;
+}

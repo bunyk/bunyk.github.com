@@ -1,12 +1,10 @@
 <%inherit file="base.mako"/>
 <%namespace name="u" file="utils.mako"/>
 
-<%block name="title">Bunyk's humble home page</%block>
+<%block name="title">Welcome to Bunyk's humble home page</%block>
 
-<a href="resume/">Resume</a>
-<h2>Hacks:</h2>
-<ul>
-	<li><a href="hypercube">HTML5 SVG Hypercube animation hack</a></li>
-</ul>
+<%block name="head">
+	<link rel="stylesheet" href="/styles/home.css" />
+</%block>
 
 ${u.disqus_thread('index')}
