@@ -31,7 +31,7 @@ class Point
 class Line
     constructor: (svg, @a, @b) ->
         @element = document.createElementNS('http://www.w3.org/2000/svg','line')
-        @element.setAttribute('style', 'stroke:rgb(0,0,0);stroke-width:2')
+        @element.setAttribute('style', svg.line_style)
         @element.setAttribute('x1', svg.x(@a.x))
         @element.setAttribute('y1', svg.y(@a.y))
         @element.setAttribute('x2', svg.x(@b.x))

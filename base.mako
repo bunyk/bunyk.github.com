@@ -5,10 +5,11 @@
         <meta charset="utf-8" />
         <title><%block name="title" /></title>
 
-        <link rel="stylesheet" href="/styles/global_layout.css" />
         <link rel="stylesheet" href="/styles/bootstrap.min.css" />
         <link rel="stylesheet" href="/styles/bootstrap-responsive.css" />
+        <link rel="stylesheet" href="/styles/global_layout.css" />
         ${u.requirejs('jquery')}
+        ${u.requirejs('/hypercube/main.coffee')}
         <%block name="head" />
     </head>
 <body>
@@ -22,7 +23,7 @@
         ${u.main_menu((
             ('/', 'Home'),
             ('/resume/', 'CV'),
-            ('/hypercube/', 'Hypercube hack'),
+            ('/hypercube/', 'Hypercube hack<span id="hypercube_logo"></span>'),
             (None, ('Deutschunterricht',
                 ('/deutsch/', 'Übungen'),
                 ('/deutsch/unendliche_geschichte.html', 'Die unendliche Geschichte'),
@@ -31,6 +32,7 @@
             ('http://bunyk.wordpress.com/', 'Блоґ'),
         ))}
       </div>
+      <script>hypercubeWidget("#hypercube_logo", 30, 30, 4, 3, 50, null, 'stroke:white;stroke-width:1');</script>
     </div></div></div>
     <div class="container">
         <h1>${self.title()}</h1>

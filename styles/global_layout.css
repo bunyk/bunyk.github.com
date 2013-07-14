@@ -8,6 +8,16 @@ body {
     overflow: hidden; /* to turn off floating of elements outside of this block around elements inside */
 }
 
+#hypercube_logo {
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin: -15px 0px -15px 5px;
+}
+
 @media print {
     .navbar, #disqus_thread {
         display: none !important;

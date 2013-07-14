@@ -4,37 +4,62 @@
 
   $ = jQuery;
 
-  $(function() {
-    var $pause, $play, ad, animate, bd, cube, dimensions, play, svg;
-    dimensions = 5;
-    svg = new svglib.SVG('#surface', 300, 300, Math.sqrt(dimensions));
+  window.hypercubeWidget = function(selector, width, height, dimensions, rotation_speed, animation_timeout, callback, line_style) {
+    var ad, animate, bd, cube, play, svg;
+    if (rotation_speed == null) {
+      rotation_speed = 5;
+    }
+    if (animation_timeout == null) {
+      animation_timeout = 30;
+    }
+    if (callback == null) {
+      callback = (function() {});
+    }
+    if (line_style == null) {
+      line_style = 'stroke:rgb(0,0,0);stroke-width:2';
+    }
+    svg = new svglib.SVG(selector, width, height, Math.sqrt(dimensions));
+    svg.line_style = line_style;
     cube = new hypercube.Hypercube(dimensions);
     cube.reset(svg);
-    $('#matrix').html(cube.matrix.html());
     ad = 0;
     bd = 1;
     play = true;
     animate = function() {
       cube.rotate(ad, bd, 5);
-      $('#matrix').html(cube.matrix.html());
+      callback(cube);
       if (Math.random() < 0.05) {
         ad = Math.floor(Math.random() * 2);
         bd = Math.floor(Math.random() * (dimensions - 2)) + 2;
       }
       if (play) {
-        return setTimeout(animate, 40);
+        return setTimeout(animate, animation_timeout);
       }
     };
     animate();
-    $('#reset').click(function() {
-      return cube.reset(svg);
+    return {
+      reset: function() {
+        return cube.reset(svg);
+      },
+      play_pause: function() {
+        if (!play) {
+          setTimeout(animate, animation_timeout);
+        }
+        return play = !play;
+      }
+    };
+  };
+
+  $(function() {
+    var $pause, $play, hw;
+    hw = hypercubeWidget('#surface', 640, 480, 5, 5, 40, function(cube) {
+      return $('#matrix').html(cube.matrix.html());
     });
+    $('#reset').click(hw.reset);
     $play = $('#play_pause .play');
     $pause = $('#play_pause .pause');
     $('#play_pause').click(function() {
-      play = !play;
-      if (play) {
-        setTimeout(animate, 40);
+      if (hw.play_pause()) {
         $play.hide();
         return $pause.show();
       } else {

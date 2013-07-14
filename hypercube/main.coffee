@@ -4,40 +4,47 @@
 
 $ = jQuery
 
-$(() ->
-    dimensions = 5
+window.hypercubeWidget = (selector, width, height, dimensions,
+    rotation_speed=5, animation_timeout=30, callback=(() ->),
+    line_style = 'stroke:rgb(0,0,0);stroke-width:2'
+) ->
     svg = new svglib.SVG(
-        '#surface', 300, 300,
+        selector, width, height,
         Math.sqrt(dimensions) # diagonal of n-hypercube = sqrt(d)
     )
+    svg.line_style = line_style
     cube = new hypercube.Hypercube(dimensions)
     cube.reset(svg)
-
-    $('#matrix').html(cube.matrix.html())
-
     ad = 0
     bd = 1
     play = true
     animate = () ->
         cube.rotate(ad, bd, 5)
-        $('#matrix').html(cube.matrix.html())
+        callback(cube)
         if Math.random() < 0.05
             ad = Math.floor(Math.random() * 2)
             bd = Math.floor(Math.random() * (dimensions - 2)) + 2
         if play
-            setTimeout(animate, 40)
+            setTimeout(animate, animation_timeout)
     animate()
+    {
+        reset: () -> cube.reset(svg)
+        play_pause: () ->
+            if not play then setTimeout(animate, animation_timeout)
+            play = not play
+    }
 
-    $('#reset').click(() ->
-        cube.reset(svg)
+$(() ->
+    hw = hypercubeWidget('#surface', 640, 480, 5, 5, 40, (cube) ->
+        $('#matrix').html(cube.matrix.html())
     )
+
+    $('#reset').click(hw.reset)
 
     $play = $('#play_pause .play');
     $pause = $('#play_pause .pause');
     $('#play_pause').click(() ->
-        play = not play
-        if play
-            setTimeout(animate, 40)
+        if hw.play_pause()
             $play.hide()
             $pause.show()
         else

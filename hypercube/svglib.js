@@ -60,7 +60,7 @@
       this.a = a;
       this.b = b;
       this.element = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      this.element.setAttribute('style', 'stroke:rgb(0,0,0);stroke-width:2');
+      this.element.setAttribute('style', svg.line_style);
       this.element.setAttribute('x1', svg.x(this.a.x));
       this.element.setAttribute('y1', svg.y(this.a.y));
       this.element.setAttribute('x2', svg.x(this.b.x));
