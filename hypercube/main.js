@@ -52,7 +52,7 @@
 
   $(function() {
     var $pause, $play, hw;
-    hw = hypercubeWidget('#surface', 640, 480, 5, 5, 40, function(cube) {
+    hw = hypercubeWidget('#surface', 400, 400, 5, 5, 40, function(cube) {
       return $('#matrix').html(cube.matrix.html());
     });
     $('#reset').click(hw.reset);

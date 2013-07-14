@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="/styles/bootstrap.min.css" />
         <link rel="stylesheet" href="/styles/bootstrap-responsive.css" />
         <link rel="stylesheet" href="/styles/global_layout.css" />
-        ${u.requirejs('jquery')}
         ${u.requirejs('/hypercube/main.coffee')}
         <%block name="head" />
     </head>
@@ -23,7 +22,7 @@
         ${u.main_menu((
             ('/', 'Home'),
             ('/resume/', 'CV'),
-            ('/hypercube/', 'Hypercube hack<span id="hypercube_logo"></span>'),
+            ('/hypercube/', h.literal('Hypercube hack<span id="hypercube_logo"></span>')),
             (None, ('Deutschunterricht',
                 ('/deutsch/', 'Übungen'),
                 ('/deutsch/unendliche_geschichte.html', 'Die unendliche Geschichte'),

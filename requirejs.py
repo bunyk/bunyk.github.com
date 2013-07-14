@@ -19,14 +19,18 @@ def include(asset, from_file, root):
     root = os.path.abspath(root)
     dir = os.path.abspath(os.path.dirname(from_file))
     asset = absolute(asset, dir, root)
-    if (asset, from_file) in included:
-        print('"{}" already included in {}'.format(asset, from_file))
-        return
-    included.add((asset, from_file))
-        
-    return '\n'.join(
+
+    def once(src):
+        if (src, from_file) in included:
+            return False
+        else:
+            included.add((src, from_file))
+            return True
+
+    return '\n<!-- include("{}") -->\n'.format(asset) + '\n'.join(
         get_tag(coffee2js(src), root)
         for src in topo_sort(get_graph(asset, root))
+        if once(src)
     )
 
 def get_tag(src, root):
@@ -40,7 +44,7 @@ def coffee2js(asset):
     if ft == 'coffee':
         js = asset[:-len('coffee')] + 'js'
         if os.path.exists(js) and os.path.getmtime(asset) <= os.path.getmtime(js):
-            print('%s is up to date' % js)
+            #print('%s is up to date' % js)
             return js
         print('Compiling %s' % asset)
         subprocess.call(['coffee', '-c', asset])

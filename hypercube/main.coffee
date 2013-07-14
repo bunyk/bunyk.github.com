@@ -1,5 +1,5 @@
 # REQUIRE jquery
-# REQUIRE svglib.js
+# REQUIRE svglib.coffee
 # REQUIRE hypercube.js
 
 $ = jQuery
@@ -35,7 +35,7 @@ window.hypercubeWidget = (selector, width, height, dimensions,
     }
 
 $(() ->
-    hw = hypercubeWidget('#surface', 640, 480, 5, 5, 40, (cube) ->
+    hw = hypercubeWidget('#surface', 400, 400, 5, 5, 40, (cube) ->
         $('#matrix').html(cube.matrix.html())
     )
 

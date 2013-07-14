@@ -14,4 +14,7 @@ _dependencies['backbone_localstorage'] = ['backbone']
 radio = 'http://raw.github.com/uxder/Radio/master/radio.min.js'
 
 bootstrap_collapse = 'http://twitter.github.io/bootstrap/assets/js/bootstrap-collapse.js'
+_dependencies['bootstrap_collapse'] = ['jquery']
+
 bootstrap_dropdown = 'http://twitter.github.io/bootstrap/assets/js/bootstrap-dropdown.js'
+_dependencies['bootstrap_dropdown'] = ['jquery']

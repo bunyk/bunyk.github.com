@@ -3,7 +3,7 @@
         import os
         import requirejs
     %>
-    ${requirejs.include(file, filename, '.')}
+    ${requirejs.include(file, filename, '.')|n}
 </%def>
 
 <%def name="li_menu(page)" filter="trim">
@@ -44,7 +44,7 @@
 
 <%def name="current_year()" filter="trim">
     <% import datetime  %>
-    ${datetime.date.today().year}
+    ${str(datetime.date.today().year)}
 </%def>
 <%def name="present_moment()" filter="trim">
     <% import datetime  %>
