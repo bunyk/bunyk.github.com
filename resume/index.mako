@@ -103,7 +103,7 @@
     <dt>Programming languages:</dt>
     <dd><ul>
         <li><strong>Python</strong> &ndash; for a lot of small hacks, some game development, and clients for some web-services (bwikibot). Also main working language at prom.ua. Even know what metaclasses is (and can write some), but still can’t remember descriptor protocol (but know that such thing exists).</li>
-        <li><strong>JavaScript</strong> &ndash; jQuery. (Also wrote a pair of controllers for Spine in CoffeScript).</li>
+        <li><strong>JavaScript / CoffeeScript</strong> &ndash; jQuery.</li>
         <li><strong>SQL</strong> &ndash; Tried MySQL and SQLite. Actively used PostgreSQL in prom.ua, but very often throught ORM.</li>
         <li><strong>C</strong> (C99) &ndash; learned how to create basic data structures during university programming course. </li>
         <li><strong>C++</strong> &ndash; STL, GLUT, Qt (last two as a wrap around OpenGL) mainly for game development. (<a href="http://bunyk.files.wordpress.com/2010/03/seawar.jpg">screenshot</a>)</li>
@@ -118,7 +118,7 @@
     <dd><ul>
         <li><strong>OpenGL</strong> &ndash; with Delphi (WinAPI), C++ (GLUT, Qt), Python (Pygame)</li>
         <li><strong>XML</strong> &ndash; DOM, SAX, XPath</li>
-        <li><strong>HTML</strong> &ndash; able to create this CV</li>
+        <li><strong>HTML</strong> &ndash; able to create this CV, and other not so bad pages.</li>
         <li><img class="latex" title="\LaTeX" alt="\LaTeX" src="http://s0.wp.com/latex.php?latex=%5CLaTeX&amp;bg=ffffff&amp;fg=1c1c1c&amp;s=0"> &ndash; sometimes I blog about math. Sometimes I need to publish my thesis</li>
         <li><strong>MediaWiki</strong> &ndash; deep wikimarkup knowledge, and administration skills.
             I am administrator of Ukrainian wikibooks project.

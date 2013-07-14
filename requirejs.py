@@ -6,6 +6,8 @@ import os
 import subprocess
 import re
 
+import external_assets
+
 included = set()
 
 def include(asset, from_file, root):
@@ -34,7 +36,8 @@ def get_tag(src, root):
     return '<script type="text/javascript" src="%s"></script>' % src
 
 def coffee2js(asset):
-    if file_type(asset) == 'coffee':
+    ft = file_type(asset)
+    if ft == 'coffee':
         js = asset[:-len('coffee')] + 'js'
         if os.path.exists(js) and os.path.getmtime(asset) <= os.path.getmtime(js):
             print('%s is up to date' % js)
@@ -42,16 +45,26 @@ def coffee2js(asset):
         print('Compiling %s' % asset)
         subprocess.call(['coffee', '-c', asset])
         return js
-    elif file_type(asset) == 'js':
+    elif ft == 'js':
         return asset
+    elif ft is None:
+        if asset in external_assets.__dict__:
+            return external_assets.__dict__[asset]
+        raise ValueError('Asset "%s" is not found in external_assets.py' % asset)
     else:
         raise ValueError('Unknown file type: .%s' % tp)
 
 def file_type(filename):
-    return filename.rsplit('.', 1)[1]
+    try:
+        return filename.rsplit('.', 1)[1]
+    except IndexError:
+        return None
 
 def external(asset):
-    return asset.startswith('http://')
+    if asset.startswith('http://'):
+        return asset
+    if asset in external_assets.__dict__:
+        return asset
 
 def absolute(filename, path, root):
     ''' filename - path to the requirement
@@ -61,7 +74,7 @@ def absolute(filename, path, root):
         root - absolute path to root of the project
     '''
     if external(filename):
-        return filename # don't touch URLs
+        return filename
     j = lambda a, b: os.path.normpath(os.path.join(a, b))
     if filename.startswith('/'):
         return j(root, filename[1:])
@@ -75,7 +88,12 @@ def requirements(asset, root):
         returns list of absolute paths.
     '''
     if external(asset):
-        return # assume external libs have no requirements
+        if asset not in external_assets._dependencies:
+            return
+        for r in external_assets._dependencies[asset]:
+            yield r
+        return
+
     tp = file_type(asset)
     try:
         requirement_re = re.compile({
@@ -137,4 +155,3 @@ def topo_sort(graph):
             break
         visit(n)
     return res
-

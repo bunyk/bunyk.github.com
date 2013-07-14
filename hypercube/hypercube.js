@@ -1,6 +1,6 @@
 "use strict";
 
-// REQUIRE svglib.js
+// REQUIRE svglib.coffee
 // REQUIRE matrix.coffee
 
 (function() {

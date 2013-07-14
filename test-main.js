@@ -1,32 +1,5 @@
-"use strict";
-require.config({
-    paths: {
-        QUnit: 'jslibs/qunit/qunit',
-        jquery: ['http://code.jquery.com/jquery-1.10.0.min', '../jslibs/jquery-2.0.2.min'],
-        radio: ['jslibs/radio.min'],
-        hypercube_test: 'hypercube/tests',
-        hypercube: 'hypercube/hypercube',
-        matrix: 'hypercube/matrix',
-        svglib: 'hypercube/svglib'
-    },
-    shim: {
-        'QUnit': {
-            exports: 'QUnit',
-            init: function() {
-                QUnit.config.autoload = false;
-                QUnit.config.autostart = false;
-            }
-        }
-    }
-});
+// REQUIRE hypercube/tests.coffee
 
-require([
-    'QUnit',
-    'hypercube_test'
-], function(QUnit, hypercube_test) {
-    hypercube_test.run();
+hypercube_tests()
 
-    QUnit.load();
-    QUnit.start();
-});
 

@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/styles/global_layout.css" />
         <link rel="stylesheet" href="/styles/bootstrap.min.css" />
         <link rel="stylesheet" href="/styles/bootstrap-responsive.css" />
-        ${u.requirejs('/jslibs/jquery-2.0.2.min.js')}
+        ${u.requirejs('jquery')}
         <%block name="head" />
     </head>
 <body>
@@ -43,8 +43,8 @@
             ${u.google_analytics()}
         </%block>
     </div>
-    ${u.requirejs('/jslibs/bootstrap-collapse.js')}
-    ${u.requirejs('/jslibs/bootstrap-dropdown.js')}
+    ${u.requirejs('bootstrap_collapse')}
+    ${u.requirejs('bootstrap_dropdown')}
 </body>
 </html>
 

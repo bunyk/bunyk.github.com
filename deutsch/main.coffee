@@ -1,4 +1,4 @@
-# REQUIRE /jslibs/jquery-2.0.2.min.js
+# REQUIRE jquery
 # REQUIRE exercises.coffee
 
 $ = jQuery

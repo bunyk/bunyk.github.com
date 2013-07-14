@@ -1,7 +1,7 @@
-# REQUIRE /jslibs/jquery-2.0.2.min.js
-# REQUIRE /jslibs/underscore-min.js
-# REQUIRE /jslibs/backbone-min.js
-# REQUIRE /jslibs/backbone.localStorage-min.js
+# REQUIRE jquery
+# REQUIRE underscore
+# REQUIRE backbone
+# REQUIRE backbone_localstorage
 
 $ = jQuery
 $(() ->
