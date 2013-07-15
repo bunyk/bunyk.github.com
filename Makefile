@@ -7,6 +7,6 @@ html:
 	python3.3 render_mako.py hypercube/index.mako 
 	python3.3 render_mako.py resume/index.mako 
 love:
-	python3.3 -m SimpleHTTPServer 8080
+	python3.3 -m http.server 8080
 test:
 	python3.3 test.py

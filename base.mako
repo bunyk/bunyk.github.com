@@ -31,7 +31,7 @@
             ('http://bunyk.wordpress.com/', 'Блоґ'),
         ))}
       </div>
-      <script>hypercubeWidget("#hypercube_logo", 30, 30, 4, 3, 50, null, 'stroke:white;stroke-width:1');</script>
+      <script>hypercubeWidget("#hypercube_logo", 30, 30, 4, 3, 150, null, 'stroke:white;stroke-width:1');</script>
     </div></div></div>
     <div class="container">
         <h1>${self.title()}</h1>
