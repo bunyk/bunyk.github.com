@@ -9,8 +9,8 @@
 	<link rel="stylesheet" href="../styles/global_layout.css" />
 	<link rel="stylesheet" href="layout.css" />
     <!-- include("/home/bunyk/bunyk.github.com/hypercube/main.coffee") -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="http://raw.github.com/uxder/Radio/master/radio.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="/hypercube/svglib.js"></script>
 <script type="text/javascript" src="/hypercube/matrix.js"></script>
 <script type="text/javascript" src="/hypercube/hypercube.js"></script>
@@ -49,7 +49,7 @@
     (function($) {
         $(window).load(function() {
             clearInterval(window.loading_progress);
-            $('#cover').fadeOut();
+            $('#cover').hide();
         });
     }(jQuery));
     </script>
@@ -80,7 +80,7 @@
     <li class="last-menu-item"></li>
     </ul>
     </div>
-    <h1 class="dark-background">HTML5 SVG graphics test</h1>
+    <h1>HTML5 SVG graphics test</h1>
 
     
 

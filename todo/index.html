@@ -6,10 +6,10 @@
 
         
     <!-- include("/home/bunyk/bunyk.github.com/todo/todos.coffee") -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
 <script type="text/javascript" src="http://backbonejs.org/backbone-min.js"></script>
 <script type="text/javascript" src="http://raw.github.com/jeromegn/Backbone.localStorage/master/backbone.localStorage-min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="/todo/todos.js"></script>
     <link rel="stylesheet" href="todo.css" />
 
@@ -46,7 +46,7 @@
     (function($) {
         $(window).load(function() {
             clearInterval(window.loading_progress);
-            $('#cover').fadeOut();
+            $('#cover').hide();
         });
     }(jQuery));
     </script>
@@ -77,7 +77,7 @@
     <li class="last-menu-item"></li>
     </ul>
     </div>
-    <h1 class="dark-background">TODO list</h1>
+    <h1>TODO list</h1>
 
     
 

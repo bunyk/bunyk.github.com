@@ -39,7 +39,7 @@
     (function($) {
         $(window).load(function() {
             clearInterval(window.loading_progress);
-            $('#cover').fadeOut();
+            $('#cover').hide();
         });
     }(jQuery));
     </script>
