@@ -3,6 +3,7 @@ body {
     margin-right:0px;
     margin-top: 0px;
     margin-bottom: 0px;
+    max-width: 50em;
 }
 
 h1 {
