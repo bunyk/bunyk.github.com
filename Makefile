@@ -1,3 +1,4 @@
+all: html love
 html:
 	python3.3 render_mako.py todo/index.mako 
 	python3.3 render_mako.py index.mako 

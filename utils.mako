@@ -6,19 +6,11 @@
     ${requirejs.include(file, filename, '.')|n}
 </%def>
 
-<%def name="li_menu(page)" filter="trim">
-    %if page == filename:
-        <li class = "active">
-    % else:
-        <li>
-    %endif
-</%def>
-
 <%def name="menu_item(location, caption)" filter="trim">
     %if location is None:
-        <li class="dropdown ${'active' if current_location in (i[0] for i in caption[1:]) else ''}">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">${caption[0]}<b class="caret"></b></a>  
-            <ul class="dropdown-menu">  
+        <li class="${'active' if current_location in (i[0] for i in caption[1:]) else ''}">
+            ${caption[0]}
+            <ul>
             %for l2, c2 in caption[1:]:
                 ${menu_item(l2, c2)}
             %endfor
@@ -36,9 +28,11 @@
 
 <%def name="main_menu(items)" filter="trim">
     <ul class="nav">
+    <li class="first-menu-item"></li>
     % for location, caption in items:
         ${menu_item(location, caption)}
     % endfor
+    <li class="last-menu-item"></li>
     </ul>
 </%def>
 

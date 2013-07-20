@@ -1,5 +1,67 @@
 body {
-    padding-top: 60px;
+    margin-left:13em;
+    margin-right:0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+h1 {
+    background-color:black;
+    color:white;
+    margin-top: 0.3em;
+    margin-bottom: 0.5em;
+    border: solid 5px white;
+    padding: 15px;
+}
+#sidebar {
+    position:fixed;
+    padding: 0 0 1em 0;
+    left: 0px;
+    top: 0px;
+    width: 12em;
+    height: 100%;
+    padding: 0px;
+}
+#sidebar ul {
+    list-style: none;
+    margin: 0;
+    margin-left: 0.3em;
+    padding: 0;
+    border: none;
+    height: 100%;
+}
+#sidebar ul li {
+    margin: 0px;
+    padding: 0.3em;
+    border-right: 1px solid black;
+}
+#sidebar li li {
+    margin-left: 1em;
+    padding: 0.3em;
+    font-weight: normal;
+}
+li.last-menu-item {
+    height:100%;
+}
+li.first-menu-item {
+    height:1em;
+}
+#sidebar li.active {
+    border-right: 0px;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-radius: 0.3em;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    font-weight: bold;
+}
+#sidebar li a {
+    display: block;
+    text-decoration: none;
+}
+#sidebar li a:hover {
+    text-decoration: underline;
 }
 
 /* hidden by default block with widgets to show after js is loaded */
@@ -8,18 +70,11 @@ body {
     overflow: hidden; /* to turn off floating of elements outside of this block around elements inside */
 }
 
-#hypercube_logo {
-    display: inline-block;
-    position: relative;
-    width: 30px;
-    height: 30px;
-    overflow: hidden;
-    vertical-align: middle;
-    margin: -15px 0px -15px 5px;
-}
-
 @media print {
-    .navbar, #disqus_thread {
+    #sidebar, #disqus_thread {
         display: none !important;
+    }
+    body {
+        margin: 0px !important;
     }
 }

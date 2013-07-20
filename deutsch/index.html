@@ -4,43 +4,66 @@
         <meta charset="utf-8" />
         <title>Моє бачення інтерактивного підручника німецької</title>
 
-        <link rel="stylesheet" href="/styles/bootstrap.min.css" />
-        <link rel="stylesheet" href="/styles/bootstrap-responsive.css" />
-        <link rel="stylesheet" href="/styles/global_layout.css" />
-        <!-- include("/home/bunyk/bunyk.github.com/hypercube/main.coffee") -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="http://raw.github.com/uxder/Radio/master/radio.min.js"></script>
-<script type="text/javascript" src="/hypercube/svglib.js"></script>
-<script type="text/javascript" src="/hypercube/matrix.js"></script>
-<script type="text/javascript" src="/hypercube/hypercube.js"></script>
-<script type="text/javascript" src="/hypercube/main.js"></script>
         
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="exercises.css" />
     <!-- include("/home/bunyk/bunyk.github.com/deutsch/main.coffee") -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/deutsch/exercises.js"></script>
 <script type="text/javascript" src="/deutsch/main.js"></script>
 
+        <link rel="stylesheet" href="/styles/global_layout.css" />
     </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top"><div class="navbar-inner"><div class="container">
-      <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div class="nav-collapse collapse">
+    <!-- Cover to show during loading process -->
+    <div id="cover" style="
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom:0px;
+        z-index: 9999;
+        background-color:white;
+        line-height:100%;
+        font-size: 5em;
+        font-family: 'Courier New', Courier, monospace;
+    ">Loading.</div>
+    <script type="text/javascript">
+    (function() {
+        var cover = document.getElementById('cover');
+        var i = 2;
+        window.loading_progress = setInterval(function() {
+            i++;
+            if(i>10) i=2;
+            cover.innerHTML = 'Loading' + Array(i).join('.');
+        }, 200);
+    }());
+    </script>
+    
+    <!-- include("jquery") -->
+    <script type="text/javascript">
+    (function($) {
+        $(window).load(function() {
+            clearInterval(window.loading_progress);
+            $('#cover').fadeOut();
+        });
+    }(jQuery));
+    </script>
+
+    <!-- Navigation -->
+    <div id="sidebar">
         <ul class="nav">
+    <li class="first-menu-item"></li>
         <li>
         <a href="/">Home</a></li>
         <li>
         <a href="/resume/">CV</a></li>
         <li>
-        <a href="/hypercube/">Hypercube hack<span id="hypercube_logo"></span></a></li>
-        <li class="dropdown active">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Deutschunterricht<b class="caret"></b></a>  
-            <ul class="dropdown-menu">  
+        <a href="/hypercube/">Hypercube hack</a></li>
+        <li class="active">
+            Deutschunterricht
+            <ul>
                 <li class="active">
         <a href="/deutsch/">Übungen</a></li>
                 <li>
@@ -51,14 +74,12 @@
         <a href="/todo/">TODO app</a></li>
         <li>
         <a href="http://bunyk.wordpress.com/">Блоґ</a></li>
+    <li class="last-menu-item"></li>
     </ul>
-      </div>
-      <script>hypercubeWidget("#hypercube_logo", 30, 30, 4, 3, 150, null, 'stroke:white;stroke-width:1');</script>
-    </div></div></div>
-    <div class="container">
-        <h1>Моє бачення інтерактивного підручника німецької</h1>
+    </div>
+    <h1 class="dark-background">Моє бачення інтерактивного підручника німецької</h1>
 
-        
+    
 
 
 
@@ -137,20 +158,15 @@
 
 
 
+    
+        <hr />
+        <a href="http://bunyk.wordpress.com/">Bunyk Taras</a>, 2013. 
         
-            <hr />
-            <a href="http://bunyk.wordpress.com/">Bunyk Taras</a>, 2013. 
-            
 <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-42001280-1']); _gaq.push(['_trackPageview']);
 (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();</script>
 
-        
-    </div>
-    <!-- include("bootstrap_collapse") -->
-<script type="text/javascript" src="http://twitter.github.io/bootstrap/assets/js/bootstrap-collapse.js"></script>
-    <!-- include("bootstrap_dropdown") -->
-<script type="text/javascript" src="http://twitter.github.io/bootstrap/assets/js/bootstrap-dropdown.js"></script>
+    
 </body>
 </html>
