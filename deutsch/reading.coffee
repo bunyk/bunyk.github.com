@@ -1,7 +1,16 @@
 # REQUIRE jquery
 # REQUIRE underscore
+# REQUIRE firebase
 
 $ = jQuery;
+
+dictionary = {}
+
+words_store = new Firebase('https://bunyk.firebaseio.com/words');
+
+words_store.on('value', (data) ->
+    dictionary = data.val() or {}
+)
 
 show_popup = (text, x, y, duration=2000) -> 
     popup = $('<div class="popup"></div>').html(text)
@@ -19,13 +28,17 @@ show_popup = (text, x, y, duration=2000) ->
     )
     $('body').append(popup)
 
-
-dictionary = {}
+load = (key) ->
+    JSON.parse(localStorage.getItem(key))
+save = (key, value) ->
+    localStorage.setItem(key, JSON.stringify(value))
 
 save_dictionary = () ->
-    localStorage.setItem('dictionary', JSON.stringify(dictionary))
+    save('dictionary', dictionary)
+    words_store.set(dictionary)
+
 load_dictionary = () ->
-    dictionary = JSON.parse(localStorage.getItem('dictionary')) or {}
+    dictionary = load('dictionary') or {}
 
 add_to_dictionary = (key, value, $elements) ->
     console.log 'adding to dictionary:', key, value
@@ -79,7 +92,9 @@ init_state = () ->
                 if is_normal()
                     add_dictionary_note()
     input: input
+    is_input: is_input
     normal: normal
+    is_normal: is_normal
     keypress: keypress
 
 state = init_state()
@@ -109,9 +124,42 @@ add_dictionary_note = () ->
     state.input()
     $('body').append(dialog)
 
+render_content = (content) ->
+    _.map(
+        content.split('\n'),
+        (line) -> '<p>' + line + '</p>'
+    ).join('\n')
+
+
+show_content = () ->
+    $('#content')
+        .html(render_content(load('content')))
+        .show()
+
+get_edit_save_click = () ->
+    () ->
+        if state.is_normal()
+            state.input()
+            $('#edit_save').html('Save')
+            $('#edit_content')
+                .val(load('content') or '')
+                .show()
+            $('#content').hide()
+            
+        else
+            state.normal()
+            $('#edit_save').html('Edit')
+            content = $('#edit_content').val()
+            $('#edit_content').hide()
+            save('content', content)
+            $('#content')
+                .html(render_content(content))
+                .show()
 
 $(() ->
     $('p').bindDictionaryLookup()
     $(document).keypress(state.keypress)
     $(window).on('unload', () -> save_dictionary())
+    $('#edit_save').click(get_edit_save_click())
+    show_content()
 )

@@ -18,3 +18,5 @@ _dependencies['bootstrap_collapse'] = ['jquery']
 
 bootstrap_dropdown = 'http://twitter.github.io/bootstrap/assets/js/bootstrap-dropdown.js'
 _dependencies['bootstrap_dropdown'] = ['jquery']
+
+firebase = 'https://cdn.firebase.com/v0/firebase.js'

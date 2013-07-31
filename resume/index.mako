@@ -43,6 +43,12 @@
                     <ul>
                         <li>Leaflet</li>
                         <li>Flask</li>
+                        <li>supervisord</li>
+                        <li>Nginx</li>
+                        <li>fabric</li>
+                        <li>Amazon EC2</li>
+                        <li>CentOS</li>
+                        <li>Zope 2</li>
                     </ul>
                 </li>
             </ul>

@@ -28,3 +28,6 @@
 button {
     margin: 3px;
 }
+textarea {
+    width: 100%;
+}

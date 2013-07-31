@@ -65,7 +65,7 @@ def file_type(filename):
         return None
 
 def external(asset):
-    if asset.startswith('http://'):
+    if asset.startswith('http://') or asset.startswith('https://'):
         return asset
     if asset in external_assets.__dict__:
         return asset
