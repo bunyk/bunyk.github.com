@@ -20,3 +20,6 @@ bootstrap_dropdown = 'http://twitter.github.io/bootstrap/assets/js/bootstrap-dro
 _dependencies['bootstrap_dropdown'] = ['jquery']
 
 firebase = 'https://cdn.firebase.com/v0/firebase.js'
+
+raphael = 'https://raw.github.com/DmitryBaranovskiy/raphael/master/raphael-min.js'
+raphael_src = 'https://raw.github.com/DmitryBaranovskiy/raphael/master/raphael.js'
