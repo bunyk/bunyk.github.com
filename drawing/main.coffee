@@ -1,5 +1,4 @@
 # REQUIRE jquery
-# REQUIRE raphael_src
 
 $ = jQuery
 
@@ -11,8 +10,6 @@ $(() ->
     i = 0
     animate = () ->
         i -= 2
-        if i > 30
-            i = 0
         $('svg line').attr('stroke-dashoffset', i)
-    setInterval(animate, 100)
+    setInterval(animate, 40)
 )

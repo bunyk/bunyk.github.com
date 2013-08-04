@@ -11,12 +11,9 @@
     i = 0;
     animate = function() {
       i -= 2;
-      if (i > 30) {
-        i = 0;
-      }
       return $('svg line').attr('stroke-dashoffset', i);
     };
-    return setInterval(animate, 100);
+    return setInterval(animate, 40);
   });
 
 }).call(this);
