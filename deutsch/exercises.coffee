@@ -5,16 +5,39 @@ $ = jQuery
 
 c = console.log.bind console
 
-$.fn.checkContent = (visual) ->
+$.fn.editable = () ->
     $this = $(this)
-    c 'Checking if #{$this} is corrrect'
-    correct = $this.data('content') == $this.data('correct')
+    editable = (e) -> $this.attr('contentEditable', e)
+
+    $this
+        .click(() -> editable(true))
+        .blur(() -> editable(false))
+        .keypress (e) ->
+            code = if e.keyCode then e.keyCode else e.which
+            if code == 13
+                $this.blur()
+    this
+
+$.fn.checkContent = (visual, html=false) ->
+    $this = $(this)
+    content = if html then $this.html().trim() else $this.data('content')
+    c "Checking if #{content} is corrrect"
+    correct = content == $this.data('correct')
     if visual
         if correct
             $this.css('background-color', '#CFC')
         else
             $this.css('background-color', '#FAA')
     correct
+
+$.fn.fillExcercise = (check_instantly) ->
+    c 'fillExcercise plugin started for', this
+    ### inside this, elements with class "editable"
+        become editable and data-correct attribute should be set.
+    ###
+
+    $editables = $('.editable', this).editable()
+    add_check_button($(this), $editables, true)
 
 $.fn.dragExcercise = (check_instantly) ->
     c 'dragExcercise plugin started for', this
@@ -51,22 +74,24 @@ $.fn.dragExcercise = (check_instantly) ->
             $this.data('content', '')
             $elem.css('color', 'black')
     )
+    add_check_button($(this), $droppables)
+
+
+add_check_button = ($this, $elements, check_html=false) ->
     check_all = () ->
         total = 0
         correct = 0
-        $droppables.each(() ->
-            if $(this).checkContent(true)
+        $elements.each(() ->
+            if $(this).checkContent(true, check_html)
                 correct++
             total++
         )
         correct / total
         
-    if not check_instantly
-        $this = $(this)
-        $check = $('<button>Check</button>').click(() -> 
-            points = Math.round($ check_all() * 12)
-            $this.append("<p>Points = #{mark} of 12</p>")
-        )
-        c 'Adding check button'
+    $check = $('<button>Check</button>').click(() -> 
+        points = Math.round(check_all() * 12)
+        $this.append("<p>Points = #{points} of 12</p>")
+    )
+    c 'Adding check button'
 
-        $this.append($check)
+    $this.append($check)

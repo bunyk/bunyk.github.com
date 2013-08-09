@@ -5,8 +5,11 @@
   $ = jQuery;
 
   $(function() {
-    return $('.drag_exercise').each(function() {
+    $('.drag_exercise').each(function() {
       return $(this).dragExcercise();
+    });
+    return $('.fill_exercise').each(function() {
+      return $(this).fillExcercise();
     });
   });
 
