@@ -4,6 +4,8 @@ jquery = 'http://code.jquery.com/jquery-2.0.3.min.js'
 jquery_ui = 'http://code.jquery.com/ui/1.10.3/jquery-ui.min.js'
 qunit = 'http://code.jquery.com/qunit/qunit-1.12.0.js'
 
+_dependencies['jquery_ui'] = ['jquery']
+
 underscore = 'http://underscorejs.org/underscore-min.js'
 backbone = 'http://backbonejs.org/backbone-min.js'
 _dependencies['backbone'] = ['underscore']
