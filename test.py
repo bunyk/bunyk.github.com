@@ -1,11 +1,34 @@
 import os
 import unittest
+import io
+from functools import reduce
 
-from requirejs import *
+def patch_open(module, filesystem):
+    '''
+        Patches function open() in module in such way,
+        that it opens files set as strings in filesystem dictionary
+    '''
+    def open_patch(filename):
+        return io.StringIO(reduce(
+            lambda d, k: d[k], 
+            filename.split('/'),
+            filesystem
+        ))
+    module.open = open_patch
 
+class TestPatchOpen(unittest.TestCase):
+    def test_opens(self):
+        m = lambda: 0
+        patch_open(m, {
+            'directory': {
+                'file.txt': 'hello!',
+            },
+        })
+        self.assertEqual(m.open('directory/file.txt').read(), 'hello!')
 class TestAbsolute(unittest.TestCase):
     def test_caller_sibling(self):
-        self.assertEquals(
+        from requirejs import absolute
+        self.assertEqual(
             absolute(
                 'script.js',
                 '/home/user/project/module/',
@@ -15,7 +38,8 @@ class TestAbsolute(unittest.TestCase):
         )
 
     def test_in_caller_parent(self):
-        self.assertEquals(
+        from requirejs import absolute
+        self.assertEqual(
             absolute(
                 '../script.js',
                 '/home/user/project/module/',
@@ -25,7 +49,8 @@ class TestAbsolute(unittest.TestCase):
         )
 
     def test_in_project_root(self):
-        self.assertEquals(
+        from requirejs import absolute
+        self.assertEqual(
             absolute(
                 '/script.js',
                 '/home/user/project/module/',
@@ -35,7 +60,8 @@ class TestAbsolute(unittest.TestCase):
         )
 
     def test_in_project_subfolder_absolute(self):
-        self.assertEquals(
+        from requirejs import absolute
+        self.assertEqual(
             absolute(
                 '/assets/script.js',
                 '/home/user/project/module/',
@@ -45,7 +71,8 @@ class TestAbsolute(unittest.TestCase):
         )
 
     def test_relative_subfolder(self):
-        self.assertEquals(
+        from requirejs import absolute
+        self.assertEqual(
             absolute(
                 'assets/script.js',
                 '/home/user/project/module/',
@@ -55,33 +82,37 @@ class TestAbsolute(unittest.TestCase):
         )
 
 class TestRequireJS(unittest.TestCase):
-    def test_include(self):
-        self.assertEqual(
-            include(
-                '/deutsch/main.coffee', 
-                './deutsch/',
-                '.', 
-            ),
-            ''
-        )
-
     def test_asset_type(self):
+        from requirejs import file_type
         self.assertEqual(file_type('main.js'), 'js')
         self.assertEqual(file_type('jquery.min.js'), 'js')
         self.assertEqual(file_type('example.coffee'), 'coffee')
 
     def test_requirements(self):
+        import requirejs
+        patch_open(requirejs, {
+            '': { # filesystem root
+                'project': {
+                    'main.coffee': '# REQUIRE jquery\n'
+                                   '# REQUIRE module.coffee\n'
+                                   '# REQUIRE /deeper/module.coffee\n',
+                }
+            }
+        })
+
         self.assertEqual(
-            list(requirements(
-                '/home/bunyk/bunyk.github.com/deutsch/main.coffee', 
-                '/home/bunyk/bunyk.github.com/', 
+            list(requirejs.requirements(
+                '/project/main.coffee', 
+                '/project/', 
             )), [
-                '/home/bunyk/bunyk.github.com/jslibs/jquery-2.0.2.min.js',
-                '/home/bunyk/bunyk.github.com/deutsch/exercises.coffee'
+                'jquery',
+                '/project/module.coffee',
+                '/project/deeper/module.coffee',
             ]
         )
 
     def test_topo_sort(self):
+        from requirejs import topo_sort
         self.assertEqual(
                 topo_sort({
                     'a': [],
@@ -90,7 +121,6 @@ class TestRequireJS(unittest.TestCase):
                 }),
                 ['a', 'c', 'b']
             )
-
 
 if __name__ == '__main__':
     unittest.main()

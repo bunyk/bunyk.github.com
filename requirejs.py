@@ -6,15 +6,34 @@ import os
 import subprocess
 import re
 
+import logging 
+log = logging.getLogger(__name__)
+
 import external_assets
+
+def main():
+    load_assets()
+
+def load_assets():
+    import httplib2
+    http = httplib2.Http()
+    for asset in dir(external_assets):
+        if asset[0] == '_': continue
+        url = getattr(external_assets, asset)
+        h, b = http.request(url)
+        log.info(h['status'], asset, url)
+        if h['status'] == 200:
+            with open('external_assets/%s' % asset, 'w') as f:
+                f.write(b)
 
 included = set()
 
-def include(asset, from_file, root):
+def include(asset, from_file, root, local=False):
     '''
         Returns a set of <script src="... tags for asset with dependencies.
         from_file - file from which asset is included
         root - root of the project
+        local - if true, than link external libs from external_assets folder
     '''
     root = os.path.abspath(root)
     dir = os.path.abspath(os.path.dirname(from_file))
@@ -27,33 +46,38 @@ def include(asset, from_file, root):
             included.add((src, from_file))
             return True
 
-    return '\n<!-- include("{}") -->\n'.format(asset) + '\n'.join(
-        get_tag(coffee2js(src), root)
-        for src in topo_sort(get_graph(asset, root))
-        if once(src)
+    return (
+        '\n<!-- include("{}") -->\n'.format(asset)
+        + '\n'.join(
+            get_tag(coffee2js(src, local), root, local)
+            for src in topo_sort(get_graph(asset, root))
+            if once(src)
+        )
     )
 
-def get_tag(src, root):
+def get_tag(src, root, local=False):
     if not external(src):
         assert src.startswith(root)
         src = src[len(root):]
+    elif local:
+        src = '/external_assets/%s' % src
     return '<script type="text/javascript" src="%s"></script>' % src
 
-def coffee2js(asset):
+def coffee2js(asset, local=False):
     ft = file_type(asset)
     if ft == 'coffee':
         js = asset[:-len('coffee')] + 'js'
         if os.path.exists(js) and os.path.getmtime(asset) <= os.path.getmtime(js):
-            #print('%s is up to date' % js)
+            log.info('%s is up to date' % js)
             return js
-        print('Compiling %s' % asset)
+        log.info('Compiling %s' % asset)
         subprocess.call(['coffee', '-c', asset])
         return js
     elif ft == 'js':
         return asset
     elif ft is None:
-        if asset in external_assets.__dict__:
-            return external_assets.__dict__[asset]
+        if external(asset):
+            return asset if local else external_assets.__dict__[asset]
         raise ValueError('Asset "%s" is not found in external_assets.py' % asset)
     else:
         raise ValueError('Unknown file type: .%s' % tp)
@@ -65,10 +89,11 @@ def file_type(filename):
         return None
 
 def external(asset):
-    if asset.startswith('http://') or asset.startswith('https://'):
-        return asset
-    if asset in external_assets.__dict__:
-        return asset
+    return (
+        asset.startswith('http://')
+        or asset.startswith('https://')
+        or asset in external_assets.__dict__
+    )
 
 def absolute(filename, path, root):
     ''' filename - path to the requirement
@@ -87,9 +112,9 @@ def absolute(filename, path, root):
 
 def requirements(asset, root):
     '''
-        asset - absolute path,
+        asset - absolute path of asset which requires other,
         root - absolute path of root of project
-        returns list of absolute paths.
+        returns list of absolute paths to required assets.
     '''
     if external(asset):
         if asset not in external_assets._dependencies:
@@ -137,15 +162,17 @@ def topo_sort(graph):
         or exception when found a cycle
     '''
     res = []
-    marks = { k: None for k in graph.keys() }
-    def unmarked():
+    marks = { k: None for k in graph.keys() } # all unvisited
+
+    def unvisited():
+        ''' Return first unvisited node or None '''
         for k, v in marks.items():
             if v is None:
                 return k
 
     def visit(n):
         if marks[n] == 'temp':
-            raise ValueError('Not a DAG')
+            raise ValueError('Found a circular dependency in "%s"' % n)
         if marks[n] is None:
             marks[n] = 'temp'
             for m in graph[n]:
@@ -154,8 +181,11 @@ def topo_sort(graph):
             res.append(n)
 
     while True:
-        n = unmarked()
-        if not n:
+        n = unvisited()
+        if n is None:
             break
         visit(n)
     return res
+
+if __name__ == '__main__':
+    main()

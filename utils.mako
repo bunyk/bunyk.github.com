@@ -3,7 +3,7 @@
         import os
         import requirejs
     %>
-    ${requirejs.include(file, filename, '.')|n}
+    ${requirejs.include(file, filename, '.', local_externals)|n}
 </%def>
 
 <%def name="menu_item(location, caption)" filter="trim">

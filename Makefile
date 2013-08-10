@@ -1,4 +1,14 @@
 all: html love
+love:
+	python3.3 -m http.server 8080
+test:
+	python3.3 test.py
+
+load:
+	mkdir -p external_assets
+	python3.3 requirejs.py
+
+html: drawing_html index_html todo_html deutsch_html resume hypercube_html
 drawing_html:
 	python3.3 render_mako.py drawing/index.mako 
 index_html:
@@ -13,9 +23,3 @@ resume:
 	python3.3 render_mako.py resume/index.mako 
 hypercube_html:
 	python3.3 render_mako.py hypercube/index.mako 
-
-html: drawing_html index_html todo_html deutsch_html resume hypercube_html
-love:
-	python3.3 -m http.server 8080
-test:
-	python3.3 test.py
