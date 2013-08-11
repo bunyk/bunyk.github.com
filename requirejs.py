@@ -15,16 +15,15 @@ def main():
     load_assets()
 
 def load_assets():
-    import httplib2
-    http = httplib2.Http()
+    import requests
     for asset in dir(external_assets):
         if asset[0] == '_': continue
         url = getattr(external_assets, asset)
-        h, b = http.request(url)
-        log.info(h['status'], asset, url)
-        if h['status'] == 200:
+        r = requests.get(url)
+        print(r.status_code, asset, url)
+        if r.status_code == 200:
             with open('external_assets/%s' % asset, 'w') as f:
-                f.write(b)
+                f.write(r.text)
 
 included = set()
 
