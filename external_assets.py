@@ -8,7 +8,10 @@ _dependencies['jquery_ui'] = ['jquery']
 
 underscore = 'http://underscorejs.org/underscore-min.js'
 backbone = 'http://backbonejs.org/backbone-min.js'
-_dependencies['backbone'] = ['underscore']
+_dependencies['backbone'] = [
+    'underscore',
+    'jquery' # don't know why, but this fixes some bugs. Order of script tags matters.
+]
 
 backbone_localstorage = 'http://raw.github.com/jeromegn/Backbone.localStorage/master/backbone.localStorage-min.js'
 _dependencies['backbone_localstorage'] = ['backbone']

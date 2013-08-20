@@ -8,14 +8,15 @@ load:
 	mkdir -p external_assets
 	python3.3 requirejs.py
 
-html: drawing_html index_html todo_html deutsch_html resume hypercube_html
+html: drawing_html index_html backbone deutsch_html resume hypercube_html
 drawing_html:
 	python3.3 render_mako.py drawing/index.mako 
 index_html:
 	python3.3 render_mako.py index.mako 
 	python3.3 render_mako.py test.mako 
-todo_html: 
+backbone: 
 	python3.3 render_mako.py todo/index.mako 
+	python3.3 render_mako.py todo/home_bi.mako 
 deutsch_html:
 	python3.3 render_mako.py deutsch/index.mako 
 	python3.3 render_mako.py deutsch/unendliche_geschichte.mako
