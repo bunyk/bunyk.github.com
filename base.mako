@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="/styles/global_layout.css" />
     </head>
 <body>
+    <%doc>
     <!-- Cover to show during loading process -->
     <div id="cover" style="
         position: fixed;
@@ -43,6 +44,7 @@
         });
     }(jQuery));
     </script>
+    </%doc>
 
     <!-- Navigation -->
     <div id="sidebar">
@@ -55,6 +57,8 @@
                 ('/deutsch/unendliche_geschichte.html', 'Die unendliche Geschichte'),
             )),
             ('/todo/', 'TODO app'),
+            ('/canvas/', 'HTML5 canvas test'),
+            ('/drawing/', 'HTML5 SVG test'),
             ('http://bunyk.wordpress.com/', 'Блоґ'),
         ))}
     </div>

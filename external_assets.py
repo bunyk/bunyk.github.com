@@ -28,3 +28,5 @@ firebase = 'http://cdn.firebase.com/v0/firebase.js'
 
 raphael = 'http://raw.github.com/DmitryBaranovskiy/raphael/master/raphael-min.js'
 raphael_src = 'http://raw.github.com/DmitryBaranovskiy/raphael/master/raphael.js'
+
+extjs = 'http://cdn.sencha.io/ext-4.2.0-gpl/ext-all.js'

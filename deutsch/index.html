@@ -7,7 +7,7 @@
         
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="exercises.css" />
-    <!-- include("/home/bunyk/bunyk.github.com/deutsch/main.coffee") -->
+    <!-- include("/home/bunyk/progs/bunyk.github.com/deutsch/main.coffee") -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/deutsch/exercises.js"></script>
@@ -16,40 +16,7 @@
         <link rel="stylesheet" href="/styles/global_layout.css" />
     </head>
 <body>
-    <!-- Cover to show during loading process -->
-    <div id="cover" style="
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        bottom:0px;
-        z-index: 9999;
-        background-color:white;
-        line-height:100%;
-        font-size: 5em;
-        font-family: 'Courier New', Courier, monospace;
-    ">Loading.</div>
-    <script type="text/javascript">
-    (function() {
-        var cover = document.getElementById('cover');
-        var i = 2;
-        window.loading_progress = setInterval(function() {
-            i++;
-            if(i>10) i=2;
-            cover.innerHTML = 'Loading' + Array(i).join('.');
-        }, 200);
-    }());
-    </script>
     
-    <!-- include("jquery") -->
-    <script type="text/javascript">
-    (function($) {
-        $(window).load(function() {
-            clearInterval(window.loading_progress);
-            $('#cover').hide();
-        });
-    }(jQuery));
-    </script>
 
     <!-- Navigation -->
     <div id="sidebar">
@@ -72,6 +39,10 @@
         </li>
         <li>
         <a href="/todo/">TODO app</a></li>
+        <li>
+        <a href="/canvas/">HTML5 canvas test</a></li>
+        <li>
+        <a href="/drawing/">HTML5 SVG test</a></li>
         <li>
         <a href="http://bunyk.wordpress.com/">Блоґ</a></li>
     <li class="last-menu-item"></li>

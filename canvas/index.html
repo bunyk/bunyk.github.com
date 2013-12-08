@@ -1,46 +1,16 @@
 <!DOCTYPE html>
-<html><!-- this html is generated from todo/home_bi.mako! -->
+<html><!-- this html is generated from canvas/index.mako! -->
     <head>
         <meta charset="utf-8" />
-        <title>Controlling home budget</title>
+        <title>HTML5 canvas graphics test</title>
 
         
-    <!-- include("/home/bunyk/progs/bunyk.github.com/todo/home_bi.coffee") -->
+	<link rel="stylesheet" href="../styles/global_layout.css" />
+    <!-- include("/home/bunyk/progs/bunyk.github.com/canvas/main.coffee") -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
-<script type="text/javascript" src="http://backbonejs.org/backbone-min.js"></script>
-<script type="text/javascript" src="http://raw.github.com/jeromegn/Backbone.localStorage/master/backbone.localStorage-min.js"></script>
-<script type="text/javascript" src="/todo/home_bi.js"></script>
-
-<style>
-.item-list tr .input {
-    display: none;
-}
-.item-list tr .save {
-    display: none;
-}
-.item-list tr.editing .edit {
-    display: none;
-}
-.item-list tr.editing .save {
-    display: block;
-}
-.item-list tr.editing .input {
-    display: block;
-}
-.item-list tr.editing .content {
-    display: none;
-}
-.widget {
-    padding: 20px;
-    border: 1px solid black;
-}
-td {
-    border: 1px solid black;
-    padding: 2px;
-    margin: 0px;
-}
-</style>
+<script type="text/javascript" src="/utils.js"></script>
+<script type="text/javascript" src="/canvas/main.js"></script>
 
         <link rel="stylesheet" href="/styles/global_layout.css" />
     </head>
@@ -68,7 +38,7 @@ td {
         </li>
         <li>
         <a href="/todo/">TODO app</a></li>
-        <li>
+        <li class="active">
         <a href="/canvas/">HTML5 canvas test</a></li>
         <li>
         <a href="/drawing/">HTML5 SVG test</a></li>
@@ -77,7 +47,7 @@ td {
     <li class="last-menu-item"></li>
     </ul>
     </div>
-    <h1>Controlling home budget</h1>
+    <h1>HTML5 canvas graphics test</h1>
 
     
 
@@ -86,10 +56,9 @@ td {
 
 
 
-<p>Created for learning backbone and to computing stats for my household</p>
-
-<div class="widget" id="vendors"></div>
-<div class="widget" id="products"></div>
+<div id="content">
+<canvas id="canvas" width="800" height="600" style="border: solid black 1px;"></canvas>
+</div>
 
 
     

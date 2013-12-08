@@ -1,51 +1,54 @@
 <!DOCTYPE html>
-<html><!-- this html is generated from todo/home_bi.mako! -->
+<html><!-- this html is generated from extjs/index.mako! -->
     <head>
         <meta charset="utf-8" />
-        <title>Controlling home budget</title>
+        <title>Ext js test</title>
 
         
-    <!-- include("/home/bunyk/progs/bunyk.github.com/todo/home_bi.coffee") -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
-<script type="text/javascript" src="http://backbonejs.org/backbone-min.js"></script>
-<script type="text/javascript" src="http://raw.github.com/jeromegn/Backbone.localStorage/master/backbone.localStorage-min.js"></script>
-<script type="text/javascript" src="/todo/home_bi.js"></script>
-
-<style>
-.item-list tr .input {
-    display: none;
-}
-.item-list tr .save {
-    display: none;
-}
-.item-list tr.editing .edit {
-    display: none;
-}
-.item-list tr.editing .save {
-    display: block;
-}
-.item-list tr.editing .input {
-    display: block;
-}
-.item-list tr.editing .content {
-    display: none;
-}
-.widget {
-    padding: 20px;
-    border: 1px solid black;
-}
-td {
-    border: 1px solid black;
-    padding: 2px;
-    margin: 0px;
-}
-</style>
+	<link rel="stylesheet" href="../styles/global_layout.css" />
+    <!-- include("extjs") -->
+<script type="text/javascript" src="http://cdn.sencha.io/ext-4.2.0-gpl/ext-all.js"></script>
+    <!-- include("/home/bunyk/progs/bunyk.github.com/extjs/main.coffee") -->
+<script type="text/javascript" src="/extjs/main.js"></script>
 
         <link rel="stylesheet" href="/styles/global_layout.css" />
     </head>
 <body>
+    <!-- Cover to show during loading process -->
+    <div id="cover" style="
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom:0px;
+        z-index: 9999;
+        background-color:white;
+        line-height:100%;
+        font-size: 5em;
+        font-family: 'Courier New', Courier, monospace;
+    ">Loading.</div>
+    <script type="text/javascript">
+    (function() {
+        var cover = document.getElementById('cover');
+        var i = 2;
+        window.loading_progress = setInterval(function() {
+            i++;
+            if(i>10) i=2;
+            cover.innerHTML = 'Loading' + Array(i).join('.');
+        }, 200);
+    }());
+    </script>
     
+    <!-- include("jquery") -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript">
+    (function($) {
+        $(window).load(function() {
+            clearInterval(window.loading_progress);
+            $('#cover').hide();
+        });
+    }(jQuery));
+    </script>
 
     <!-- Navigation -->
     <div id="sidebar">
@@ -69,15 +72,11 @@ td {
         <li>
         <a href="/todo/">TODO app</a></li>
         <li>
-        <a href="/canvas/">HTML5 canvas test</a></li>
-        <li>
-        <a href="/drawing/">HTML5 SVG test</a></li>
-        <li>
         <a href="http://bunyk.wordpress.com/">Блоґ</a></li>
     <li class="last-menu-item"></li>
     </ul>
     </div>
-    <h1>Controlling home budget</h1>
+    <h1>Ext js test</h1>
 
     
 
@@ -85,11 +84,6 @@ td {
 
 
 
-
-<p>Created for learning backbone and to computing stats for my household</p>
-
-<div class="widget" id="vendors"></div>
-<div class="widget" id="products"></div>
 
 
     

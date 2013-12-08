@@ -8,51 +8,18 @@
 	<link rel="stylesheet" href="../styles/matrix.css" />
 	<link rel="stylesheet" href="../styles/global_layout.css" />
 	<link rel="stylesheet" href="layout.css" />
-    <!-- include("/home/bunyk/bunyk.github.com/hypercube/main.coffee") -->
+    <!-- include("/home/bunyk/progs/bunyk.github.com/hypercube/main.coffee") -->
+<script type="text/javascript" src="/hypercube/matrix.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="http://raw.github.com/uxder/Radio/master/radio.min.js"></script>
 <script type="text/javascript" src="/hypercube/svglib.js"></script>
-<script type="text/javascript" src="/hypercube/matrix.js"></script>
 <script type="text/javascript" src="/hypercube/hypercube.js"></script>
 <script type="text/javascript" src="/hypercube/main.js"></script>
 
         <link rel="stylesheet" href="/styles/global_layout.css" />
     </head>
 <body>
-    <!-- Cover to show during loading process -->
-    <div id="cover" style="
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        bottom:0px;
-        z-index: 9999;
-        background-color:white;
-        line-height:100%;
-        font-size: 5em;
-        font-family: 'Courier New', Courier, monospace;
-    ">Loading.</div>
-    <script type="text/javascript">
-    (function() {
-        var cover = document.getElementById('cover');
-        var i = 2;
-        window.loading_progress = setInterval(function() {
-            i++;
-            if(i>10) i=2;
-            cover.innerHTML = 'Loading' + Array(i).join('.');
-        }, 200);
-    }());
-    </script>
     
-    <!-- include("jquery") -->
-    <script type="text/javascript">
-    (function($) {
-        $(window).load(function() {
-            clearInterval(window.loading_progress);
-            $('#cover').hide();
-        });
-    }(jQuery));
-    </script>
 
     <!-- Navigation -->
     <div id="sidebar">
@@ -75,6 +42,10 @@
         </li>
         <li>
         <a href="/todo/">TODO app</a></li>
+        <li>
+        <a href="/canvas/">HTML5 canvas test</a></li>
+        <li>
+        <a href="/drawing/">HTML5 SVG test</a></li>
         <li>
         <a href="http://bunyk.wordpress.com/">Блоґ</a></li>
     <li class="last-menu-item"></li>
