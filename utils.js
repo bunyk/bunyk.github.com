@@ -16,6 +16,10 @@
     return (zeroes + x).slice(-1 * padding);
   };
 
+  window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function(callback) {
+    return window.setTimeout(callback, 1000 / 60);
+  };
+
   AllReady = (function() {
 
     function AllReady(onReady) {

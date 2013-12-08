@@ -81,25 +81,27 @@ $(() ->
         coast = new Tile(coast_sprite)
         flowers = new Tile(flowers_sprite)
 
-        mills = (get_random_sprite(windmill) for i in [0 .. 40])
-        fires = (get_random_sprite(fire) for i in [0 .. 30])
+        mills = (get_random_sprite(windmill) for i in [0 .. 20])
+        fires = (get_random_sprite(fire) for i in [0 .. 80])
 
         animate = () ->
-            for i in [0 .. 5]
+            requestAnimationFrame(animate)
+            for i in [0 .. 13]
                 for j in [0 .. 8]
-                    desert.render(ctx, i, j)
-            for i in [5 .. 12]
-                for j in [0 .. 8]
-                    flowers.render(ctx, i, j)
-            for j in [0 .. 8]
-                coast.render(ctx, 13, j)
+                    (switch (i + j) % 3
+                        when 0 then desert
+                        when 1 then coast
+                        when 2 then flowers
+                    ).render(ctx, i, j)
 
             for mill in mills
                 mill.animate(ctx)
             for fire in fires
                 fire.animate(ctx)
 
-        setInterval(animate, 50)
+        animate()
+
+        # setInterval(animate, 50)
 
     allready = new AllReady(start);
     windmill = new LoadingSpriteSet(

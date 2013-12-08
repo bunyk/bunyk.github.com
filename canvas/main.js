@@ -133,7 +133,7 @@
       mills = (function() {
         var _i, _results;
         _results = [];
-        for (i = _i = 0; _i <= 40; i = ++_i) {
+        for (i = _i = 0; _i <= 20; i = ++_i) {
           _results.push(get_random_sprite(windmill));
         }
         return _results;
@@ -141,38 +141,40 @@
       fires = (function() {
         var _i, _results;
         _results = [];
-        for (i = _i = 0; _i <= 30; i = ++_i) {
+        for (i = _i = 0; _i <= 80; i = ++_i) {
           _results.push(get_random_sprite(fire));
         }
         return _results;
       })();
       animate = function() {
-        var fire, j, mill, _i, _j, _k, _l, _len, _len1, _m, _n, _o, _results;
-        for (i = _i = 0; _i <= 5; i = ++_i) {
+        var fire, j, mill, _i, _j, _k, _l, _len, _len1, _results;
+        requestAnimationFrame(animate);
+        for (i = _i = 0; _i <= 13; i = ++_i) {
           for (j = _j = 0; _j <= 8; j = ++_j) {
-            desert.render(ctx, i, j);
+            ((function() {
+              switch ((i + j) % 3) {
+                case 0:
+                  return desert;
+                case 1:
+                  return coast;
+                case 2:
+                  return flowers;
+              }
+            })()).render(ctx, i, j);
           }
         }
-        for (i = _k = 5; _k <= 12; i = ++_k) {
-          for (j = _l = 0; _l <= 8; j = ++_l) {
-            flowers.render(ctx, i, j);
-          }
-        }
-        for (j = _m = 0; _m <= 8; j = ++_m) {
-          coast.render(ctx, 13, j);
-        }
-        for (_n = 0, _len = mills.length; _n < _len; _n++) {
-          mill = mills[_n];
+        for (_k = 0, _len = mills.length; _k < _len; _k++) {
+          mill = mills[_k];
           mill.animate(ctx);
         }
         _results = [];
-        for (_o = 0, _len1 = fires.length; _o < _len1; _o++) {
-          fire = fires[_o];
+        for (_l = 0, _len1 = fires.length; _l < _len1; _l++) {
+          fire = fires[_l];
           _results.push(fire.animate(ctx));
         }
         return _results;
       };
-      return setInterval(animate, 50);
+      return animate();
     };
     allready = new AllReady(start);
     windmill = new LoadingSpriteSet('wesnoth/scenery/', {
