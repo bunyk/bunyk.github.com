@@ -3,6 +3,10 @@
 
 $ = jQuery
 
+wesnoth_image = (path) ->
+    'https://raw.github.com/wesnoth/wesnoth-old/master/data/core/images/' + path
+
+
 class LoadingSpriteSet
     constructor: (@path, @animations, @onLoad) ->
         @load()
@@ -105,7 +109,7 @@ $(() ->
 
     allready = new AllReady(start);
     windmill = new LoadingSpriteSet(
-        'wesnoth/scenery/',
+        wesnoth_image('scenery/'),
         { 
             'idle':
                 pattern: (n) -> "windmill-#{_.zfill(n, 2)}.png"
@@ -115,7 +119,7 @@ $(() ->
         allready.wait()
     )
     fire = new LoadingSpriteSet(
-        'wesnoth/scenery/',
+        wesnoth_image('scenery/'),
         { 
             'idle':
                 pattern: (n) -> "fire#{n}.png"
@@ -126,15 +130,15 @@ $(() ->
     )
 
     desert_sprite = new LoadingSprite(
-        'wesnoth/terrain/desert.png',
+        wesnoth_image('terrain/sand/desert.png'),
         allready.wait()
     )
     flowers_sprite = new LoadingSprite(
-        'wesnoth/terrain/flowers.png',
+        wesnoth_image('terrain/grass/green.png'),
         allready.wait()
     )
     coast_sprite = new LoadingSprite(
-        'wesnoth/terrain/coast-tile.png',
+        wesnoth_image('terrain/water/coast-tile.png'),
         allready.wait()
     )
 )
