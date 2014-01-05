@@ -3,9 +3,11 @@
 
 $ = jQuery
 
+WIDTH = 800
+HEIGHT = 600
+
 wesnoth_image = (path) ->
     'https://raw.github.com/wesnoth/wesnoth-old/master/data/core/images/' + path
-
 
 class LoadingSpriteSet
     constructor: (@path, @animations, @onLoad) ->
@@ -28,8 +30,13 @@ class LoadingSpriteSet
 
 
 class LoadingSprite
-    constructor: (@path, @onLoad) ->
+    constructor: (@path, @afterLoad) ->
         @load()
+
+    onLoad: () =>
+        @width = @img.naturalWidth
+        @height = @img.naturalHeight
+        @afterLoad()
 
     load: () ->
         @img = new Image()
@@ -53,19 +60,53 @@ class MovingSprite
         if img
             ctx.drawImage(img, @x, @y)
 
-class Tile
-    constructor: (@sprite) ->
-        @width = @sprite.img.naturalWidth
-        @height = @sprite.img.naturalHeight
-        console.log(@width, @height)
-
+class Tile extends LoadingSprite
     render: (ctx, i, j) ->
         x = i * @width * 0.75
         y = j * @height
         if i % 2
             y += @height / 2.0
-        console.log(x, y)
-        ctx.drawImage(@sprite.img, x, y)
+        ctx.drawImage(@img, x, y)
+
+class Character extends LoadingSprite
+    render: (ctx, x, y, dir, frame) ->
+        sW = @width / 4.0
+        sH = @height / 4.0
+        sX = sW * ((frame % 8) / 2 | 0)
+        sY = sH * dir
+
+        ctx.drawImage(@img, sX, sY, sW, sH, x, y, sW, sH)
+
+    setAnimation: (direction) ->
+        @frame = 0
+        @speed = 1
+        @direction = direction
+
+    move: () ->
+        switch direction
+            when 0 # down
+                sH = @height / 4.0
+                if @y < HEIGHT - sH
+                    @frame = @frame + 1
+                    @y += @speed
+            when 1 # left
+                if @x > 0
+                    @frame = @frame + 1
+                    @x -= @speed
+            when 2 # right
+                sW = @width / 4.0
+                if @x < WIDTH - sW
+                    @frame = @frame + 1
+                    @x += @speed
+            when 3 # up
+                if @y > 0
+                    @frame = @frame + 1
+                    @y -= @speed
+
+    animate: (ctx) ->
+        @move()
+        @render(ctx, @x, @y, @direction, @frame)
+
 
 get_random_sprite = (type) ->
     sprite = new MovingSprite(type)
@@ -75,28 +116,51 @@ get_random_sprite = (type) ->
     sprite.frame = 0
     return sprite
 
+load_tiles = (list, done) ->
+    allready = new AllReady(done)
+
+    new Tile(
+        wesnoth_image('terrain/' + fn),
+        allready.wait()
+    ) for fn in list
+
+load_characters = (list, done) ->
+    allready = new AllReady(done)
+
+    new Character(
+        'images/characters/' + fn,
+        allready.wait()
+    ) for fn in list
+
+
 $(() ->
-    canvas = $('#canvas')[0]
+
+    canvas = $('<canvas style="border: solid black 1px;"></canvas>')
+        .appendTo('#content')
+    canvas = canvas[0]
+    canvas.width = WIDTH
+    canvas.height = HEIGHT
+
     ctx = canvas.getContext('2d')
 
     start = () ->
         console.log('Loaded!')
-        desert = new Tile(desert_sprite)
-        coast = new Tile(coast_sprite)
-        flowers = new Tile(flowers_sprite)
 
-        mills = (get_random_sprite(windmill) for i in [0 .. 20])
-        fires = (get_random_sprite(fire) for i in [0 .. 80])
+        mills = (get_random_sprite(windmill) for i in [0 .. 10])
+        fires = (get_random_sprite(fire) for i in [0 .. 20])
+
+        character = characters[3]
+        character.x = 100
+        character.y = 100
+        character.setAnimation(0)
 
         animate = () ->
             requestAnimationFrame(animate)
             for i in [0 .. 13]
                 for j in [0 .. 8]
-                    (switch (i + j) % 3
-                        when 0 then desert
-                        when 1 then coast
-                        when 2 then flowers
-                    ).render(ctx, i, j)
+                    terrain[1].render(ctx, i, j)
+
+            character.animate(ctx)
 
             for mill in mills
                 mill.animate(ctx)
@@ -104,8 +168,6 @@ $(() ->
                 fire.animate(ctx)
 
         animate()
-
-        # setInterval(animate, 50)
 
     allready = new AllReady(start);
     windmill = new LoadingSpriteSet(
@@ -128,17 +190,26 @@ $(() ->
         },
         allready.wait()
     )
+    terrain = load_tiles([
+        'darken.png',
+        'sand/desert.png',
+        'grass/green.png',
+        'water/coast-tile.png',
+    ], allready.wait())
 
-    desert_sprite = new LoadingSprite(
-        wesnoth_image('terrain/sand/desert.png'),
-        allready.wait()
-    )
-    flowers_sprite = new LoadingSprite(
-        wesnoth_image('terrain/grass/green.png'),
-        allready.wait()
-    )
-    coast_sprite = new LoadingSprite(
-        wesnoth_image('terrain/water/coast-tile.png'),
-        allready.wait()
-    )
+    characters = load_characters([
+        'astromechdroid.png',
+        'cat.png',
+        'chewie.png',
+        'hulk.png',
+        'indianajones.png',
+        'indianajones_whip.png',
+        'luggage.png',
+        'nazi.png',
+        'princessleia.png',
+        'rincewind.png',
+        'scottish_m1.png',
+        'stormtrooper.png',
+        'yoda.png',
+    ], allready.wait())
 )

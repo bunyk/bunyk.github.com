@@ -9,5 +9,4 @@
 <%block name="title">HTML5 canvas graphics test</%block>
 
 <div id="content">
-<canvas id="canvas" width="800" height="600" style="border: solid black 1px;"></canvas>
 </div>
