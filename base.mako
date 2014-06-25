@@ -51,6 +51,7 @@
         ${u.main_menu((
             ('/', 'Home'),
             ('/resume/', 'CV'),
+            ('/tech_tree/', 'Technology tree'),
             ('/hypercube/', 'Hypercube hack'),
             (None, ('Deutschunterricht',
                 ('/deutsch/', 'Übungen'),

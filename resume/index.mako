@@ -16,9 +16,10 @@
         <li><strong>Skype</strong>: tbunyk</li>
         <li><strong>Address</strong>: Lviv</li>
         <li><a href="http://bunyk.wordpress.com/"><strong>Personal blog</strong></a></li>
-        <li><a href="http://code.google.com/u/tbunyk/"><strong>Google code profile</strong></a> (my code samples)</li>
-        <li><a href="https://github.com/bunyk"><strong>GitHub profile</strong></a> (a little more code samples)</li>
-        <li><a href="http://ua.linkedin.com/pub/taras-bunyk/22/487/3a5"><img border="0" height="15" width="80" alt="View Taras Bunyk's profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.png" style="vertical-align:middle;"></a></li>
+        <li><a href="https://github.com/bunyk"><strong>GitHub profile</strong></a></li>
+        <li><a href="http://ua.linkedin.com/pub/taras-bunyk/22/487/3a5"><strong>LinkedIn profile</strong></a></li>
+        <li><a href="http://stackoverflow.com/users/816449/bunyk"><strong>StackOverflow profile</strong></a></li>
+        <li><a href="http://code.google.com/u/tbunyk/"><strong>Google code profile</strong></a> (my very old code samples)</li>
         </ul>
     </dd>
 
@@ -37,18 +38,23 @@
     <dt>Work experience</dt>
     <dd><ul>
         <li><p>(2013 &ndash; till now) <a href="http://softserve.ua/">SoftServe</a>,
-            as a intermediate web-developer.</p>
+            as a intermediate Python developer.</p>
             <ul>
                 <li><strong>Technologies:</strong>
                     <ul>
-                        <li>Leaflet</li>
+                        <li>Twisted</li>
+                        <li>PowerShell</li>
+                        <li>Zope Component Architecture</li>
+                        <li>MySQL</li>
                         <li>Flask</li>
+                        <li>Fabric</li>
+                        <li>SNMP</li>
                         <li>supervisord</li>
                         <li>Nginx</li>
-                        <li>fabric</li>
+                        <li>Leaflet</li>
+                        <li>Ext.js</li>
                         <li>Amazon EC2</li>
                         <li>CentOS</li>
-                        <li>Zope 2</li>
                     </ul>
                 </li>
             </ul>
@@ -109,7 +115,7 @@
     <dt>Programming languages:</dt>
     <dd><ul>
         <li><strong>Python</strong> &ndash; for a lot of small hacks, some game development, and clients for some web-services (bwikibot). Also main working language at prom.ua. Even know what metaclasses is (and can write some), but still can’t remember descriptor protocol (but know that such thing exists).</li>
-        <li><strong>JavaScript / CoffeeScript</strong> &ndash; jQuery.</li>
+        <li><strong>JavaScript / CoffeeScript</strong> &ndash; jQuery, AngularJS</li>
         <li><strong>SQL</strong> &ndash; Tried MySQL and SQLite. Actively used PostgreSQL in prom.ua, but very often throught ORM.</li>
         <li><strong>C</strong> (C99) &ndash; learned how to create basic data structures during university programming course. </li>
         <li><strong>C++</strong> &ndash; STL, GLUT, Qt (last two as a wrap around OpenGL) mainly for game development. (<a href="http://bunyk.files.wordpress.com/2010/03/seawar.jpg">screenshot</a>)</li>
@@ -137,11 +143,11 @@
 
     <dt>Languages:</dt>
     <dd><ul>
-        <li><strong>English</strong> &ndash; fluent in reading, intermediate in listening, basic in writing, almost not tested in speaking.</li>
+        <li><strong>English</strong> &ndash; Intervediate strong.</li>
+        <li><strong>German</strong> &ndash; beginner level. Able to ask for food, direction and other basic needs, able to read news.</li>
         <li><strong>Ukrainian</strong> &ndash; native. Intermediate knowledge of grammar and spelling.</li>
         <li><strong>Russian</strong> &ndash; fluent in comprehension, basic in writing and speaking.</li>
-        <li><strong>Esperanto</strong> &ndash; basic level. Need more motivation to learn it.</li>
-        <li><strong>German</strong> &ndash; able to read Rapunzel, working on it in free time.</li>
+        <li><strong>Esperanto</strong> &ndash; basic level.</li>
     </ul></dd>
 
     <dd class="clear"></dd>
@@ -160,4 +166,3 @@
 </%block>
 
 ${u.google_analytics()}
-
