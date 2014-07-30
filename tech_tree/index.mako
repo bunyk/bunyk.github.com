@@ -27,6 +27,8 @@
 
 <%block name="title">D3 Tree test</%block>
 
+<textarea id="edit_code"></textarea>
+<button id="submit_button">Update</button>
 <div class="widget_block">
 </div>
 
