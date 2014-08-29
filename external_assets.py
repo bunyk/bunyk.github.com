@@ -32,3 +32,5 @@ raphael_src = 'http://raw.github.com/DmitryBaranovskiy/raphael/master/raphael.js
 extjs = 'http://cdn.sencha.io/ext-4.2.0-gpl/ext-all.js'
 
 d3 = 'http://d3js.org/d3.v3.min.js'
+
+google_maps = 'https://maps.googleapis.com/maps/api/js?language=uk'

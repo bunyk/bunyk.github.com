@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html><!-- this html is generated from todo/index.mako! -->
+<html><!-- this html is generated from gamemaps/index.mako! -->
     <head>
         <meta charset="utf-8" />
-        <title>TODO list</title>
+        <title>Game using google maps as map</title>
 
         
-    <!-- include("/home/bunyk/bunyk.github.com/todo/todos.coffee") -->
-<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="../styles/global_layout.css" />
+    <style type="text/css">
+      #map-canvas {
+          width: 800px;
+          height: 600px;
+      }
+    </style>
+    <!-- include("/home/bunyk/bunyk.github.com/gamemaps/main.coffee") -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="http://backbonejs.org/backbone-min.js"></script>
-<script type="text/javascript" src="http://raw.github.com/jeromegn/Backbone.localStorage/master/backbone.localStorage-min.js"></script>
-<script type="text/javascript" src="/todo/todos.js"></script>
-    <link rel="stylesheet" href="todo.css" />
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?language=uk"></script>
+<script type="text/javascript" src="/gamemaps/main.js"></script>
 
         <link rel="stylesheet" href="/styles/global_layout.css" />
     </head>
@@ -40,7 +45,7 @@
             </ul>
         </li>
         <li class="active">
-        <a href="/todo/">TODO app</a></li>
+        <a href="/gamemaps/">Google Maps game</a></li>
         <li>
         <a href="/canvas/">HTML5 canvas test</a></li>
         <li>
@@ -50,7 +55,7 @@
     <li class="last-menu-item"></li>
     </ul>
     </div>
-    <h1>TODO list</h1>
+    <h1>Game using google maps as map</h1>
 
     
 
@@ -59,18 +64,7 @@
 
 
 
-<p>Created for learning backbone and may be for personal management</p>
-
-<div id="todoapp">
-    <div class="content">
-        <div id="create-todo">
-            <input id="new-todo" placeholder="What else needs to be done?" type="text" />
-        </div>
-        <div id="todos">
-            <ul id="todo-list"></ul>
-        </div>
-    </div>
-</div>
+<div id="map-canvas" />
 
 
     

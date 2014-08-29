@@ -57,7 +57,7 @@
                 ('/deutsch/', 'Übungen'),
                 ('/deutsch/unendliche_geschichte.html', 'Die unendliche Geschichte'),
             )),
-            ('/todo/', 'TODO app'),
+            ('/gamemaps/', 'Google Maps game'),
             ('/canvas/', 'HTML5 canvas test'),
             ('/drawing/', 'HTML5 SVG test'),
             ('http://bunyk.wordpress.com/', 'Блоґ'),
