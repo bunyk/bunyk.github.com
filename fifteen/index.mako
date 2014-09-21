@@ -8,5 +8,9 @@
 
 <%block name="title">15-puzzle</%block>
 
+<p>Press space to shuffle.</p>
+
 <div class="widget_block">
 </div>
+
+${u.disqus_thread('fifteen')}

@@ -8,10 +8,7 @@ load:
 	mkdir -p external_assets
 	python3.3 requirejs.py
 
-html: drawing_html index_html deutsch_html resume hypercube_html canvas_html tree_html fifteen_html
-
-drawing_html:
-	python3.3 render_mako.py drawing/index.mako 
+html: index_html deutsch_html resume_html hypercube_html canvas_html fifteen_html
 
 index_html:
 	python3.3 render_mako.py index.mako 
@@ -19,7 +16,6 @@ index_html:
 
 deutsch_html:
 	python3.3 render_mako.py deutsch/index.mako 
-	python3.3 render_mako.py deutsch/unendliche_geschichte.mako
 
 resume_html: 
 	python3.3 render_mako.py resume/index.mako 
@@ -27,14 +23,8 @@ resume_html:
 hypercube_html:
 	python3.3 render_mako.py hypercube/index.mako 
 
-extjs_html:
-	python3.3 render_mako.py extjs/index.mako
-
 canvas_html:
 	python3.3 render_mako.py canvas/index.mako
-
-tree_html:
-	python3.3 render_mako.py tech_tree/index.mako
 
 fifteen_html:
 	python3.3 render_mako.py fifteen/index.mako
