@@ -51,14 +51,12 @@
         ${u.main_menu((
             ('/', 'Home'),
             ('/resume/', 'CV'),
+            ('/fifteen/', 'SVG 15-puzzle'),
             ('/hypercube/', 'Hypercube hack'),
             (None, ('Deutschunterricht',
                 ('/deutsch/', 'Übungen'),
-                ('/deutsch/unendliche_geschichte.html', 'Die unendliche Geschichte'),
             )),
-            ('/todo/', 'TODO app'),
             ('/canvas/', 'HTML5 canvas test'),
-            ('/drawing/', 'HTML5 SVG test'),
             ('http://bunyk.wordpress.com/', 'Блоґ'),
         ))}
     </div>

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html><!-- this html is generated from deutsch/unendliche_geschichte.mako! -->
+<html><!-- this html is generated from fifteen/index.mako! -->
     <head>
         <meta charset="utf-8" />
-        <title>Die unendliche Geschichte</title>
+        <title>15-puzzle</title>
 
         
-    <!-- include("/home/bunyk/progs/bunyk.github.com/deutsch/reading.coffee") -->
+	<link rel="stylesheet" href="../styles/global_layout.css" />
+    <!-- include("/home/bunyk/bunyk.github.com/fifteen/main.coffee") -->
 <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
-<script type="text/javascript" src="http://cdn.firebase.com/v0/firebase.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="/deutsch/reading.js"></script>
-    <link rel="stylesheet" href="reading.css" />
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="/fifteen/main.js"></script>
 
         <link rel="stylesheet" href="/styles/global_layout.css" />
     </head>
@@ -25,29 +25,25 @@
         <a href="/">Home</a></li>
         <li>
         <a href="/resume/">CV</a></li>
+        <li class="active">
+        <a href="/fifteen/">SVG 15-puzzle</a></li>
         <li>
         <a href="/hypercube/">Hypercube hack</a></li>
-        <li class="active">
+        <li class="">
             Deutschunterricht
             <ul>
                 <li>
         <a href="/deutsch/">Übungen</a></li>
-                <li class="active">
-        <a href="/deutsch/unendliche_geschichte.html">Die unendliche Geschichte</a></li>
             </ul>
         </li>
         <li>
-        <a href="/todo/">TODO app</a></li>
-        <li>
         <a href="/canvas/">HTML5 canvas test</a></li>
-        <li>
-        <a href="/drawing/">HTML5 SVG test</a></li>
         <li>
         <a href="http://bunyk.wordpress.com/">Блоґ</a></li>
     <li class="last-menu-item"></li>
     </ul>
     </div>
-    <h1>Die unendliche Geschichte</h1>
+    <h1>15-puzzle</h1>
 
     
 
@@ -56,12 +52,9 @@
 
 
 
-<button id="edit_save" class="btn">Edit</button>
-<textarea id="edit_content" style="display:none" rows="20"></textarea>
-<div id="content">
-    <p>TAIRAUQITNA<br />
-    rednaeroK darnoK lraK: rebahnI</p>
-    <p> ... </p>
+<p>Press space to shuffle.</p>
+
+<div class="widget_block">
 </div>
 
 
@@ -70,7 +63,7 @@
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'bunykshumblehomepage'; // required: replace example with your forum shortname
-        var disqus_identifier = 'unendliche_geschichte'; 
+        var disqus_identifier = 'fifteen'; 
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
@@ -86,7 +79,7 @@
 
     
         <hr />
-        <a href="http://bunyk.wordpress.com/">Bunyk Taras</a>, 2013. 
+        <a href="http://bunyk.wordpress.com/">Bunyk Taras</a>, 2014. 
         
 <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-42001280-1']); _gaq.push(['_trackPageview']);
 (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
