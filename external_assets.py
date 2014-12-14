@@ -34,3 +34,9 @@ extjs = 'http://cdn.sencha.io/ext-4.2.0-gpl/ext-all.js'
 d3 = 'http://d3js.org/d3.v3.min.js'
 
 google_maps = 'https://maps.googleapis.com/maps/api/js?language=uk'
+
+react = 'http://fb.me/react-0.12.1.js'
+JSXTransformer = 'http://fb.me/JSXTransformer-0.12.1.js'
+_dependencies['react'] = ['JSXTransformer']
+
+angular = 'http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'

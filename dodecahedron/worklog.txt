@@ -1,0 +1,41 @@
+11:29 How to create 15-puzzle?
+11:31 Use some framework? 
+11:31 No, let use just plain coffescript and SVG.
+
+11:32 From where to start? 
+11:32 Let's draw field, or some SVG on page.
+
+11:45 How to center text in SVG? 
+11:49 text-anchor="middle"
+
+11:50 How to draw multiple tiles? 
+11:56 Draw them using function, and transform="translate()" attr in group
+
+12:06 If tile exists, how to not draw duplicate? 
+12:27 Search tile by id, and if exists just update transform.
+
+12:27 Field is not drawn, using functions. Why? 
+12:29 DOM is build, and supposingly correctly, but not visible. Why? 
+12:34 If hardcode generated DOM into HTML code, it renders. But inserted using jQuery - not. Why?
+12:37 Because when we pass marcup into $, to create element, it parses as HTML, and know nothing about SVG namespace.
+
+12:41 What we could use instead of jQuery? 
+12:45 D3 may be? 
+13:22 Or better Raphael? 
+13:37 Ok, D3, but we need to rewrite our SVG in group into chain of append() and attr() calls.
+
+13:55 How to center text vertically in SVG? 
+13:58 dominant-baseline="middle"
+
+14:04 How to know on which tile user clicked?
+14:08 tiles.on('click', (d) -> ... d is data. Nice.
+
+14:09 How to move tiles accordingly to the click? 
+14:27 Better rewrite field as object instead as array of arrays, to incapsulate actions on it.
+
+16:58 Ok, it works. What next? 
+17:00 Make shuffle only generate solvable permutations,
+    add to site menu,
+    add "Solved! screen",
+    add moves counter,
+    add visual buttons,

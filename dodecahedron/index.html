@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html><!-- this html is generated from dodecahedron/index.mako! -->
+    <head>
+        <meta charset="utf-8" />
+        <title>Dodecahedron</title>
+
+        
+	<link rel="stylesheet" href="../styles/global_layout.css" />
+    <!-- include("/home/bunyk/github/bunyk.github.com/dodecahedron/main.coffee") -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+<script type="text/javascript" src="/dodecahedron/main.js"></script>
+    <style>
+
+polygon {
+    stroke: black;
+    stroke-width: 1px;
+}
+#widget {
+    border: solid black 1px;
+    width: 800px;
+    height: 940px;
+    position: relative;
+}
+.face {
+    /* border: solid black 1px; */
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.content {
+    /* border: solid black 1px; */
+    position: absolute;
+    top: 50px;
+    left: 35px;
+    width: 130px;
+    height: 100px;
+    font-family: monospace;
+    font-size: 10px;
+}
+#face0 {
+    top: 410px;
+    left: 300px;
+}
+    </style>
+
+        <link rel="stylesheet" href="/styles/global_layout.css" />
+    </head>
+<body>
+    
+
+    <!-- Navigation -->
+    <div id="sidebar">
+        <ul class="nav">
+    <li class="first-menu-item"></li>
+        <li>
+        <a href="/">Home</a></li>
+        <li>
+        <a href="/resume/">CV</a></li>
+        <li>
+        <a href="/fifteen/">SVG 15-puzzle</a></li>
+        <li class="active">
+        <a href="/dodecahedron/">Dodecahedron layout</a></li>
+        <li>
+        <a href="/hypercube/">Hypercube hack</a></li>
+        <li class="">
+            Deutschunterricht
+            <ul>
+                <li>
+        <a href="/deutsch/">Übungen</a></li>
+            </ul>
+        </li>
+        <li>
+        <a href="/canvas/">HTML5 canvas test</a></li>
+        <li>
+        <a href="http://bunyk.wordpress.com/">Блоґ</a></li>
+    <li class="last-menu-item"></li>
+    </ul>
+    </div>
+    <h1>Dodecahedron</h1>
+
+    
+
+
+
+
+
+
+<div class="widget_block" id="widget"
+    ng-app="dodecahedronApp"
+    ng-controller="DodecahedronController as dc">
+
+<script type="text/ng-template" id="dodecahedron_face_renderer.html">
+    <svg  width="200" height="200" version="1.1" viewBox="0 0 200 200"
+         xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
+        <defs>
+            <pattern id="background{{face.id}}" patternUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+                <image
+                    xlink:href="{{face.background}}"
+                    x="{{face.background_pos[0]}}"
+                    y="{{face.background_pos[1]}}"
+                    height="{{face.background_size[0]}}"
+                    width="{{face.background_size[1]}}"
+                />
+            </pattern>
+        </defs>
+        <polygon
+            points="{{face.points}}"
+            fill="url(#background{{face.id}})"
+            fill-opacity="0.6"
+        />
+
+        <polygon ng-repeat="t in face.glue_triangles"
+            points="{{dc.get_glue(t)}}"
+            fill-opacity="0"
+            stroke="solid black 1px"
+        />
+    </svg>
+
+    <pre class="content">
+        {{face.content}}
+    </pre>
+
+    <div class="face"
+        ng-include="'dodecahedron_face_renderer.html'"
+        ng-repeat="face in face.subfaces"
+        id="{{face.id}}"
+        style="{{face.style}}"
+    ></div>
+</script>
+
+    <div class="face"
+        ng-include="'dodecahedron_face_renderer.html'"
+        ng-repeat="face in dc.faces"
+        id="{{face.id}}"
+        style="{{face.style}}"
+    ></div>
+</div>
+
+
+
+    
+        <hr />
+        <a href="http://bunyk.wordpress.com/">Bunyk Taras</a>, 2014. 
+        
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-42001280-1']); _gaq.push(['_trackPageview']);
+(function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();</script>
+
+    
+</body>
+</html>

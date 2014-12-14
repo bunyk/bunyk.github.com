@@ -141,22 +141,50 @@
       var sH, sW, sX, sY;
       sW = this.width / 4.0;
       sH = this.height / 4.0;
-      sX = sW * ((frame % 12) / 3 | 0);
+      sX = sW * ((frame % 8) / 2 | 0);
       sY = sH * dir;
       return ctx.drawImage(this.img, sX, sY, sW, sH, x, y, sW, sH);
     };
 
     Character.prototype.setAnimation = function(direction) {
-      this.vx = [0, -1, 1, 0];
-      this.vy = [1, 0, 0, -1];
       this.frame = 0;
+      this.speed = 1;
       return this.direction = direction;
     };
 
+    Character.prototype.move = function() {
+      var sH, sW;
+      switch (direction) {
+        case 0:
+          sH = this.height / 4.0;
+          if (this.y < HEIGHT - sH) {
+            this.frame = this.frame + 1;
+            return this.y += this.speed;
+          }
+          break;
+        case 1:
+          if (this.x > 0) {
+            this.frame = this.frame + 1;
+            return this.x -= this.speed;
+          }
+          break;
+        case 2:
+          sW = this.width / 4.0;
+          if (this.x < WIDTH - sW) {
+            this.frame = this.frame + 1;
+            return this.x += this.speed;
+          }
+          break;
+        case 3:
+          if (this.y > 0) {
+            this.frame = this.frame + 1;
+            return this.y -= this.speed;
+          }
+      }
+    };
+
     Character.prototype.animate = function(ctx) {
-      this.frame = this.frame + 1;
-      this.x += this.vx[this.direction];
-      this.y += this.vy[this.direction];
+      this.move();
       return this.render(ctx, this.x, this.y, this.direction, this.frame);
     };
 

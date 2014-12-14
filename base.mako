@@ -52,6 +52,7 @@
             ('/', 'Home'),
             ('/resume/', 'CV'),
             ('/fifteen/', 'SVG 15-puzzle'),
+            ('/dodecahedron/', 'Dodecahedron layout'),
             ('/hypercube/', 'Hypercube hack'),
             (None, ('Deutschunterricht',
                 ('/deutsch/', 'Übungen'),
