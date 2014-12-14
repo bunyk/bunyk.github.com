@@ -97,4 +97,4 @@ polygon {
     ></div>
 </div>
 
-## ${u.disqus_thread('dodecahedron')}
+${u.disqus_thread('dodecahedron')}
