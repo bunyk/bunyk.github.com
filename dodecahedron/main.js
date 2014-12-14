@@ -44,9 +44,13 @@
   });
 
   app.controller('DodecahedronController', function() {
-    var common_points, months, move_to_the_edge_transform, r_small;
+    var autumn, common_points, months, move_to_the_edge_transform, r_small, spring, summer, winter;
     r_small = 100 * Math.cos(Math.PI / 5.0);
     months = [' Січень          \nнд пн вт ср чт пт сб   \n             1  2  3   \n 4  5  6  7  8  9 10   \n11 12 13 14 15 16 17   \n18 19 20 21 22 23 24   \n25 26 27 28 29 30 31   ', '      Лютий         \nнд пн вт ср чт пт сб \n1  2  3  4  5  6  7 \n8  9 10 11 12 13 14 \n15 16 17 18 19 20 21 \n22 23 24 25 26 27 28 ', '     Березень      \nнд пн вт ср чт пт сб\n1  2  3  4  5  6  7\n8  9 10 11 12 13 14\n15 16 17 18 19 20 21\n22 23 24 25 26 27 28\n29 30 31            '];
+    summer = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Field_Hamois_Belgium_Luc_Viatour.jpg/389px-Field_Hamois_Belgium_Luc_Viatour.jpg';
+    autumn = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Hapgood_Pond_-_Flickr_-_USDAgov.jpg/640px-Hapgood_Pond_-_Flickr_-_USDAgov.jpg';
+    winter = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Tallinn_cityview.jpg/640px-Tallinn_cityview.jpg';
+    spring = 'https://upload.wikimedia.org/wikipedia/commons/1/12/SpringFlower_2008.jpg';
     this.get_glue = function(i) {
       return get_glue_triangle_points(100, 100, 100, 5, d2r(-90), i);
     };
@@ -58,7 +62,7 @@
       {
         id: 'face0',
         style: '',
-        background: 'https://upload.wikimedia.org/wikipedia/uk/b/b7/Frankivsk455.jpg',
+        background: winter,
         background_pos: [-100, -100],
         background_size: [400, 400],
         points: common_points,
@@ -68,9 +72,9 @@
           {
             id: 'face1',
             style: move_to_the_edge_transform(0),
-            background: 'http://vrubli.files.wordpress.com/2014/08/img_4071.jpg',
-            background_pos: [0, 0],
-            background_size: [200, 200],
+            background: winter,
+            background_pos: [-100, -100],
+            background_size: [400, 400],
             points: common_points,
             glue_triangles: [1, 3, 4],
             content: months[1],
@@ -78,9 +82,9 @@
               {
                 id: 'face2',
                 style: move_to_the_edge_transform(0),
-                background: 'http://vrubli.files.wordpress.com/2013/09/img_1673.jpg',
-                background_pos: [0, 0],
-                background_size: [200, 200],
+                background: spring,
+                background_pos: [-100, -100],
+                background_size: [400, 400],
                 points: common_points,
                 glue_triangles: [0, 1, 3, 4],
                 content: months[2],
@@ -90,98 +94,98 @@
           }, {
             id: 'face3',
             style: move_to_the_edge_transform(1),
-            background: 'http://vrubli.files.wordpress.com/2014/08/img_4014.jpg',
-            background_pos: [0, 0],
-            background_size: [200, 200],
+            background: spring,
+            background_pos: [-100, -100],
+            background_size: [400, 400],
             points: common_points,
             glue_triangles: [1],
-            content: months[0],
+            content: 'Тут буде Квітень',
             subfaces: [
               {
                 id: 'face4',
                 style: move_to_the_edge_transform(0),
-                background: 'http://vrubli.files.wordpress.com/2014/09/img_4542.jpg',
-                background_pos: [0, 0],
-                background_size: [200, 200],
+                background: spring,
+                background_pos: [-100, -100],
+                background_size: [400, 400],
                 points: common_points,
                 glue_triangles: [0, 1, 4],
-                content: months[2],
+                content: 'Тут буде Травень',
                 subfaces: []
               }
             ]
           }, {
             id: 'face5',
             style: move_to_the_edge_transform(2),
-            background: 'http://vrubli.files.wordpress.com/2014/08/img_4014.jpg',
-            background_pos: [0, 0],
-            background_size: [200, 200],
+            background: summer,
+            background_pos: [-50, -30],
+            background_size: [300, 300],
             points: common_points,
             glue_triangles: [1],
-            content: months[0],
+            content: 'Червень',
             subfaces: [
               {
                 id: 'face6',
                 style: move_to_the_edge_transform(0),
-                background: 'http://vrubli.files.wordpress.com/2014/09/img_4542.jpg',
-                background_pos: [0, 0],
-                background_size: [200, 200],
+                background: summer,
+                background_pos: [-50, -30],
+                background_size: [300, 300],
                 points: common_points,
                 glue_triangles: [0, 1, 4],
-                content: months[2],
+                content: 'Липень',
                 subfaces: []
               }
             ]
           }, {
             id: 'face7',
             style: move_to_the_edge_transform(3),
-            background: 'http://vrubli.files.wordpress.com/2014/08/img_4014.jpg',
-            background_pos: [0, 0],
-            background_size: [200, 200],
+            background: summer,
+            background_pos: [-50, -30],
+            background_size: [300, 300],
             points: common_points,
             glue_triangles: [1],
-            content: months[0],
+            content: 'Серпень',
             subfaces: [
               {
                 id: 'face8',
                 style: move_to_the_edge_transform(0),
-                background: 'http://vrubli.files.wordpress.com/2014/09/img_4542.jpg',
-                background_pos: [0, 0],
-                background_size: [200, 200],
+                background: autumn,
+                background_pos: [-100, -100],
+                background_size: [400, 400],
                 points: common_points,
                 glue_triangles: [0, 1, 4],
-                content: months[2],
+                content: 'Вересень',
                 subfaces: []
               }
             ]
           }, {
             id: 'face9',
             style: move_to_the_edge_transform(4),
-            background: 'http://cs618126.vk.me/v618126487/b7eb/phtmGhecxc0.jpg',
-            background_pos: [0, 0],
-            background_size: [200, 200],
+            background: autumn,
+            background_pos: [-100, -100],
+            background_size: [400, 400],
             points: common_points,
             glue_triangles: [],
-            content: months[0],
+            content: 'Жовтень',
             subfaces: [
               {
                 id: 'face10',
                 style: move_to_the_edge_transform(0),
-                background: 'http://vrubli.files.wordpress.com/2012/12/dsc09898.jpg',
-                background_pos: [0, 0],
-                background_size: [200, 200],
+                background: autumn,
+                background_pos: [-100, -100],
+                background_size: [400, 400],
                 points: common_points,
                 glue_triangles: [],
-                content: months[2],
+                content: 'Листопад',
                 subfaces: [
                   {
                     id: 'face11',
                     style: move_to_the_edge_transform(4),
-                    background: 'http://vrubli.files.wordpress.com/2014/03/193.jpg',
-                    background_pos: [0, 0],
-                    background_size: [200, 200],
+                    background: winter,
+                    background_pos: [-100, -100],
+                    background_size: [400, 400],
                     points: common_points,
                     glue_triangles: [],
-                    content: months[2]
+                    content: 'Грудень 2015\n (c) Буник Т. 2014'
                   }
                 ]
               }

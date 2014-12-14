@@ -33,10 +33,13 @@ polygon {
     height: 100px;
     font-family: monospace;
     font-size: 10px;
+    text-shadow: 1px 1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff, -1px -1px 0px #fff,
+                 0px 1px 0px #fff, 0px -1px 0px #fff, -1px 0px 0px #fff, 1px 0px 0px #fff,
+                 2px 2px 2px #fff, 2px -2px 2px #fff, -2px 2px 2px #fff, -2px -2px 2px #fff;
 }
 #face0 {
     top: 410px;
-    left: 300px;
+    left: 310px;
 }
     </style>
 </%block>
@@ -64,7 +67,7 @@ polygon {
         <polygon
             points="{{face.points}}"
             fill="url(#background{{face.id}})"
-            fill-opacity="0.6"
+            fill-opacity="1"
         />
 
         <polygon ng-repeat="t in face.glue_triangles"
