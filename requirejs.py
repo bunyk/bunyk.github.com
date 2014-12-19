@@ -40,7 +40,11 @@ def load_assets(directory):
     for asset in dir(external_assets):
         if asset[0] == '_': continue
         url = getattr(external_assets, asset)
-        r = requests.get(url)
+        try:
+            r = requests.get(url)
+        except requests.exceptions.ConnectionError as e:
+            log.error(str(e))
+            continue
         log.info(r.status_code, asset, url)
         if r.status_code == 200:
             # TODO: add .js extension
