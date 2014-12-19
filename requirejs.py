@@ -1,5 +1,26 @@
 '''
-Python script for JavaScript and coffescript assets management.
+This is a Python script for JavaScript and coffescript assets management,
+namely resolving dependencies, topologically sorting a set of libraries and
+including them into code.  Also supports downloading libraries
+from the web for offline development.
+
+So this is something like JavaScript package manager written in Python.
+
+Libraries are described as string variables in module external_assets.py.
+Each value there contains a url to the file with the code of the library.
+
+Also external_assets.py contains _dependencies dictionary. Keys there is a
+library variable names, and values - list of names of variables for libraries
+it depends on.
+
+Two most useful functions here:
+
+    load_assets() - loads all defined assets into given directory.
+                    If this module is called as a script, by default it
+                    loads all the assets into external_assets directory.
+
+    include() - returns a string with a html script tags. See docstring.
+
 '''
 
 import os
@@ -12,17 +33,18 @@ log = logging.getLogger(__name__)
 import external_assets
 
 def main():
-    load_assets()
+    load_assets('external_assets')
 
-def load_assets():
+def load_assets(directory):
     import requests
     for asset in dir(external_assets):
         if asset[0] == '_': continue
         url = getattr(external_assets, asset)
         r = requests.get(url)
-        print(r.status_code, asset, url)
+        log.info(r.status_code, asset, url)
         if r.status_code == 200:
-            with open('external_assets/%s' % asset, 'w') as f:
+            # TODO: add .js extension
+            with open('%s/%s' % (directory, asset), 'w') as f:
                 f.write(r.text)
 
 included = set()

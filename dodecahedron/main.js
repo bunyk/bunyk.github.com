@@ -58,6 +58,9 @@
       return "transform: rotate(" + (36 + 72 * edge_id) + "deg) translate(0, -" + (r_small * 2) + "px)";
     };
     common_points = get_polygon_points(100, 100, 100, 5, d2r(-90));
+    this.toggle_edit_background = function(face) {
+      return face.edit_background = !face.edit_background;
+    };
     return this.faces = [
       {
         id: 'face0',

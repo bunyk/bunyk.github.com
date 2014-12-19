@@ -78,6 +78,10 @@ app.controller('DodecahedronController', () ->
 
 
     common_points = get_polygon_points(100, 100, 100, 5, d2r(-90))
+
+    this.toggle_edit_background = (face) ->
+        face.edit_background = !face.edit_background
+
     this.faces = [{
         id: 'face0',
         style: '',
