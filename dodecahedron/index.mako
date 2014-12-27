@@ -12,14 +12,15 @@
 <div class="widget_block" id="widget"
     ng-app="dodecahedronApp"
     ng-controller="DodecahedronController as dc">
-<button ng-click="dc.toggle_edit_background()">Edit</button>
+
 <script type="text/ng-template" id="dodecahedron_face_renderer.html">
-    <div class="inputs" ng-show="dc.edit_backgrounds">
-        <input ng-model="face.background" />
-        <input ng-model="face.background_pos[0]" type="range" min="-200" max="200" />
-        <input ng-model="face.background_pos[1]" type="range" min="-200" max="200" />
-        <input ng-model="face.background_size[0]" type="range" min="0" max="500" />
-        <input ng-model="face.background_size[1]" type="range" min="0" max="500" />
+    <label class="inputs" style="top: 150px; left: 20px; z-index: 99;" ng-show="dc.edit||face.edit"><input ng-model="face.edit" ng-click="dc.toggle_edit()" type="checkbox"/>Edit</label>
+    <div class="inputs" ng-show="face.edit">
+        <input ng-model="face.background"/>
+        <input ng-model="face.background_pos[0]" title="x" type="range" min="-200" max="200" />
+        <input ng-model="face.background_pos[1]" title="y" type="range" min="-200" max="200" />
+        <input ng-model="face.background_size" title="size" type="range" min="0" max="500" />
+        <textarea ng-model="face.content"></textarea>
     </div>
     <svg version="1.1"
         width="200" height="200"
@@ -33,8 +34,8 @@
                     xlink:href="{{face.background}}"
                     x="{{face.background_pos[0]}}"
                     y="{{face.background_pos[1]}}"
-                    height="{{face.background_size[0]}}"
-                    width="{{face.background_size[1]}}"
+                    height="{{face.background_size}}"
+                    width="{{face.background_size}}"
                 />
             </pattern>
         </defs>
@@ -62,12 +63,21 @@
     ></div>
 </script>
 
-    <div class="face"
-        ng-include="'dodecahedron_face_renderer.html'"
-        ng-repeat="face in dc.faces"
-        id="{{face.id}}"
-        style="{{face.style}}"
-    ></div>
+<div class="face"
+    ng-include="'dodecahedron_face_renderer.html'"
+    ng-repeat="face in dc.faces"
+    id="{{face.id}}"
+    style="{{face.style}}"
+></div>
+
+<div class="noprint inputs" style="top: 0px;">
+    <input type="number" ng-model="dc.year" ng-change="dc.set_year(dc.year)"/>
+    <label style="position: static">
+        <input type="checkbox" ng-model="dc.edit">
+        Edit
+    </label>
+</div>
+
 </div>
 
 ${u.disqus_thread('dodecahedron')}

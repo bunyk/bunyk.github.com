@@ -73,7 +73,7 @@ li.first-menu-item {
 }
 
 @media print {
-    #sidebar, #disqus_thread {
+    .noprint, #sidebar, #disqus_thread {
         display: none !important;
     }
     body {

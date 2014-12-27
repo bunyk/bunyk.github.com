@@ -44,12 +44,20 @@
   });
 
   app.controller('DodecahedronController', function() {
-    var autumn, common_points, face_text, i, lions, move_to_the_edge_transform, r_small, spring, summer, winter, _i;
+    var autumn, common_points, face_text, lions, move_to_the_edge_transform, r_small, spring, summer, winter;
     r_small = 100 * Math.cos(Math.PI / 5.0);
+    this.year = 2015;
     face_text = [];
-    for (i = _i = 0; _i < 12; i = ++_i) {
-      face_text.push(cal.text(2015, i));
-    }
+    this.set_year = function(year) {
+      var i, _i, _results;
+      face_text.length = 0;
+      _results = [];
+      for (i = _i = 0; _i < 12; i = ++_i) {
+        _results.push(face_text.push(cal.text(year, i)));
+      }
+      return _results;
+    };
+    this.set_year(this.year);
     summer = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Field_Hamois_Belgium_Luc_Viatour.jpg/389px-Field_Hamois_Belgium_Luc_Viatour.jpg';
     autumn = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Hapgood_Pond_-_Flickr_-_USDAgov.jpg/640px-Hapgood_Pond_-_Flickr_-_USDAgov.jpg';
     winter = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Tallinn_cityview.jpg/640px-Tallinn_cityview.jpg';
@@ -62,9 +70,9 @@
       return "transform: rotate(" + (36 + 72 * edge_id) + "deg) translate(0, -" + (r_small * 2) + "px)";
     };
     common_points = get_polygon_points(100, 100, 100, 5, d2r(-90));
-    this.edit_backgrounds = false;
-    this.toggle_edit_background = function() {
-      return this.edit_backgrounds = !this.edit_backgrounds;
+    this.edit = false;
+    this.toggle_edit = function() {
+      return this.edit = !this.edit;
     };
     return this.faces = [
       {
@@ -72,7 +80,7 @@
         style: '',
         background: lions,
         background_pos: [-100, -100],
-        background_size: [400, 400],
+        background_size: 400,
         points: common_points,
         glue_triangles: [],
         content: face_text[0],
@@ -82,7 +90,7 @@
             style: move_to_the_edge_transform(0),
             background: winter,
             background_pos: [-100, -100],
-            background_size: [400, 400],
+            background_size: 400,
             points: common_points,
             glue_triangles: [1, 3, 4],
             content: face_text[1],
@@ -92,7 +100,7 @@
                 style: move_to_the_edge_transform(0),
                 background: spring,
                 background_pos: [-100, -100],
-                background_size: [400, 400],
+                background_size: 400,
                 points: common_points,
                 glue_triangles: [0, 1, 3, 4],
                 content: face_text[2],
@@ -104,7 +112,7 @@
             style: move_to_the_edge_transform(1),
             background: spring,
             background_pos: [-100, -100],
-            background_size: [400, 400],
+            background_size: 400,
             points: common_points,
             glue_triangles: [1],
             content: face_text[3],
@@ -114,7 +122,7 @@
                 style: move_to_the_edge_transform(0),
                 background: spring,
                 background_pos: [-100, -100],
-                background_size: [400, 400],
+                background_size: 400,
                 points: common_points,
                 glue_triangles: [0, 1, 4],
                 content: face_text[4],
@@ -126,7 +134,7 @@
             style: move_to_the_edge_transform(2),
             background: summer,
             background_pos: [-50, -30],
-            background_size: [300, 300],
+            background_size: 300,
             points: common_points,
             glue_triangles: [1],
             content: face_text[5],
@@ -136,7 +144,7 @@
                 style: move_to_the_edge_transform(0),
                 background: summer,
                 background_pos: [-50, -30],
-                background_size: [300, 300],
+                background_size: 300,
                 points: common_points,
                 glue_triangles: [0, 1, 4],
                 content: face_text[6],
@@ -148,7 +156,7 @@
             style: move_to_the_edge_transform(3),
             background: summer,
             background_pos: [-50, -30],
-            background_size: [300, 300],
+            background_size: 300,
             points: common_points,
             glue_triangles: [1],
             content: face_text[7],
@@ -158,7 +166,7 @@
                 style: move_to_the_edge_transform(0),
                 background: autumn,
                 background_pos: [-100, -100],
-                background_size: [400, 400],
+                background_size: 400,
                 points: common_points,
                 glue_triangles: [0, 1, 4],
                 content: face_text[8],
@@ -170,7 +178,7 @@
             style: move_to_the_edge_transform(4),
             background: autumn,
             background_pos: [-100, -100],
-            background_size: [400, 400],
+            background_size: 400,
             points: common_points,
             glue_triangles: [],
             content: face_text[9],
@@ -180,7 +188,7 @@
                 style: move_to_the_edge_transform(0),
                 background: autumn,
                 background_pos: [-100, -100],
-                background_size: [400, 400],
+                background_size: 400,
                 points: common_points,
                 glue_triangles: [],
                 content: face_text[10],
@@ -190,7 +198,7 @@
                     style: move_to_the_edge_transform(4),
                     background: winter,
                     background_pos: [-100, -100],
-                    background_size: [400, 400],
+                    background_size: 400,
                     points: common_points,
                     glue_triangles: [],
                     content: face_text[11]
