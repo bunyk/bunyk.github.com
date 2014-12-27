@@ -44,13 +44,17 @@
   });
 
   app.controller('DodecahedronController', function() {
-    var autumn, common_points, months, move_to_the_edge_transform, r_small, spring, summer, winter;
+    var autumn, common_points, face_text, i, lions, move_to_the_edge_transform, r_small, spring, summer, winter, _i;
     r_small = 100 * Math.cos(Math.PI / 5.0);
-    months = [' Січень          \nнд пн вт ср чт пт сб   \n             1  2  3   \n 4  5  6  7  8  9 10   \n11 12 13 14 15 16 17   \n18 19 20 21 22 23 24   \n25 26 27 28 29 30 31   ', '      Лютий         \nнд пн вт ср чт пт сб \n1  2  3  4  5  6  7 \n8  9 10 11 12 13 14 \n15 16 17 18 19 20 21 \n22 23 24 25 26 27 28 ', '     Березень      \nнд пн вт ср чт пт сб\n1  2  3  4  5  6  7\n8  9 10 11 12 13 14\n15 16 17 18 19 20 21\n22 23 24 25 26 27 28\n29 30 31            '];
+    face_text = [];
+    for (i = _i = 0; _i < 12; i = ++_i) {
+      face_text.push(cal.text(2015, i));
+    }
     summer = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Field_Hamois_Belgium_Luc_Viatour.jpg/389px-Field_Hamois_Belgium_Luc_Viatour.jpg';
     autumn = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Hapgood_Pond_-_Flickr_-_USDAgov.jpg/640px-Hapgood_Pond_-_Flickr_-_USDAgov.jpg';
     winter = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Tallinn_cityview.jpg/640px-Tallinn_cityview.jpg';
     spring = 'https://upload.wikimedia.org/wikipedia/commons/1/12/SpringFlower_2008.jpg';
+    lions = '/dodecahedron/leopolis_lions.jpg';
     this.get_glue = function(i) {
       return get_glue_triangle_points(100, 100, 100, 5, d2r(-90), i);
     };
@@ -58,19 +62,20 @@
       return "transform: rotate(" + (36 + 72 * edge_id) + "deg) translate(0, -" + (r_small * 2) + "px)";
     };
     common_points = get_polygon_points(100, 100, 100, 5, d2r(-90));
-    this.toggle_edit_background = function(face) {
-      return face.edit_background = !face.edit_background;
+    this.edit_backgrounds = false;
+    this.toggle_edit_background = function() {
+      return this.edit_backgrounds = !this.edit_backgrounds;
     };
     return this.faces = [
       {
         id: 'face0',
         style: '',
-        background: winter,
+        background: lions,
         background_pos: [-100, -100],
         background_size: [400, 400],
         points: common_points,
         glue_triangles: [],
-        content: months[0],
+        content: face_text[0],
         subfaces: [
           {
             id: 'face1',
@@ -80,7 +85,7 @@
             background_size: [400, 400],
             points: common_points,
             glue_triangles: [1, 3, 4],
-            content: months[1],
+            content: face_text[1],
             subfaces: [
               {
                 id: 'face2',
@@ -90,7 +95,7 @@
                 background_size: [400, 400],
                 points: common_points,
                 glue_triangles: [0, 1, 3, 4],
-                content: months[2],
+                content: face_text[2],
                 subfaces: []
               }
             ]
@@ -102,7 +107,7 @@
             background_size: [400, 400],
             points: common_points,
             glue_triangles: [1],
-            content: 'Тут буде Квітень',
+            content: face_text[3],
             subfaces: [
               {
                 id: 'face4',
@@ -112,7 +117,7 @@
                 background_size: [400, 400],
                 points: common_points,
                 glue_triangles: [0, 1, 4],
-                content: 'Тут буде Травень',
+                content: face_text[4],
                 subfaces: []
               }
             ]
@@ -124,7 +129,7 @@
             background_size: [300, 300],
             points: common_points,
             glue_triangles: [1],
-            content: 'Червень',
+            content: face_text[5],
             subfaces: [
               {
                 id: 'face6',
@@ -134,7 +139,7 @@
                 background_size: [300, 300],
                 points: common_points,
                 glue_triangles: [0, 1, 4],
-                content: 'Липень',
+                content: face_text[6],
                 subfaces: []
               }
             ]
@@ -146,7 +151,7 @@
             background_size: [300, 300],
             points: common_points,
             glue_triangles: [1],
-            content: 'Серпень',
+            content: face_text[7],
             subfaces: [
               {
                 id: 'face8',
@@ -156,7 +161,7 @@
                 background_size: [400, 400],
                 points: common_points,
                 glue_triangles: [0, 1, 4],
-                content: 'Вересень',
+                content: face_text[8],
                 subfaces: []
               }
             ]
@@ -168,7 +173,7 @@
             background_size: [400, 400],
             points: common_points,
             glue_triangles: [],
-            content: 'Жовтень',
+            content: face_text[9],
             subfaces: [
               {
                 id: 'face10',
@@ -178,7 +183,7 @@
                 background_size: [400, 400],
                 points: common_points,
                 glue_triangles: [],
-                content: 'Листопад',
+                content: face_text[10],
                 subfaces: [
                   {
                     id: 'face11',
@@ -188,7 +193,7 @@
                     background_size: [400, 400],
                     points: common_points,
                     glue_triangles: [],
-                    content: 'Грудень 2015\n (c) Буник Т. 2014'
+                    content: face_text[11]
                   }
                 ]
               }

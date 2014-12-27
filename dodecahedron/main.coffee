@@ -8,7 +8,6 @@ $(() ->
     $('.widget_block').show()
 )
 
-
 d2r = (d) ->
     d / 180.0 * Math.PI
 
@@ -38,59 +37,38 @@ app = angular.module('dodecahedronApp', [])
 app.controller('DodecahedronController', () ->
     r_small = 100 * Math.cos(Math.PI / 5.0)
 
-    months = [''' Січень          
-нд пн вт ср чт пт сб   
-             1  2  3   
- 4  5  6  7  8  9 10   
-11 12 13 14 15 16 17   
-18 19 20 21 22 23 24   
-25 26 27 28 29 30 31   
-''',
-    '''
-       Лютий         
-нд пн вт ср чт пт сб 
- 1  2  3  4  5  6  7 
- 8  9 10 11 12 13 14 
-15 16 17 18 19 20 21 
-22 23 24 25 26 27 28 
-''',
-    '''
-      Березень      
-нд пн вт ср чт пт сб
- 1  2  3  4  5  6  7
- 8  9 10 11 12 13 14
-15 16 17 18 19 20 21
-22 23 24 25 26 27 28
-29 30 31            
-''']
+    face_text = []
+    for i in [0 ... 12]
+        face_text.push(cal.text(2015, i))
 
     summer = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Field_Hamois_Belgium_Luc_Viatour.jpg/389px-Field_Hamois_Belgium_Luc_Viatour.jpg'
     autumn = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Hapgood_Pond_-_Flickr_-_USDAgov.jpg/640px-Hapgood_Pond_-_Flickr_-_USDAgov.jpg'
     winter = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Tallinn_cityview.jpg/640px-Tallinn_cityview.jpg'
     spring = 'https://upload.wikimedia.org/wikipedia/commons/1/12/SpringFlower_2008.jpg'
+    lions = '/dodecahedron/leopolis_lions.jpg'
                                                                                     
 
-    this.get_glue = (i) -> 
+    @get_glue = (i) -> 
         get_glue_triangle_points(100, 100, 100, 5, d2r(-90), i)
 
     move_to_the_edge_transform = (edge_id) ->
         "transform: rotate(#{36 + 72*edge_id}deg) translate(0, -#{r_small * 2}px)"
 
-
     common_points = get_polygon_points(100, 100, 100, 5, d2r(-90))
 
-    this.toggle_edit_background = (face) ->
-        face.edit_background = !face.edit_background
+    @edit_backgrounds = false
+    @toggle_edit_background = () ->
+        @edit_backgrounds = !@edit_backgrounds
 
-    this.faces = [{
+    @faces = [{
         id: 'face0',
         style: '',
-        background: winter,
+        background: lions,
         background_pos: [-100, -100],
         background_size: [400, 400],
         points: common_points,
         glue_triangles: [],
-        content: months[0],
+        content: face_text[0],
         subfaces: [{
             id: 'face1',
             style: move_to_the_edge_transform(0),
@@ -99,7 +77,7 @@ app.controller('DodecahedronController', () ->
             background_size: [400, 400],
             points: common_points,
             glue_triangles: [1, 3, 4],
-            content: months[1],
+            content: face_text[1],
             subfaces: [{
                 id: 'face2',
                 style: move_to_the_edge_transform(0),
@@ -108,7 +86,7 @@ app.controller('DodecahedronController', () ->
                 background_size: [400, 400],
                 points: common_points,
                 glue_triangles: [0, 1, 3, 4],
-                content: months[2],
+                content: face_text[2],
                 subfaces: [],
             }],
         }, {
@@ -119,7 +97,7 @@ app.controller('DodecahedronController', () ->
             background_size: [400, 400],
             points: common_points,
             glue_triangles: [1],
-            content: 'Тут буде Квітень',
+            content: face_text[3],
             subfaces: [{
                 id: 'face4',
                 style: move_to_the_edge_transform(0),
@@ -128,7 +106,7 @@ app.controller('DodecahedronController', () ->
                 background_size: [400, 400],
                 points: common_points,
                 glue_triangles: [0, 1, 4],
-                content: 'Тут буде Травень',
+                content: face_text[4],
                 subfaces: [],
                 
             }],
@@ -140,7 +118,7 @@ app.controller('DodecahedronController', () ->
             background_size: [300, 300],
             points: common_points,
             glue_triangles: [1],
-            content: 'Червень',
+            content: face_text[5],
             subfaces: [{
                 id: 'face6',
                 style: move_to_the_edge_transform(0),
@@ -149,7 +127,7 @@ app.controller('DodecahedronController', () ->
                 background_size: [300, 300],
                 points: common_points,
                 glue_triangles: [0, 1, 4],
-                content: 'Липень',
+                content: face_text[6],
                 subfaces: [],
             }],
         }, {
@@ -160,7 +138,7 @@ app.controller('DodecahedronController', () ->
             background_size: [300, 300],
             points: common_points,
             glue_triangles: [1],
-            content: 'Серпень',
+            content: face_text[7],
             subfaces: [{
                 id: 'face8',
                 style: move_to_the_edge_transform(0),
@@ -169,7 +147,7 @@ app.controller('DodecahedronController', () ->
                 background_size: [400, 400],
                 points: common_points,
                 glue_triangles: [0, 1, 4],
-                content: 'Вересень',
+                content: face_text[8],
                 subfaces: [],
             }],
         }, {
@@ -180,7 +158,7 @@ app.controller('DodecahedronController', () ->
             background_size: [400, 400],
             points: common_points,
             glue_triangles: [],
-            content: 'Жовтень',
+            content: face_text[9],
             subfaces: [{
                 id: 'face10',
                 style: move_to_the_edge_transform(0),
@@ -189,7 +167,7 @@ app.controller('DodecahedronController', () ->
                 background_size: [400, 400],
                 points: common_points,
                 glue_triangles: [],
-                content: 'Листопад',
+                content: face_text[10],
                 subfaces: [{
                     id: 'face11',
                     style: move_to_the_edge_transform(4),
@@ -198,7 +176,7 @@ app.controller('DodecahedronController', () ->
                     background_size: [400, 400],
                     points: common_points,
                     glue_triangles: [],
-                    content: 'Грудень 2015\n (c) Буник Т. 2014',
+                    content: face_text[11],
                 }],
             }],
         }],

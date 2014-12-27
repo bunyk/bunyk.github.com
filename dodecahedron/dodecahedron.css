@@ -1,0 +1,41 @@
+polygon {
+    stroke: black;
+    stroke-width: 1px;
+}
+#widget {
+    border: solid black 1px;
+    width: 800px;
+    height: 940px;
+    position: relative;
+}
+.face {
+    /* border: solid black 1px; */
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.content {
+    /* border: solid black 1px; */
+    position: absolute;
+    top: 50px;
+    left: 35px;
+    width: 130px;
+    height: 100px;
+    font-family: monospace;
+    font-size: 10px;
+    text-shadow: 1px 1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff, -1px -1px 0px #fff,
+                 0px 1px 0px #fff, 0px -1px 0px #fff, -1px 0px 0px #fff, 1px 0px 0px #fff,
+                 2px 2px 2px #fff, 2px -2px 2px #fff, -2px 2px 2px #fff, -2px -2px 2px #fff;
+}
+#face0 {
+    top: 410px;
+    left: 310px;
+}
+div.inputs {
+    z-index: 100;
+    position: absolute;
+    top: 70px;
+    left: 10px;
+}
