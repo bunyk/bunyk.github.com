@@ -30,6 +30,6 @@ fifteen_html:
 	python3.3 render_mako.py fifteen/index.mako
 
 dodecahedron_html:
-	python3.3 render_mako.py -l dodecahedron/index.mako
+	python3.3 render_mako.py dodecahedron/index.mako
 
 d: dodecahedron_html love
