@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+<section>
+    <h1>ZCA</h1>
+    <h3>Zope Component Architecture</h3>
+    <p>
+        <small>by <a href="http://bunyk.wordpress.com">Буник Тарас</a></small>
+    </p>
+    <aside class="notes">
+        <ul>
+            <li>Мене звати Буник Тарас, я блогер.</li>
+            <li>Працюю з Python з 2011 по 2012-тий в prom.ua (Pylons), з 2013 - SoftServe - Zope</li>
+            <li>На жодному з фреймворків не написав жодного сайту з нуля, тому не дуже їх знаю.</li>
+            <li>Але ZCA - це не Zope</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h1>ZOPE</h1>
+    <h3>Z Object Publishing Environment</h3>
+
+    <aside class="notes">
+        <ul>
+            <li>Це дуже цікава ідея - публікувати не html</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <img src="imgs/zope-fish.jpg" width="100%"/>
+    <aside class="notes">
+        <ul>
+            <li>Також - це риба</li>
+            <li>Інша назва - ballerus ballerus, або blue bream</li>
+            <li>Українською - синець звичайний.</li>
+            <li>З родини коропових.</li>
+        </ul>
+    </aside>
+</section>
+<section data-background="imgs/Kheops-Pyramid.jpg">
+    <h1 class="fragment" style="color: black;">1995</h1>
+    <aside class="notes">
+        <ul>
+            <li>Воно таке старе, як php. Тому на той час - публікувати об’єкти - ідея що випередила час.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h2>Zope 3 (2004) = BlueBream</h2>
+    <aside class="notes">
+        <ul>
+            <li>ZCA з’явилась саме в Zope3</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <img src="imgs/heritage.jpg" />
+    <aside class="notes">
+        <ul>
+            <li>Взагалі, у фреймворків складний родовід</li>
+            <li>Я хотів сказати що Zope може й мертвий</li>
+            <li>але його ідеї живуть в нащадках</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h2>Installation</h2>
+    <ul> 
+        <li><code>zope.interface</code></li>
+        <li><code>zope.component</code></li>
+    </ul>
+
+
+    <pre class="fragment"><code data-trim contenteditable>
+    pip install zope.component
+    </code></pre>
+    </script>
+    <aside class="notes">
+        <ul>
+            <li>Сьогодні нас цікавлять лише дві частини</li>
+            <li>Які ставляться одною командою</li>
+            <li>І можна зразу переходити до коду.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h2>A simple calculator example</h2>
+    <pre><code data-trim>
+operations = {
+    '+': lambda a, b: a + b,
+    '-': lambda a, b: a - b,
+}
+
+def calc(expr):
+    ''' Expressions "parser".
+        Expression is a two arguments and operation between them,
+        separated by whitespace
+    '''
+    a, op, b = expr.split()
+    return operations[op](eval(a), eval(b))
+    </code>
+    <code data-trim class="fragment">
+assert calc('2 + 2') == 4
+assert calc('2 - 2') == 0
+assert calc('2 - 0.2') == 1.8
+    </code>
+    </pre>
+</section>
+
+<section>
+    <pre><code data-trim>
+operations = {
+    '+': lambda a, b: a + b,
+    '-': lambda a, b: a - b,
+}
+def calc(expr):
+    a, op, b = expr.split()
+    return operations[op](eval(a), eval(b))
+
+assert calc('2 * 2') == 4 # ???
+    </code>
+    <code data-trim class="fragment">
+Traceback (most recent call last):
+  File "calc1.py", line 17, in &lt;module>
+    assert calc('2 * 2') == 4
+  File "calc1.py", line 12, in calc
+    return operations[op](eval(a), eval(b))
+KeyError: '*'
+</code></pre>
+</section>
+
+<section>
+    <p>It is extensible! </p>
+
+<pre><code data-trim>
+import calc1
+calc1.operations['*'] = lambda a, b: a * b
+
+assert calc1.calc('2 * 2') == 4
+</code></pre>
+    <aside class="notes">
+        <ul>
+            <li>Таким чином не змінюючи коду calc1 ми його розширюємо.</li>
+            <li>Просто? Тепер зробимо це ZCA, побачимо що ви тоді заспіваєте!</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Interface</h2>
+
+<pre><code data-trim>
+from zope.interface import Interface
+ 
+class IOperation(Interface):
+    def __call__(a, b):
+        ''' Performs operation on two operands '''
+</code></pre>
+    <aside class="notes">
+        <ul>
+            <li>Інтерфейси – це класи що наслідуються від класу Interface і за домовленістю, назва починається з префіксу I</li>
+            <li>Інтерфес - це по суті документація</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Interface attribute</h2>
+
+<pre><code data-trim>
+from zope.interface import Attribute
+ 
+class IPerson(Interface):
+    name = Attribute('Name of the person')
+
+</code></pre>
+    <aside class="notes">
+        <ul>
+            <li>Інтерфейси також можуть документувати атрибути</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Components</h2>
+<pre><code data-trim>
+from zope.interface import implements
+ 
+class Plus(object):
+    implements(IOperation)
+    def __call__(self, a, b):
+        return a + b
+ 
+class Minus(object):
+    implements(IOperation)
+    def __call__(self, a, b):
+        return a - b
+</code></pre>
+    <aside class="notes">
+        <ul>
+            <li>Компоненти реалізують інтерфейси</li>
+            <li>Функція implements називається class-advisor-ом. Бо міняє деякі атрибути в класі.</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+<pre><code data-trim>
+class Minus(object):
+    def __call__(self, a, b):
+        return a - b
+
+from zope.interface import classImplements
+classImplements(Minus, IOperation)
+</code></pre>
+    <aside class="notes">
+        <ul>
+            <li>Можна позначити що клас реалізує інтерфейс і без advisor-а, простою функцією</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+<pre><code data-trim>
+from zope.interface.verify import verifyObject, verifyClass
+ 
+verifyClass(IOperation, Plus) # true
+verifyObject(IOperation, Plus()) # true
+</code></pre>
+
+<pre class="fragment"><code data-trim>
+zope.interface.exceptions.DoesNotImplement: An object
+  does not implement interface &lt;InterfaceClass __main__.IOperation>
+</code></pre>
+
+<pre class="fragment"><code data-trim>
+zope.interface.exceptions.BrokenMethodImplementation: 
+  The implementation of __call__ violates its contract
+  because implementation doesn't allow enough arguments.
+</code></pre>
+    <aside class="notes">
+        <ul>
+            <li>Окрім того що інтерфейс - документація, відповідність об’єктів їй можна перевірити автоматично</li>
+            <li>Якщо об’єкт не відповідає інтерфейсу - буде виняток.</li>
+            <li>Якщо інтерфейс метода не відповідає інтерфейсу - теж буде виняток</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+<h2>Invariant</h2>
+<pre><code data-trim>
+from zope.interface import invariant
+ 
+def binary_float_operation(obj):
+    res = obj(2, 2.1)
+    assert isinstance(res, float), 'Operation should return float'
+ 
+class IOperation(Interface):
+    def __call__(a, b):
+        ''' performs operation on two operands '''
+    invariant(binary_float_operation)
+</code></pre>
+<pre class="fragment"><code data-trim>
+IOperation.validateInvariants(plus_operation)
+</code></pre>
+<pre class="fragment"><code data-trim>
+File "calc.py", line 8, in binary_float_operation
+    assert isinstance(res, float), 'Operation should return float'
+AssertionError: Operation should return float
+</code></pre>
+    <aside class="notes">
+        <ul>
+            <li>Окрім документації, до інтерфейсів можна прив’язувати щось на зразок тестів</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+<h2>Marker interface</h2>
+<pre><code data-trim>
+class ISpecialOperation(Interface):
+    """Special operation"""
+</code></pre>
+    <aside class="notes">
+        <ul>
+            <li>Можна створювати інтерфейси без жодних методів та атрибутів. Таких називають маркерними.</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+<h2>Searching for implementations</h2>
+    <aside class="notes">
+        Для чого нам ці інтерфейси? Щоб знаходити компоненти які їх реалізують? Де ми їх шукаємо? В реєстрі.
+    </aside>
+</section>
+<section>
+<h2>Global site manager</h2>
+<pre><code data-trim>
+from zope.component import getGlobalSiteManager
+gsm = getGlobalSiteManager()
+</code></pre>
+<pre class="fragment"><code data-trim>
+gsm.registerUtility(Plus(), IOperation, '+')
+gsm.registerUtility(Minus(), IOperation, '-')
+</code></pre>
+    <aside class="notes">
+Перший аргумент методу registerUtility – об’єкт що надає інтерфейс, другий – той інтерфейс який він надає, третій – необов’язкове ім’я. Якщо інтерфейс у нас реалізує лише одна утиліта, то ім’я давати необов’язково, ми все одно цю утиліту знайдемо.
+    </aside>
+</section>
+
+<section>
+    <h1>The End</h1>
+    <h2>Thank you!</h2>
+    <h3>Any questions?</h3>
+    <aside class="notes">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </aside>
+</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
