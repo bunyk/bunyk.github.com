@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>ZCA presentation</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -330,10 +330,18 @@ class ISpecialOperation(Interface):
 
 <section>
 <h2>Searching for implementations</h2>
+<p>
+There are two kinds of components in ZCA:
+<ul>
+    <li>Utilities</li>
+    <li>Adapters</li>
+</ul>
+</p>
     <aside class="notes">
         Для чого нам ці інтерфейси? Щоб знаходити компоненти які їх реалізують? Де ми їх шукаємо? В реєстрі.
     </aside>
 </section>
+
 <section>
 <h2>Global site manager</h2>
 <pre><code data-trim>
@@ -350,9 +358,119 @@ gsm.registerUtility(Minus(), IOperation, '-')
 </section>
 
 <section>
-    <h1>The End</h1>
-    <h2>Thank you!</h2>
-    <h3>Any questions?</h3>
+<pre><code data-trim>
+from zope.component import getUtility
+def calc(expr):
+    a, op, b = expr.split()
+    res = getUtility(IOperation, op)(eval(a), eval(b))
+    return res
+</code></pre>
+<pre class="fragment"><code data-trim>
+assert calc('2 + 2') == 4
+assert calc('2 - 2') == 0
+assert calc('2 - 0.2') == 1.8
+assert calc('2 * 2') == 4 # ZCA will not help here. But!
+</code></pre>
+    <aside class="notes">
+    </aside>
+
+</section>
+<section>
+<h2>Code became longer:</h2>
+<pre><code data-trim>
+# calc.py
+from zope.interface import Interface, implements
+from zope.component import getUtility
+ 
+class IOperation(Interface):
+    def __call__(a, b):
+        ''' performs operation on two operands '''
+ 
+class Plus(object):
+    implements(IOperation)
+    def __call__(self, a, b):
+        return a + b
+plus = Plus()
+ 
+class Minus(object):
+    implements(IOperation)
+    def __call__(self, a, b):
+        return a - b
+minus = Minus()
+</code></pre>
+<p>It even not fits in the slide.
+<strong>Why then we use it?</strong></p>
+    <aside class="notes">
+    </aside>
+
+</section>
+
+<section>
+<h2>External configuration:</h2>
+<pre><code data-trim>
+<!-- configure.zcml -->
+&lt;configure xmlns="http://namespaces.zope.org/zope">
+ 
+&lt;include package="zope.component" file="meta.zcml" />
+&lt;utility
+    component="calc.plus"
+    provides="calc.IOperation"
+    name="+"
+    />
+ 
+&lt;utility
+    component="calc.minus"
+    provides="calc.IOperation"
+    name="-"
+    />
+ 
+&lt;configure>
+</code></pre>
+<p>I hate XML!</p>
+    <aside class="notes">
+    </aside>
+
+</section>
+
+<section>
+<h2>Main script:</h2>
+<pre><code data-trim>
+# main.py 
+# We should additionally install zope.configuration
+from zope.configuration import xmlconfig
+  
+def eval(expr):
+    a, op, b = expr.split()
+    return getUtility(IOperation, op)(float(a), float(b))
+  
+def main():
+    xmlconfig.file('configure.zcml') # it will import every needed component
+  
+    assert eval('2 + 2') == 4
+    assert eval('2 - 2') == 0
+  
+if __name__ == '__main__':
+    main()
+</code></pre>
+    <aside class="notes">
+    </aside>
+
+</section>
+
+<section>
+    <h2>Sources, links, to know more</h2>
+    <ul>
+        <li>Article which was the basis of this presentation you could read here: <a href="https://bunyk.wordpress.com/2014/12/13/zca/">bunyk.wordpress.com/2014/12/13/zca/</a></li>
+        <li><a href="http://www.funtoo.org/Zope_Component_Architecture">List of definitions for Zope Component Architecture</a>, by Daniel Robbins (creator of Gentoo, and once a Zenoss employee)</li>
+        <li><a href="http://www.muthukadan.net/docs/zca.html">A Comprehensive Guide to Zope Component Architecture</a> - nice free book from Baiju Muthukadan</li>
+        <li>StackOverflow of course</li>
+    </ul>
+</section>
+
+<section>
+    <h2>The End</h2>
+    <p>Thank you for your time and attention!</p>
+    <p>Any questions or comments?</p>
     <aside class="notes">
         <ul>
             <li></li>
