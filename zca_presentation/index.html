@@ -458,11 +458,110 @@ if __name__ == '__main__':
 </section>
 
 <section>
-    <h2>Sources, links, to know more</h2>
+<h2>Component creation:</h2>
+<pre><code data-trim>
+plus = Plus() # during module load
+</code></pre>
+<pre><code data-trim>
+&lt;utility
+    component="calc.plus"
+    provides="calc.IOperation"
+    name="+"
+    />
+</code></pre>
+    <aside class="notes">
+    </aside>
+</section>
+
+<section>
+<h2>Using factory:</h2>
+<pre><code data-trim>
+plus = Plus()
+</code></pre>
+<pre><code data-trim>
+&lt;utility
+    factory="calc.Plus" <!-- created when parsing this -->
+    provides="calc.IOperation"
+    name="+"
+    />
+</code></pre>
+    <aside class="notes">
+    </aside>
+</section>
+
+<section>
+<h2>IFactory:</h2>
+<pre><code data-trim>
+import random
+ 
+def get_digit():
+    return random.randint(1, 9)
+
+from zope.component.factory import Factory
+factory = Factory(get_digit, 'random_digit', 'Gives a random digit')
+
+from zope.component.interfaces import IFactory
+gsm.registerUtility(factory, IFactory, 'random_digit')
+</code></pre>
+<pre class="fragment"><code data-trim>
+print getUtility(IFactory, 'random_digit')() # creates digit
+
+from zope.component import createObject
+print createObject('random_digit') # also creates a digit
+</code></pre>
+    <aside class="notes">
+        В двох словах - фабрика це скорочення для утиліти яка створює об’єкти при виклику.
+    </aside>
+</section>
+
+
+<section data-background="imgs/adapter.jpg">
+    <h1 style="background-color:white">Adapter<h1>
+</section>
+
+<section>
+   <img src="imgs/design_patterns.jpg" width="60%"/>
+</section>
+
+<section>
+<pre><code data-trim>
+class IScalaOperation(Interface):
+    def apply(a, b):
+        ''' performs operation on two operands '''
+ 
+class Division(object):
+    implements(IScalaOperation)
+    def apply(self, x, y):
+        return x / y
+
+gsm.registerUtility(Division(), IScalaOperation, '/') # instead of zcml
+</code></pre>
+    <aside class="notes">
+        Нехай в нас є інший вид операцій. І функція що приймає операції, але не цього виду.
+    </aside>
+</section>
+
+<section>
+<pre><code data-trim>
+def foldl(op, seq): # aka reduce
+    op = IOperation(op)  # instead of verifyObject
+    acc = seq[0]
+    for n in seq[1:]:
+        acc = op(acc, n)
+    return acc
+</code></pre>
+    <aside class="notes">
+        А це наша обіцяна симуляція "статичної типізації". op не може бути нічим окрім чогось що втілює IOperation.
+    </aside>
+</section>
+
+<section>
+    <h2>Where to find out more</h2>
     <ul>
         <li>Article which was the basis of this presentation you could read here: <a href="https://bunyk.wordpress.com/2014/12/13/zca/">bunyk.wordpress.com/2014/12/13/zca/</a></li>
         <li><a href="http://www.funtoo.org/Zope_Component_Architecture">List of definitions for Zope Component Architecture</a>, by Daniel Robbins (creator of Gentoo, and once a Zenoss employee)</li>
         <li><a href="http://www.muthukadan.net/docs/zca.html">A Comprehensive Guide to Zope Component Architecture</a> - nice free book from Baiju Muthukadan</li>
+        <li><a href="http://twistedmatrix.com/documents/current/core/howto/components.html">Twisted docs on components</a> (if you use Twisted)</li>
         <li>StackOverflow of course</li>
     </ul>
 </section>
