@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+		<link rel="stylesheet" href="css/theme/serif.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -524,6 +524,31 @@ print createObject('random_digit') # also creates a digit
 </section>
 
 <section>
+<h2>Similar to decorator:</h2>
+<pre><code data-trim>
+def d(f):
+    return 0
+@d
+def f():
+    return 'hello world!'
+</code></pre>
+
+
+<pre class="fragment"><code data-trim>
+>>> f()
+Traceback (most recent call last):
+  File "&lt;input>", line 1, in &lt;module>
+TypeError: 'int' object is not callable
+>>> f
+0
+</code></pre>
+    <aside class="notes">
+        Декоратор в Python може помножити функцію на нуль. :) Тобто може бути й адаптером.
+    </aside>
+</section>
+
+<section>
+<h2>Something to adapt:</h2>
 <pre><code data-trim>
 class IScalaOperation(Interface):
     def apply(a, b):
@@ -544,7 +569,7 @@ gsm.registerUtility(Division(), IScalaOperation, '/') # instead of zcml
 <section>
 <pre><code data-trim>
 def foldl(op, seq): # aka reduce
-    op = IOperation(op)  # instead of verifyObject
+    op = IOperation(op)  # instead of verifyObject, but better
     acc = seq[0]
     for n in seq[1:]:
         acc = op(acc, n)
@@ -554,6 +579,76 @@ def foldl(op, seq): # aka reduce
         А це наша обіцяна симуляція "статичної типізації". op не може бути нічим окрім чогось що втілює IOperation.
     </aside>
 </section>
+
+<section>
+    <h2>Static typing?</h2>
+    <p><quote>"type checking may occur either at compile-time (a static check) or run-time (a dynamic check)"</quote> (wikipedia entry on type systems)</p>
+    <p>Guido van Rossum, recently sent out a proposal on the python-ideas mailing list for adding type annotations to Python function declarations. The proposal aims at bringing to Python the benefits provided by static typing without changing Python's dynamic typing nature and interpreter behaviour. (some news)</p>
+    <aside class="notes">
+        Гаразд, я трохи перебільшив зі статичною типізацією. Вона все одно відбувається в рантаймі. Але ZCA зі своїми перевірками та інваріантами дозволяє виявити невідповідності в типах трохи раніше ніж качина типізація.
+        І якщо анотації дають нам переваги статичної типізації - ZCA теж.
+    </aside>
+</section>
+
+<section>
+    <h2>Strong typing?</h2>
+    <p>The object-oriented programming languages Smalltalk, Perl, JavaScript, Ruby, <strong>Python</strong>, and Self are all <strong>"strongly typed"</strong> in the sense that typing errors are prevented at runtime and they do little implicit type conversion.</p>
+<pre class="fragment"><code data-trim>
+  File "/home/bunyk/zca/calc.py", line 44, in foldl
+    op = IOperation(op)
+TypeError: ('Could not adapt', &lt;calc.Division object at 0xb70f33ac>,
+&lt;InterfaceClass calc.IOperation>)
+</code></pre>
+<p class="fragment"><code>Division</code> implements <code>IScalaOperation</code> not <code>IOperation</code></p>
+    <aside class="notes">
+        "Could not adapt означає що ZCA намагалось бути слаботипізованим, але не вийшло. Бо адаптера не знайшлось. Давайте нарешті напишемо адаптер.         
+    </aside>
+</section>
+
+<section>
+<pre><code data-trim>
+from zope.component import adapts
+class ScalaOperationAdapter(object):
+    implements(IOperation)
+    adapts(IScalaOperation)
+ 
+    def __init__(self, scala_op):
+        self.scala_op = scala_op
+ 
+    def __call__(self, a, b):
+        return self.scala_op.apply(a, b)
+</code></pre>
+    <aside class="notes">
+    </aside>
+</section>
+
+<section>
+<pre><code data-trim>
+&lt;adapter
+    factory="calc.ScalaOperationAdapter"
+    provides="calc.IOperation"
+    for="calc.IScalaOperation"
+    />
+</code></pre>
+<p>or</p>
+<pre><code data-trim>
+gsm.registerAdapter(ScalaOperationAdapter)
+</code></pre>
+    <aside class="notes">
+Інтерфейси які цей клас надає та адаптує можна не вказувати, бо вони вже й так описані в класі адвайзорами implements та adapts. Неіменовану утиліту можна реєструвати аналогічно, просто передавши об’єкт в registerUtility.
+    </aside>
+</section>
+
+<section>
+<pre class="fragment"><code data-trim>
+op = IOperation(Division())
+verifyObject(IOperation, op) # yes it is!
+</code></pre>
+    <aside class="notes">
+        
+    </aside>
+</section>
+
 
 <section>
     <h2>Where to find out more</h2>
@@ -569,14 +664,8 @@ def foldl(op, seq): # aka reduce
 <section>
     <h2>The End</h2>
     <p>Thank you for your time and attention!</p>
-    <p>Any questions or comments?</p>
+    <p>Questions and comments are welcomed.</p>
     <aside class="notes">
-        <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
     </aside>
 </section>
 			</div>
