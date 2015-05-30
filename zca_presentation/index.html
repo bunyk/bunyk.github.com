@@ -380,7 +380,6 @@ assert calc('2 * 2') == 4 # ZCA will not help here. But!
 <pre><code data-trim>
 # calc.py
 from zope.interface import Interface, implements
-from zope.component import getUtility
  
 class IOperation(Interface):
     def __call__(a, b):
@@ -437,6 +436,7 @@ minus = Minus()
 <pre><code data-trim>
 # main.py 
 # We should additionally install zope.configuration
+from zope.component import getUtility
 from zope.configuration import xmlconfig
   
 def eval(expr):
