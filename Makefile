@@ -33,4 +33,7 @@ fifteen_html:
 dodecahedron_html:
 	$(python) render_mako.py dodecahedron/index.mako
 
-d: dodecahedron_html love
+calendar_html:
+	$(python) render_mako.py calendar/index.mako
+
+d: calendar_html love

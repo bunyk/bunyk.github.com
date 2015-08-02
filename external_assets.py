@@ -39,4 +39,4 @@ react = 'http://fb.me/react-0.12.1.js'
 JSXTransformer = 'http://fb.me/JSXTransformer-0.12.1.js'
 _dependencies['react'] = ['JSXTransformer']
 
-angular = 'http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'
+angular = 'http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js'

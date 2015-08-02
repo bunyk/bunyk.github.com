@@ -24,8 +24,9 @@ Two most useful functions here:
 '''
 
 import os
-import subprocess
 import re
+import sys
+import subprocess
 
 import logging 
 log = logging.getLogger(__name__)
@@ -61,8 +62,8 @@ def include(asset, from_file, root, local=False):
         local - if true, than link external libs from external_assets folder
     '''
     root = os.path.abspath(root)
-    dir = os.path.abspath(os.path.dirname(from_file))
-    asset = absolute(asset, dir, root)
+    directory = os.path.abspath(os.path.dirname(from_file))
+    asset = absolute(asset, directory, root)
 
     def once(src):
         if (src, from_file) in included:
@@ -71,14 +72,19 @@ def include(asset, from_file, root, local=False):
             included.add((src, from_file))
             return True
 
-    return (
-        '\n<!-- include("{}") -->\n'.format(asset)
-        + '\n'.join(
-            get_tag(coffee2js(src, local), root, local)
-            for src in topo_sort(get_graph(asset, root))
-            if once(src)
+    try:
+        return (
+            '\n<!-- include("{}") -->\n'.format(asset)
+            + '\n'.join(
+                get_tag(coffee2js(src, local), root, local)
+                for src in topo_sort(get_graph(asset, root))
+                if once(src)
+            )
         )
-    )
+    except FileNotFoundError as e:
+        msg = 'File not found: %s' % e.filename
+        print(msg, file=sys.stderr)
+        return msg
 
 def get_tag(src, root, local=False):
     if not external(src):
