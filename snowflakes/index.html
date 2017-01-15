@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+    <link rel="manifest" href="manifest.json" />
+
+    <style>
+        html, body {
+            margin: 0px;
+            overflow-y: hidden;
+        }
+        svg {
+            cursor: crosshair;
+            object-fit: contain;
+            width: 100vw;
+            height: calc(100vh - 50px);
+            border: none;
+        }
+        .toolbar {
+            height: 50px;
+            margin: 0px;
+            padding: 2px;
+            font-family: helvetica;
+            box-sizing: border-box;
+        }
+        .toolbar input[type="number"] {
+            width: 40px;
+        }
+    </style>
+</head>
+
+<body>
+<p class="toolbar">
+    Товщина: <input type="number" value="2" id="penWidth" min="1" max="20" onchange="changeCursor()"/>;
+    Колір: <input type="color" id="color" value="#0000ff" onchange="changeCursor()">
+    Осі: <input type="checkbox" id="showReference" checked/>;
+    Віддзеркалювати: <input type="checkbox" id="mirrorCheck" checked/>;
+    <button id="clearBtn">Стерти</button>
+</p>
+<svg id="canvas" viewbox="0 0 300 300"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+    <use xlink:href="#mirror"  transform="rotate(60, 150, 150)"/>
+    <use xlink:href="#mirror"  transform="rotate(120, 150, 150)"/>
+    <use xlink:href="#mirror"  transform="rotate(180, 150, 150)"/>
+    <use xlink:href="#mirror"  transform="rotate(240, 150, 150)"/>
+    <use xlink:href="#mirror"  transform="rotate(300, 150, 150)"/>
+    <g id="mirror">
+        <use  id="mirrored" xlink:href="#original" transform="translate(300, 0) scale(-1, 1)"/>
+        <g id="original">
+            <g id="lines"></g>
+            <line id="referenceLine" stroke="gray" stroke-width="0.5" x1="150" y1="0" x2="150" y2="300"/>
+            <circle id="cursor" fill="#0000ff" r="2"/>
+        </g>
+    </g>
+</svg>
+<script src="snowflake.js"></script>
+</body>
+</html>

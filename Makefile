@@ -1,4 +1,4 @@
-python = python3.4
+python = python3.5
 all: html love
 love:
 	$(python) -m http.server 8080
