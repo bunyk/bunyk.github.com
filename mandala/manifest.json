@@ -1,0 +1,15 @@
+{
+  "name": "Mandala drawing app",
+  "short_name": "Mandala",
+  "display": "standalone",
+  "start_url": "/mandala/",
+  "theme_color": "#673ab6",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
