@@ -47,3 +47,6 @@ dd.clear {
     margin: 0;
     height: 15px;
 }
+dd li {
+    margin-bottom: 1em;
+}
