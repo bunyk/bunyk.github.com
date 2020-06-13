@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>HTTP2 vs WebSockets: a study of dashboard performance</title>
+	<meta name="description" content="">
+	<meta name="generator" content="Hugo 0.52" />
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo" role="banner">
+			<a class="logo__link" href="/" title="Bunyk Taras" rel="home">
+				<div class="logo__title">Bunyk Taras</div>
+				
+			</a>
+		</div>
+	</div>
+	
+<nav class="menu">
+	<ul class="menu__list">
+		<li class="menu__item"><a class="menu__link" href="/">HOME</a></li>
+		<li class="menu__item"><a class="menu__link" href="/resume/">RESUME</a></li>
+		<li class="menu__item"><a class="menu__link" href="https://bunyk.wordpress.com/">OLD BLOG</a></li>
+	</ul>
+</nav>
+
+</header>
+		<div class="wrapper flex">
+			<section class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">HTTP2 vs WebSockets: a study of dashboard performance</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-12-20T15:48:50">December 20, 2018</time></div>
+		</header><div class="content post__content clearfix">
+			<p>In this post, we will compare the performance of different approaches to load data for analytics dashboards, or any page where we have lots of different requests to the same server.</p>
+
+<h2 id="baseline">Baseline</h2>
+
+<p>We will start from sample dashboard created with Vue.js and Chart.js (which does not matter) and loaded over HTTP/1.1 (which does matter). It should look like this, and appearance of it would not change till the end of this article, but we will try to change how quickly it appears in the browser window:</p>
+
+<figure>
+    <img src="dashboard.png" width="600px"/> <figcaption>
+            <h4>Our sample dashboard</h4>
+        </figcaption>
+</figure>
+
+
+<p>Static content will be served by Nginx server, which would also be a proxy to our backend python server which would serve data. It will expose 8080 port for HTTP and 8083 for HTTPS:</p>
+
+<p>(If you are bored with lot&rsquo;s of code - scroll down, there will be explanations of what happens, I just publish it here to make this experiment reproducible)</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">version: <span style="color:#e6db74">&#39;3&#39;</span>
+
+services:
+    server:
+        image: server
+        build:
+            context: .
+            dockerfile: nginx.docker
+        ports:
+            - <span style="color:#ae81ff">8080</span>:<span style="color:#ae81ff">80</span>
+            - <span style="color:#ae81ff">8083</span>:<span style="color:#ae81ff">443</span>
+    backend:
+        image: backend
+        build:
+            context: .
+            dockerfile: backend.docker</code></pre></div>
+
+<p>Nginx container just runs image with a copy of configuration file and our HTML inside:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> nginx</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>COPY nginx.conf /etc/nginx/nginx.conf<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>COPY dashboard.html /var/www/index.html</code></pre></div>
+
+<p>And this is its configuration file. It tells to listen at port 80, serve files from <code>/var/www</code>, and redirect requests to all URLs that have prefix <code>/api/</code> to our backend container:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">user</span> <span style="color:#e6db74">nginx</span>;
+
+<span style="color:#66d9ef">events</span> {
+  <span style="color:#f92672">worker_connections</span> <span style="color:#ae81ff">1024</span>;
+}
+
+<span style="color:#66d9ef">http</span> {
+    <span style="color:#f92672">sendfile</span> <span style="color:#66d9ef">on</span>;
+    
+    <span style="color:#f92672">include</span> <span style="color:#e6db74">/etc/nginx/mime.types</span>;
+
+    <span style="color:#f92672">server</span> {
+        <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
+
+        <span style="color:#f92672">root</span> <span style="color:#e6db74">/var/www</span>;
+
+        <span style="color:#f92672">location</span> <span style="color:#e6db74">/api/</span> {
+            <span style="color:#f92672">proxy_pass</span>      <span style="color:#e6db74">http://backend:8080/</span>;
+        }
+    }
+}</code></pre></div>
+
+<p>Here is Dockerfile for backend server:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> python:3.7</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span><span style="color:#e6db74"> PYTHONUNBUFFERED 1</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> mkdir /code<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> /code</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> pip install sanic<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>COPY server.py /code/server.py<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 8080</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span><span style="color:#e6db74"> python /code/server.py</span></code></pre></div>
+
+<p>It has Python3.7 inside, installs Sanic framework, exposes port 8080 and runs <code>server.py</code>, which will provide us with data:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
+<span style="color:#f92672">import</span> random
+
+<span style="color:#f92672">from</span> sanic <span style="color:#f92672">import</span> Sanic
+<span style="color:#f92672">from</span> sanic.response <span style="color:#f92672">import</span> json <span style="color:#66d9ef">as</span> json_response
+
+app <span style="color:#f92672">=</span> Sanic() <span style="color:#75715e"># It is almost like Flask, just asyncronous</span>
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/data/&lt;data:int&gt;&#39;</span>)
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">return_data</span>(request, data):
+    <span style="color:#66d9ef">return</span> json_response(await get_data(
+        data, int(request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;size&#39;</span>, <span style="color:#ae81ff">10</span>))
+    ))
+
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_data</span>(data, size):
+    <span style="color:#75715e"># First we wait 1-5 seconds to simulate request to database</span>
+    await asyncio<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> random<span style="color:#f92672">.</span>random() <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>)
+
+    <span style="color:#75715e"># then start random walk from point that equals to data given</span>
+    <span style="color:#75715e"># This is done to be able to distinguish between different graphs</span>
+    position <span style="color:#f92672">=</span> data
+    data <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(size):
+        position <span style="color:#f92672">+=</span> random<span style="color:#f92672">.</span>random() <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.5</span>
+        data<span style="color:#f92672">.</span>append(position)
+    <span style="color:#75715e"># And return the data of that random walk</span>
+    <span style="color:#66d9ef">return</span> data
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    app<span style="color:#f92672">.</span>run(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;0.0.0.0&#39;</span>, port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span>)</code></pre></div>
+
+<p>And the biggest listing in this post - HTML (well, mostly JavaScript) of the dashboard:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;Dashboard&lt;/<span style="color:#f92672">title</span>&gt;
+    &lt;<span style="color:#f92672">style</span>&gt;
+        .<span style="color:#a6e22e">chart</span> {
+            <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">350</span><span style="color:#66d9ef">px</span>; <span style="color:#66d9ef">height</span>: <span style="color:#ae81ff">200</span><span style="color:#66d9ef">px</span>;
+            <span style="color:#66d9ef">margin</span>: <span style="color:#ae81ff">3</span><span style="color:#66d9ef">px</span>; <span style="color:#66d9ef">border</span>: <span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#66d9ef">black</span>;
+            <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">relative</span>; <span style="color:#66d9ef">float</span>: <span style="color:#66d9ef">left</span>;
+        }
+    &lt;/<span style="color:#f92672">style</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+
+&lt;<span style="color:#f92672">body</span>&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;app&#34;</span>&gt;
+        &lt;<span style="color:#f92672">p</span>&gt;Loaded charts: {{loaded_chart_count}}&lt;/<span style="color:#f92672">p</span>&gt;
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">v-for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;chart in charts&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;chart&#34;</span>&gt;
+            &lt;<span style="color:#f92672">chart</span> <span style="color:#a6e22e">:widget</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;chart&#34;</span> <span style="color:#a6e22e">v-once</span>&gt;&lt;/<span style="color:#f92672">chart</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt;
+    &lt;/<span style="color:#f92672">div</span>&gt;
+  
+&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js&#39;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js&#39;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.min.js&#39;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+
+&lt;<span style="color:#f92672">script</span> &gt;
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">time</span>(<span style="color:#e6db74">&#39;load&#39;</span>); <span style="color:#75715e">// Measure time from here to end of load
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">DATA_LEN</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>;
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CHARTS_COUNT</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>;
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">charts</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">_</span>.<span style="color:#a6e22e">range</span>(<span style="color:#a6e22e">CHARTS_COUNT</span>),
+    <span style="color:#a6e22e">loaded_chart_count</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+};
+
+
+<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">component</span>(<span style="color:#e6db74">&#39;chart&#39;</span>, {
+  <span style="color:#a6e22e">template</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&lt;canvas width=&#34;350&#34; height=&#34;200&#34;&gt;&lt;/canvas&gt;&#39;</span>,
+  <span style="color:#a6e22e">props</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;widget&#39;</span>],
+  <span style="color:#a6e22e">mounted</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span>() {
+    <span style="color:#a6e22e">createChart</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$el</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">widget</span>);
+  }
+});
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">createChart</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">el</span>, <span style="color:#a6e22e">widget</span>) {
+    <span style="color:#75715e">// Load data and render line chart in given element
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">loadData</span>(<span style="color:#a6e22e">widget</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">chart_data</span>) {
+      <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Chart</span>(<span style="color:#a6e22e">el</span>, {
+          <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;line&#39;</span>,
+          <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> {
+              <span style="color:#a6e22e">labels</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">_</span>.<span style="color:#a6e22e">range</span>(<span style="color:#a6e22e">chart_data</span>.<span style="color:#a6e22e">length</span>),
+              <span style="color:#a6e22e">datasets</span><span style="color:#f92672">:</span> [{
+                  <span style="color:#a6e22e">label</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Data &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">widget</span>,
+                  <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">chart_data</span>,
+              }]
+          },
+      });
+      <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">loaded_chart_count</span> <span style="color:#f92672">++</span>;
+      <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">loaded_chart_count</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">CHARTS_COUNT</span>) {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">timeEnd</span>(<span style="color:#e6db74">&#39;load&#39;</span>); <span style="color:#75715e">// stop load timer
+</span><span style="color:#75715e"></span>      }
+    });
+};
+
+<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vue</span>({
+  <span style="color:#a6e22e">el</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;#app&#34;</span>,
+  <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">data</span>
+});
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">loadData</span>(<span style="color:#a6e22e">widget</span>, <span style="color:#a6e22e">cb</span>) {
+    <span style="color:#75715e">// Load data for widget given, and when it is loaded - call cb
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/data/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">widget</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;?size=&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">DATA_LEN</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>()).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">cb</span>);
+}
+&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;</code></pre></div>
+
+<p>It loads Charts.js and Vue using CDN and renders <code>CHARTS_COUNT</code> charts. We will work here with the function <code>loadData()</code>, to see what we could improve. But first - test our baseline. Run <code>docker-compose up</code> and check how quickly it loads. We could do it in browser console using <code>console.time</code>, and on network tab:</p>
+
+<figure>
+    <img src="network_debug.png" width="600px"/> <figcaption>
+            <h4>Screenshot of network tab of browser debugger</h4>
+        </figcaption>
+</figure>
+
+
+<p>29 seconds for 50 graphs? When all the JavaScript was loaded from cache? Not cool. Not cool at all.</p>
+
+<h2 id="debugging-the-problem">Debugging the problem</h2>
+
+<p>But why it takes so much? Lets open request details:</p>
+
+<figure>
+    <img src="request_timings.png" width="600px"/> <figcaption>
+            <h4>Time of separate request</h4>
+        </figcaption>
+</figure>
+
+
+<p>We see that 24 seconds are spent in <strong>Blocked</strong> state, and 4.5 in <strong>Waiting</strong>, everything else is negligible. Here what <a href="https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor/request_details#Timings">Mozilla documentation</a> has to say about that states:</p>
+
+<blockquote>
+<ul>
+<li><p><strong>Blocked:</strong> Time spent in a queue waiting for a network connection.</p>
+
+<p>The browser imposes a limit on the number of simultaneous connections that can be made to a single server. In Firefox this defaults to 6, but can be changed using the network.http.max-persistent-connections-per-server preference. If all connections are in use, the browser can&rsquo;t download more resources until a connection is released.</p></li>
+
+<li><p><strong>Waiting:</strong> Waiting for a response from the server.</p></li>
+</ul>
+</blockquote>
+
+<p>Let&rsquo;s assume that we optimized everything we could about time of request processing on the server because my post is not about this. What could we do about time spent blocked? Could we increase the limit of simultaneous connections in a browser? <a href="https://tools.ietf.org/html/rfc2616#section-8.1.4">RFC 2616</a> (document that defines HTTP/1.1) does not recommend this, and Firefox already has that amount higher than recommended:</p>
+
+<blockquote>
+<p>Clients that use persistent connections SHOULD limit the number of
+  simultaneous connections that they maintain to a given server. A
+  single-user client SHOULD NOT maintain more than 2 connections with
+  any server or proxy. A proxy SHOULD use up to 2 * N connections to
+  another server or proxy, where N is the number of simultaneously
+  active users. These guidelines are intended to improve HTTP response
+  times and avoid congestion.</p>
+</blockquote>
+
+<p>There are other solutions, like <a href="https://medium.com/@jperasmus11/domain-sharding-on-the-modern-web-dc97df4f6a90">domain sharding</a> where we duplicate our resources on different domains, so this limit is not applicable, but it requires configuring other domains on Nginx, updating front-end to do requests to different domains, and additional DNS calls.</p>
+
+<p>Another option is to do one request per dashboard and receive all the data that dashboard needs in one response. The most important downside of this - decrease in <a href="https://en.wikipedia.org/wiki/Perceived_performance">perceived performance</a>, when user will not be able to see top graphs which are requested first, first, but will observe inactivity on the page for a long time and then everything will load. And this will not be possible when a user creates dashboard dynamically by adding widgets here and there. And will require a rewrite of server and client.</p>
+
+<p>But there is a possibility to do all request over one connection and then receive all responses over the same one:</p>
+
+<h2 id="websockets">WebSockets</h2>
+
+<p>First, for Nginx to pass WebSocket requests to the backend server, we need to change location configuration for our API like this:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx">        <span style="color:#66d9ef">location</span> <span style="color:#e6db74">/api/</span> {
+            <span style="color:#f92672">proxy_pass</span>      <span style="color:#e6db74">http://backend:8080/</span>; <span style="color:#75715e"># this line was here before, the rest are added
+</span><span style="color:#75715e"></span>            <span style="color:#f92672">proxy_http_version</span> <span style="color:#ae81ff">1</span><span style="color:#e6db74">.1</span>;
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Upgrade</span> $http_upgrade;
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Connection</span> <span style="color:#e6db74">&#34;Upgrade&#34;</span>;
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Host</span> $host;
+            <span style="color:#f92672">proxy_read_timeout</span> <span style="color:#e6db74">3600s</span>;
+            <span style="color:#f92672">proxy_send_timeout</span> <span style="color:#e6db74">3600s</span>;
+        }</code></pre></div>
+
+<p>Then, as we will send all the requests and receive all the responses over one connection, and they will be received not in the same order as they were sent, we need to figure out how to match requests with responses. That could be done using unique ids, which define to which chart each response belongs.</p>
+
+<p>So, we will replace our <code>loadData</code> function that called <code>fetch</code> with the following code:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ws</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">WebSocket</span>(<span style="color:#e6db74">&#39;ws://&#39;</span> <span style="color:#f92672">+</span> document.<span style="color:#a6e22e">domain</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;:&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">port</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/api/ws/&#39;</span>);
+
+<span style="color:#a6e22e">ws</span>.<span style="color:#a6e22e">onopen</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
+    <span style="color:#75715e">// Vue instance should be created after socket is open because otherwise 
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// components could try to send requests before it opens, and will fail
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vue</span>({
+      <span style="color:#a6e22e">el</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;#app&#34;</span>,
+      <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">data</span>
+    });
+}
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">socketSubscribers</span> <span style="color:#f92672">=</span> {}; <span style="color:#75715e">// will map request id&#39;s to repsponse handlers
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">ws</span>.<span style="color:#a6e22e">onmessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">event</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">data</span>);
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">subscriber</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">socketSubscribers</span>[<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">id</span>];
+    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">subscriber</span>) {
+        <span style="color:#a6e22e">subscriber</span>(<span style="color:#a6e22e">data</span>);
+        <span style="color:#75715e">// TODO: maybe remove subscriber
+</span><span style="color:#75715e"></span>    };
+};
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">get_unique_id</span>() {
+    <span style="color:#75715e">// Will not work for multiple users, for production use some UUID implementation
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">get_unique_id</span>.<span style="color:#a6e22e">uid</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">get_unique_id</span>.<span style="color:#a6e22e">uid</span> <span style="color:#f92672">||</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">get_unique_id</span>.<span style="color:#a6e22e">uid</span>
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">loadData</span>(<span style="color:#a6e22e">widget</span>, <span style="color:#a6e22e">cb</span>) {
+    <span style="color:#75715e">// Load data for widget given, and when it is loaded - call cb
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_unique_id</span>();
+
+    <span style="color:#75715e">// Send request 
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ws</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({
+        <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">id</span>, 
+        <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">widget</span>,
+        <span style="color:#a6e22e">size</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">DATA_LEN</span>,
+    }));
+    <span style="color:#75715e">// Add subscriber for response with this id
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">socketSubscribers</span>[<span style="color:#a6e22e">id</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">data</span>) {
+        <span style="color:#a6e22e">cb</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">data</span>);
+    };
+}
+</code></pre></div>
+
+<p>This code is artificially simplified to fit in this post, and for example, proper ID generation, handling of errors, reconnect in case of lost connection are not implemented.</p>
+
+<p>Let&rsquo;s also look at how the server is changed. We need to add a new handler for WebSocket endpoint:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@app.websocket</span>(<span style="color:#e6db74">&#39;/ws&#39;</span>)
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">websocket</span>(request, websocket):
+    <span style="color:#66d9ef">while</span> True: <span style="color:#75715e"># Run forever</span>
+        data <span style="color:#f92672">=</span> await websocket<span style="color:#f92672">.</span>recv() <span style="color:#75715e"># when receiving request from socket</span>
+        
+        <span style="color:#75715e"># start task to handle that, pass it socket</span>
+        asyncio<span style="color:#f92672">.</span>create_task(handle_socket_data(websocket, data)) 
+
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_socket_data</span>(websocket, data):
+    <span style="color:#66d9ef">try</span>:
+        json_data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(data)
+        data <span style="color:#f92672">=</span> json_data[<span style="color:#e6db74">&#39;data&#39;</span>]
+        size <span style="color:#f92672">=</span> json_data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;size&#39;</span>, <span style="color:#ae81ff">10</span>)
+        await websocket<span style="color:#f92672">.</span>send(json<span style="color:#f92672">.</span>dumps(dict(
+            id<span style="color:#f92672">=</span>json_data[<span style="color:#e6db74">&#39;id&#39;</span>],
+            data<span style="color:#f92672">=</span>await get_data(data, size)
+        )))
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+        await websocket<span style="color:#f92672">.</span>send(json<span style="color:#f92672">.</span>dumps(dict(
+            error<span style="color:#f92672">=</span>str(e)
+        )))
+        <span style="color:#66d9ef">return</span></code></pre></div>
+
+<p>The server is not as complex as front-end part, but it is just because we are not re-implemented router here. Which we are likely to do if our goal was to multiplex multiple requests over one WebSocket.</p>
+
+<p>So, unfortunately, Firefox does not have WebSocket debugger to see it&rsquo;s performance, but we used <code>console.time</code> to measure time from start of script execution to the moment when <code>CHARTS_COUNT</code> charts are finished loading, and it gives me 5215ms. This is a lot better than 29 seconds. 5-6 times better.</p>
+
+<p>Could we do this even better? Well, time of each request is random and between 1 and 5 seconds, so if we will have it under 5 seconds it will be just an accident, but if better means not only faster but maintainable, then yes.</p>
+
+<p>This code above is a very simple example. It becomes more complicated when you had different endpoints so you will need to reimplement router for WebSockets handler. Then if you have different HTTP methods, you will also need to add that into the router and into the WebSocket payload. Then, if you need auth, cache control, you will start to reimplement HTTP. And it has a lot of features. For example, the browser already has a cache for requests and is able to update it using different methods (Etag, If-Modified-Since). Frameworks already have routers, auth and stuff like that.</p>
+
+<p>Additionally, if you have microservice architecture, will you create WebSocket for each service? Or create a microservice proxy that connects to other microservices over HTTP and provides WebSocket interface? Or add it to the backlog and forget about it forever, because you will never get to it because you will have to support that huge pile of <del>sh</del> code you wrote to optimize page load time.</p>
+
+<p>So, let me show you a better way:</p>
+
+<h2 id="http2">HTTP2</h2>
+
+<p>First and biggest task that we need to do in order to use HTTP2 is to have TLS certificate for our domain. If you are serious about your app, you should have them for https anyway. For our experiments we could generate a self-signed certificate for localhost using this command:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openssl req -x509 -out localhost.crt -keyout localhost.key <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -newkey rsa:2048 -nodes -sha256 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -subj <span style="color:#e6db74">&#39;/CN=localhost&#39;</span> -extensions EXT -config &lt;<span style="color:#f92672">(</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   printf <span style="color:#e6db74">&#34;[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth&#34;</span><span style="color:#f92672">)</span></code></pre></div>
+
+<p>Then just add that certificate to Nginx container:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker">COPY localhost.crt /etc/ssl/certs/localhost.crt;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>COPY localhost.key /etc/ssl/private/localhost.key;</code></pre></div>
+
+<p>And now, update <code>nginx.conf</code> server section with this:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx">        <span style="color:#66d9ef">listen</span> <span style="color:#ae81ff">443</span> <span style="color:#e6db74">ssl</span> <span style="color:#e6db74">http2</span> <span style="color:#e6db74">default_server</span>;
+        <span style="color:#66d9ef">listen</span> <span style="color:#e6db74">[::]:443</span> <span style="color:#e6db74">ssl</span> <span style="color:#e6db74">http2</span> <span style="color:#e6db74">default_server</span>;
+        <span style="color:#66d9ef">ssl_ciphers</span> <span style="color:#e6db74">EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5</span>;
+
+        <span style="color:#66d9ef">ssl_certificate</span> <span style="color:#e6db74">/etc/ssl/certs/localhost.crt</span>;
+        <span style="color:#66d9ef">ssl_certificate_key</span> <span style="color:#e6db74">/etc/ssl/private/localhost.key</span>;</code></pre></div>
+
+<p>Now, when we open <a href="https://localhost:8083/">https://localhost:8083/</a> in a browser, and check network tab, we will see this:</p>
+
+<figure>
+    <img src="http2_network_debug.png" width="600px"/> <figcaption>
+            <h4>Requests with HTTP2</h4>
+        </figcaption>
+</figure>
+
+
+<p>5.3 seconds and all requests start at the same time. Same speed improvement as WebSockets, but this time we just changed Nginx config, and not touched front-end or back-end code at all.</p>
+
+<p>Additional benefits from using HTTP is that it is now a lot easier to debug (you could explore WebSocket frames using Chrome debugger), but you could not reproduce socket request using <code>curl</code>. Also, here we automatically get browser cache and compression of HTTP headers.</p>
+
+<p>Of course, some old browsers could have no support HTTP2, but this should not worry us, because the protocol is negotiated automatically.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>If you really have reason and resources to use WebSockets - use WebSockets. If your only task was to optimize page load, and you wanted to decrease time requests spend in a blocked state - just turn on HTTP2, don&rsquo;t repeat my mistake of developing WebSocket solution just because you do not know about HTTP2. You do now.</p>
+		</div>
+		
+	</article>
+</main>
+
+
+
+
+			</section>
+			
+		</div>
+		<footer class="footer">
+	<div class="container">
+		<div class="footer__copyright">&copy; 2018 Bunyk Taras. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+	</div>
+</footer>
+	</div>
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+		label: "Menu",
+	});
+</script></body>
+</html>
