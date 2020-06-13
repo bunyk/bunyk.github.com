@@ -4,14 +4,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Bunyk Taras</title>
+	<title>SICP 1.1 The Elements of Programming</title>
 	<meta name="description" content="">
 	<meta name="generator" content="Hugo 0.48-DEV" />
 	
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Bunyk Taras">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/style.css">
@@ -33,7 +32,7 @@
 	
 <nav class="menu">
 	<ul class="menu__list">
-		<li class="menu__item menu__item--active"><a class="menu__link" href="/">HOME</a></li>
+		<li class="menu__item"><a class="menu__link" href="/">HOME</a></li>
 		<li class="menu__item"><a class="menu__link" href="/resume/">RESUME</a></li>
 		<li class="menu__item"><a class="menu__link" href="https://bunyk.wordpress.com/">OLD BLOG</a></li>
 	</ul>
@@ -43,36 +42,50 @@
 		<div class="wrapper flex">
 			<section class="primary">
 			
-<main class="main list" role="main"><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/sicp1.1/" rel="bookmark">
-			SICP 1.1 The Elements of Programming
-			</a>
-		</h3><div class="list__meta meta">
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SICP 1.1 The Elements of Programming</h1><div class="post__meta meta">
 <svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
 <time class="post__meta-date meta-date" datetime="2020-06-13T23:22:32">June 13, 2020</time></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>Decided to finally try and go through this book. Will try to keep journal with notes here.</p>
+		</header><div class="content post__content clearfix">
+			<p>Decided to finally try and go through this book. Will try to keep journal with notes here.</p>
 
 <p></p>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/hello-world/" rel="bookmark">
-			Hello World
-			</a>
-		</h3><div class="list__meta meta">
-<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
-<time class="post__meta-date meta-date" datetime="2018-08-27T23:12:23">August 27, 2018</time></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		This is hello world in posts directory
-	</div>
-</article>
+
+<p>Interpreter recommended for it - MIT Scheme, could be installed in Ubuntu by installing package <code>mit-scheme</code>.</p>
+
+<p>Then <code>scheme</code> command starts interpreter, <code>scheme --load sqr.scm</code> loads &amp; evaluates file <code>sqr.scm</code>.</p>
+
+<p>And here is my own implementation for finding the square root:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(abs x)
+  (<span style="color:#66d9ef">if </span>(&lt; x <span style="color:#ae81ff">0</span>)
+    (- <span style="color:#ae81ff">0</span> x)
+    x
+  ))
+
+(<span style="color:#66d9ef">define </span>(~= x y)
+  (&lt; (abs (- x y)) <span style="color:#ae81ff">0.0001</span>))
+
+(<span style="color:#66d9ef">define </span>(sqr x) 
+  (* x x))
+
+(<span style="color:#66d9ef">define </span>(avg a b) 
+  (/ (+ a b) <span style="color:#ae81ff">2</span>))
+
+(<span style="color:#66d9ef">define </span>(sqrt x) 
+  (<span style="color:#66d9ef">define </span>(sqrt-iter guess) 
+    (<span style="color:#66d9ef">if </span>(~= (sqr guess) x)
+      guess
+      (sqrt-iter (avg guess (/ x guess)))))
+  (sqrt-iter <span style="color:#ae81ff">1.0</span>))</code></pre></div>
+		</div>
+		
+	</article>
 </main>
+
+
 
 
 			</section>

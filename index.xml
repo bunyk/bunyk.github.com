@@ -6,10 +6,21 @@
     <description>Recent content on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Aug 2018 23:12:23 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jun 2020 23:22:32 +0200</lastBuildDate>
     
 	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SICP 1.1 The Elements of Programming</title>
+      <link>http://example.org/posts/sicp1.1/</link>
+      <pubDate>Sat, 13 Jun 2020 23:22:32 +0200</pubDate>
+      
+      <guid>http://example.org/posts/sicp1.1/</guid>
+      <description>&lt;p&gt;Decided to finally try and go through this book. Will try to keep journal with notes here.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Hello World</title>
