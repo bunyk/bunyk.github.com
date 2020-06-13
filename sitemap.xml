@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>http://example.org/posts/http2-vs-websockets/</loc>
+    <lastmod>2018-12-20T15:48:50+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://example.org/resume/</loc>
     <lastmod>2018-08-27T23:47:07+03:00</lastmod>
   </url>

@@ -23,6 +23,17 @@
     </item>
     
     <item>
+      <title>HTTP2 vs WebSockets: a study of dashboard performance</title>
+      <link>http://example.org/posts/http2-vs-websockets/</link>
+      <pubDate>Thu, 20 Dec 2018 15:48:50 +0200</pubDate>
+      
+      <guid>http://example.org/posts/http2-vs-websockets/</guid>
+      <description>&lt;p&gt;In this post, we will compare the performance of different approaches to load data for analytics dashboards, or any page where we have lots of different requests to the same server.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Hello World</title>
       <link>http://example.org/posts/hello-world/</link>
       <pubDate>Mon, 27 Aug 2018 23:12:23 +0300</pubDate>

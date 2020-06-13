@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>HTTP2 vs WebSockets: a study of dashboard performance</title>
 	<meta name="description" content="">
-	<meta name="generator" content="Hugo 0.52" />
+	<meta name="generator" content="Hugo 0.48-DEV" />
 	
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -51,14 +51,23 @@
 		</header><div class="content post__content clearfix">
 			<p>In this post, we will compare the performance of different approaches to load data for analytics dashboards, or any page where we have lots of different requests to the same server.</p>
 
+<p></p>
+
 <h2 id="baseline">Baseline</h2>
 
 <p>We will start from sample dashboard created with Vue.js and Chart.js (which does not matter) and loaded over HTTP/1.1 (which does matter). It should look like this, and appearance of it would not change till the end of this article, but we will try to change how quickly it appears in the browser window:</p>
 
+
 <figure>
-    <img src="dashboard.png" width="600px"/> <figcaption>
-            <h4>Our sample dashboard</h4>
-        </figcaption>
+    
+        <img src="dashboard.png" width="600px" />
+    
+    
+    <figcaption>
+        <h4>Our sample dashboard</h4>
+        
+    </figcaption>
+    
 </figure>
 
 
@@ -245,10 +254,17 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_dat
 
 <p>It loads Charts.js and Vue using CDN and renders <code>CHARTS_COUNT</code> charts. We will work here with the function <code>loadData()</code>, to see what we could improve. But first - test our baseline. Run <code>docker-compose up</code> and check how quickly it loads. We could do it in browser console using <code>console.time</code>, and on network tab:</p>
 
+
 <figure>
-    <img src="network_debug.png" width="600px"/> <figcaption>
-            <h4>Screenshot of network tab of browser debugger</h4>
-        </figcaption>
+    
+        <img src="network_debug.png" width="600px" />
+    
+    
+    <figcaption>
+        <h4>Screenshot of network tab of browser debugger</h4>
+        
+    </figcaption>
+    
 </figure>
 
 
@@ -258,10 +274,17 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_dat
 
 <p>But why it takes so much? Lets open request details:</p>
 
+
 <figure>
-    <img src="request_timings.png" width="600px"/> <figcaption>
-            <h4>Time of separate request</h4>
-        </figcaption>
+    
+        <img src="request_timings.png" width="600px" />
+    
+    
+    <figcaption>
+        <h4>Time of separate request</h4>
+        
+    </figcaption>
+    
 </figure>
 
 
@@ -421,10 +444,17 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_
 
 <p>Now, when we open <a href="https://localhost:8083/">https://localhost:8083/</a> in a browser, and check network tab, we will see this:</p>
 
+
 <figure>
-    <img src="http2_network_debug.png" width="600px"/> <figcaption>
-            <h4>Requests with HTTP2</h4>
-        </figcaption>
+    
+        <img src="http2_network_debug.png" width="600px" />
+    
+    
+    <figcaption>
+        <h4>Requests with HTTP2</h4>
+        
+    </figcaption>
+    
 </figure>
 
 
@@ -450,7 +480,7 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_
 		</div>
 		<footer class="footer">
 	<div class="container">
-		<div class="footer__copyright">&copy; 2018 Bunyk Taras. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+		<div class="footer__copyright">&copy; 2020 Bunyk Taras. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
 	</div>
 </footer>
 	</div>
