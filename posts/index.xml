@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Jun 2020 20:28:16 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2020 21:06:09 +0200</lastBuildDate>
     
 	<atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SICP 1.2.2 Tree recursion</title>
+      <link>http://example.org/posts/sicp1.2.2/</link>
+      <pubDate>Sun, 14 Jun 2020 21:06:09 +0200</pubDate>
+      
+      <guid>http://example.org/posts/sicp1.2.2/</guid>
+      <description>I like how they did not shown yet how to work with any data structures, but wrote function that behaves like a immutable array:
+(define (first-denomination kinds-of-coins) (cond ((= kinds-of-coins 1) 1) ((= kinds-of-coins 2) 5) ((= kinds-of-coins 3) 10) ((= kinds-of-coins 4) 25) ((= kinds-of-coins 5) 50))) Exercise 1.11 Functions should produce following sequence: 1, 2, 4, 11, 25, 59, 142 (Sequence A100550 in the On-Line Encyclopedia of Integer Sequences)</description>
+    </item>
     
     <item>
       <title>SICP1.2.1 Recursion &amp; Iteration</title>
