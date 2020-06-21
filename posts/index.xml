@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Jun 2020 21:06:09 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2020 19:04:58 +0200</lastBuildDate>
     
 	<atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SICP 1.2.4 Exponentiation</title>
+      <link>http://example.org/posts/sicp1.2.4/</link>
+      <pubDate>Sat, 20 Jun 2020 19:04:58 +0200</pubDate>
+      
+      <guid>http://example.org/posts/sicp1.2.4/</guid>
+      <description>Today I learned that ancient mit-scheme REPL could be improved with history &amp;amp; tab completion. Thanks to this StackOverflow answer. That answer is not very recent too, but here we are trying to learn really ancien magic.
+And this section really starts to feel like magic. In the end, I learned that there is a way to compute n-th Fibonacci number with time complexity O(log(n)). And just few sections before, authors show how computing Fibonacci sequence using wrong approach could blow up exponencially.</description>
+    </item>
     
     <item>
       <title>SICP 1.2.2 Tree recursion</title>
