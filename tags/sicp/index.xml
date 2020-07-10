@@ -17,8 +17,11 @@
       <pubDate>Wed, 08 Jul 2020 23:44:14 +0200</pubDate>
       
       <guid>http://example.org/posts/sicp2.1.2/</guid>
-      <description>In this section I&amp;rsquo;m starting to have strong need for types.
-Code in exercises becomes more verbose. Exercise 2.2 (define make-segment cons) (define start-segment car) (define end-segment cdr) (define make-point cons) (define x-point car) (define y-point cdr) (define (mid-segment segment) (let ( (s (start-segment segment)) (e (end-segment segment)) ) (make-point (/ (+ (x-point s) (x-point e)) 2) (/ (+ (y-point s) (y-point e)) 2) )) ) (define (print-point p) (newline) (display &amp;#34;(&amp;#34;) (display (x-point p)) (display &amp;#34;,&amp;#34;) (display (y-point p)) (display &amp;#34;)&amp;#34;)) (define a (make-point 1.</description>
+      <description>&lt;p&gt;In this section I&amp;rsquo;m starting to have strong need for types.&lt;/p&gt;
+
+&lt;p&gt;Code in exercises becomes more verbose.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -27,8 +30,11 @@ Code in exercises becomes more verbose. Exercise 2.2 (define make-segment cons) 
       <pubDate>Wed, 08 Jul 2020 23:41:33 +0200</pubDate>
       
       <guid>http://example.org/posts/sicp2.1.1/</guid>
-      <description>Exercise 2.1 Here is how you construct rational number:
-(define (make-rat n d) (let ((g (gcd n d)) (sign (if (&amp;lt; d 0) -1 1))) (cons (/ n g sign) (/ d g sign)))) (define numer car) (define denom cdr) (define (print-rat x) (newline) (display (numer x)) (display &amp;#34;/&amp;#34;) (display (denom x))) That&amp;rsquo;s it, change sign of both parts when denominator is negative, you could do that by multiplying or dividing by -1.</description>
+      <description>&lt;h2 id=&#34;exercise-2-1&#34;&gt;Exercise 2.1&lt;/h2&gt;
+
+&lt;p&gt;Here is how you construct rational number:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -37,10 +43,15 @@ Code in exercises becomes more verbose. Exercise 2.2 (define make-segment cons) 
       <pubDate>Thu, 02 Jul 2020 23:43:40 +0200</pubDate>
       
       <guid>http://example.org/posts/sicp1.3.4/</guid>
-      <description>Today I have learned that John Carmack was also challenged by SICP:
- 100 pages into Structure and Interpretation of Computer Programs. I&amp;rsquo;m proud of myself for not skipping the Church Numerals exercise. Twitter
- I still need to get so far.
-Exercise 1.40 (define (cubic a b c) (lambda (x) (+ (* x x x) (* a x x) (* b x) c )) ) Exercise 1.41 (define (inc x) (+ x 1)) (define (double f) (lambda (x) (f (f x))) ) Exercise 1.</description>
+      <description>&lt;p&gt;Today I have learned that John Carmack was also challenged by SICP:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;100 pages into Structure and Interpretation of Computer Programs. I&amp;rsquo;m proud of myself for not skipping the Church Numerals exercise. &lt;a href=&#34;https://twitter.com/ID_AA_Carmack/status/350028210551013376&#34;&gt;Twitter&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I still need to get so far.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -49,9 +60,9 @@ Exercise 1.40 (define (cubic a b c) (lambda (x) (+ (* x x x) (* a x x) (* b x) c
       <pubDate>Mon, 29 Jun 2020 23:32:06 +0200</pubDate>
       
       <guid>http://example.org/posts/sicp1.3.3/</guid>
-      <description>I&amp;rsquo;ll attach solution from previous section to this post as it was the only exercise there.
-Exercise 1.34 Runtime error with types (define (f g) (g 2)) (f f) -&amp;gt; (f 2) -&amp;gt; (2 2) 2 is obviously not a function, so scheme gives error when you try to apply it as function.
-Exercise 1.35 Use fixed point procedure for finding golden ratio So, let&amp;rsquo;s divide both sides of equation Φ2 = Φ + 1.</description>
+      <description>&lt;p&gt;I&amp;rsquo;ll attach solution from previous section to this post as it was the only exercise there.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -60,7 +71,9 @@ Exercise 1.35 Use fixed point procedure for finding golden ratio So, let&amp;rsq
       <pubDate>Sat, 27 Jun 2020 19:32:06 +0200</pubDate>
       
       <guid>http://example.org/posts/sicp1.3.1/</guid>
-      <description>Solving more exercises, trying not to skip to be able to learn next chapters better. Exercise 1.29 Simpson rule integration (define (cube x) (* x x x)) (define (integral f a b dx) (define (add-dx x) (+ x dx)) (* (sum f (+ a (/ dx 2.0)) add-dx b) dx)) (define (sum term a next b) (if (&amp;gt; a b) 0 (+ (term a) (sum term (next a) next b)))) (integral cube 0 1 0.</description>
+      <description>&lt;p&gt;Solving more exercises, trying not to skip to be able to learn next chapters better.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -69,8 +82,9 @@ Exercise 1.35 Use fixed point procedure for finding golden ratio So, let&amp;rsq
       <pubDate>Sun, 21 Jun 2020 18:22:37 +0200</pubDate>
       
       <guid>http://example.org/posts/sicp1.2.6/</guid>
-      <description>Exercise 1.21: Smallest divisors This is so trivial, so I&amp;rsquo;ll try to rewrite example, because it&amp;rsquo;s just copypaste otherwise:
-(define (divisor? d n) (= (remainder n d) 0)) (define (smallest-divisor n) (define (find-divisor n d) (cond ((&amp;gt; (sqr d) n) n) ((divisor? d n) d) (else (find-divisor n (+ d 1))) ) ) (find-divisor n 2) ) 1 ]=&amp;gt; (smallest-divisor 199) ;Value: 199 1 ]=&amp;gt; (smallest-divisor 1999) ;Value: 1999 1 ]=&amp;gt; (smallest-divisor 19999) ;Value: 7 Well, that was unexpected.</description>
+      <description>&lt;p&gt;A little bit of number theory.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>

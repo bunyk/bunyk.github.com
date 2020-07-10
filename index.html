@@ -54,8 +54,11 @@
 <time class="post__meta-date meta-date" datetime="2020-07-08T23:44:14">July 08, 2020</time></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		In this section I&rsquo;m starting to have strong need for types.
-Code in exercises becomes more verbose. Exercise 2.2 (define make-segment cons) (define start-segment car) (define end-segment cdr) (define make-point cons) (define x-point car) (define y-point cdr) (define (mid-segment segment) (let ( (s (start-segment segment)) (e (end-segment segment)) ) (make-point (/ (+ (x-point s) (x-point e)) 2) (/ (+ (y-point s) (y-point e)) 2) )) ) (define (print-point p) (newline) (display &#34;(&#34;) (display (x-point p)) (display &#34;,&#34;) (display (y-point p)) (display &#34;)&#34;)) (define a (make-point 1.
+		<p>In this section I&rsquo;m starting to have strong need for types.</p>
+
+<p>Code in exercises becomes more verbose.</p>
+
+<p></p>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -68,8 +71,11 @@ Code in exercises becomes more verbose. Exercise 2.2 (define make-segment cons) 
 <time class="post__meta-date meta-date" datetime="2020-07-08T23:41:33">July 08, 2020</time></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Exercise 2.1 Here is how you construct rational number:
-(define (make-rat n d) (let ((g (gcd n d)) (sign (if (&lt; d 0) -1 1))) (cons (/ n g sign) (/ d g sign)))) (define numer car) (define denom cdr) (define (print-rat x) (newline) (display (numer x)) (display &#34;/&#34;) (display (denom x))) That&rsquo;s it, change sign of both parts when denominator is negative, you could do that by multiplying or dividing by -1.
+		<h2 id="exercise-2-1">Exercise 2.1</h2>
+
+<p>Here is how you construct rational number:</p>
+
+<p></p>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -82,10 +88,15 @@ Code in exercises becomes more verbose. Exercise 2.2 (define make-segment cons) 
 <time class="post__meta-date meta-date" datetime="2020-07-02T23:43:40">July 02, 2020</time></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Today I have learned that John Carmack was also challenged by SICP:
- 100 pages into Structure and Interpretation of Computer Programs. I&rsquo;m proud of myself for not skipping the Church Numerals exercise. Twitter
- I still need to get so far.
-Exercise 1.40 (define (cubic a b c) (lambda (x) (+ (* x x x) (* a x x) (* b x) c )) ) Exercise 1.41 (define (inc x) (+ x 1)) (define (double f) (lambda (x) (f (f x))) ) Exercise 1.
+		<p>Today I have learned that John Carmack was also challenged by SICP:</p>
+
+<blockquote>
+<p>100 pages into Structure and Interpretation of Computer Programs. I&rsquo;m proud of myself for not skipping the Church Numerals exercise. <a href="https://twitter.com/ID_AA_Carmack/status/350028210551013376">Twitter</a></p>
+</blockquote>
+
+<p>I still need to get so far.</p>
+
+<p></p>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -98,9 +109,9 @@ Exercise 1.40 (define (cubic a b c) (lambda (x) (+ (* x x x) (* a x x) (* b x) c
 <time class="post__meta-date meta-date" datetime="2020-06-29T23:32:06">June 29, 2020</time></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		I&rsquo;ll attach solution from previous section to this post as it was the only exercise there.
-Exercise 1.34 Runtime error with types (define (f g) (g 2)) (f f) -&gt; (f 2) -&gt; (2 2) 2 is obviously not a function, so scheme gives error when you try to apply it as function.
-Exercise 1.35 Use fixed point procedure for finding golden ratio So, let&rsquo;s divide both sides of equation Φ2 = Φ + 1.
+		<p>I&rsquo;ll attach solution from previous section to this post as it was the only exercise there.</p>
+
+<p></p>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -113,7 +124,9 @@ Exercise 1.35 Use fixed point procedure for finding golden ratio So, let&rsquo;s
 <time class="post__meta-date meta-date" datetime="2020-06-27T19:32:06">June 27, 2020</time></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Solving more exercises, trying not to skip to be able to learn next chapters better. Exercise 1.29 Simpson rule integration (define (cube x) (* x x x)) (define (integral f a b dx) (define (add-dx x) (+ x dx)) (* (sum f (+ a (/ dx 2.0)) add-dx b) dx)) (define (sum term a next b) (if (&gt; a b) 0 (+ (term a) (sum term (next a) next b)))) (integral cube 0 1 0.
+		<p>Solving more exercises, trying not to skip to be able to learn next chapters better.</p>
+
+<p></p>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -126,8 +139,9 @@ Exercise 1.35 Use fixed point procedure for finding golden ratio So, let&rsquo;s
 <time class="post__meta-date meta-date" datetime="2020-06-21T18:22:37">June 21, 2020</time></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Exercise 1.21: Smallest divisors This is so trivial, so I&rsquo;ll try to rewrite example, because it&rsquo;s just copypaste otherwise:
-(define (divisor? d n) (= (remainder n d) 0)) (define (smallest-divisor n) (define (find-divisor n d) (cond ((&gt; (sqr d) n) n) ((divisor? d n) d) (else (find-divisor n (+ d 1))) ) ) (find-divisor n 2) ) 1 ]=&gt; (smallest-divisor 199) ;Value: 199 1 ]=&gt; (smallest-divisor 1999) ;Value: 1999 1 ]=&gt; (smallest-divisor 19999) ;Value: 7 Well, that was unexpected.
+		<p>A little bit of number theory.</p>
+
+<p></p>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
