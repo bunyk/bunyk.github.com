@@ -46,6 +46,34 @@
 <main class="main list" role="main"><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
+			<a href="/posts/sicp2.1.2/" rel="bookmark">
+			SICP 2.1.2 Abstraction barriers
+			</a>
+		</h3><div class="list__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2020-07-08T23:44:14">July 08, 2020</time></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		In this section I&rsquo;m starting to have strong need for types.
+Code in exercises becomes more verbose. Exercise 2.2 (define make-segment cons) (define start-segment car) (define end-segment cdr) (define make-point cons) (define x-point car) (define y-point cdr) (define (mid-segment segment) (let ( (s (start-segment segment)) (e (end-segment segment)) ) (make-point (/ (+ (x-point s) (x-point e)) 2) (/ (+ (y-point s) (y-point e)) 2) )) ) (define (print-point p) (newline) (display &#34;(&#34;) (display (x-point p)) (display &#34;,&#34;) (display (y-point p)) (display &#34;)&#34;)) (define a (make-point 1.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/sicp2.1.1/" rel="bookmark">
+			SISP 2.1.1: Rational numbers
+			</a>
+		</h3><div class="list__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2020-07-08T23:41:33">July 08, 2020</time></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Exercise 2.1 Here is how you construct rational number:
+(define (make-rat n d) (let ((g (gcd n d)) (sign (if (&lt; d 0) -1 1))) (cons (/ n g sign) (/ d g sign)))) (define numer car) (define denom cdr) (define (print-rat x) (newline) (display (numer x)) (display &#34;/&#34;) (display (denom x))) That&rsquo;s it, change sign of both parts when denominator is negative, you could do that by multiplying or dividing by -1.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
 			<a href="/posts/sicp1.3.4/" rel="bookmark">
 			SICP 1.3.4 Procedures as returned values
 			</a>
@@ -161,36 +189,13 @@ And this section really starts to feel like magic. In the end, I learned that th
 
 <p></p>
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/http2-vs-websockets/" rel="bookmark">
-			HTTP2 vs WebSockets: a study of dashboard performance
-			</a>
-		</h3><div class="list__meta meta">
-<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
-<time class="post__meta-date meta-date" datetime="2018-12-20T15:48:50">December 20, 2018</time></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>In this post, we will compare the performance of different approaches to load data for analytics dashboards, or any page where we have lots of different requests to the same server.</p>
-
-<p></p>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/hello-world/" rel="bookmark">
-			Hello World
-			</a>
-		</h3><div class="list__meta meta">
-<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
-<time class="post__meta-date meta-date" datetime="2018-08-27T23:12:23">August 27, 2018</time></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		This is hello world in posts directory
-	</div>
 </article>
 </main>
+
+<div class="pagination">
+	<span class="pagination__item pagination__item--current">1/2</span>
+	<a class="pagination__item pagination__item--next btn" href="/page/2/">»</a>
+</div>
 
 
 			</section>
