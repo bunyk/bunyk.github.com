@@ -6,10 +6,21 @@
     <description>Recent content on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Jul 2020 23:44:14 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jul 2020 21:02:43 +0200</lastBuildDate>
     
 	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SICP 2.1.3 Meaning of data</title>
+      <link>http://example.org/posts/sicp2.1.3/</link>
+      <pubDate>Fri, 10 Jul 2020 21:02:43 +0200</pubDate>
+      
+      <guid>http://example.org/posts/sicp2.1.3/</guid>
+      <description>&lt;p&gt;This section blows your mind by showing that data could be represented by functions. That&amp;rsquo;s kid of obvious that array or assotiative array could be replaced by function that returns value by index, but here you replace with functions even the most basic data type - integer. Not for practical reasons, but I guess to achieve satory about lambda calculus.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>SICP 2.1.2 Abstraction barriers</title>
