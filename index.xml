@@ -6,10 +6,25 @@
     <description>Recent content on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Jul 2020 20:36:52 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jul 2020 23:39:38 +0200</lastBuildDate>
     
 	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SICP 2.2.1 Sequences</title>
+      <link>http://example.org/posts/sicp2.2.1/</link>
+      <pubDate>Thu, 16 Jul 2020 23:39:38 +0200</pubDate>
+      
+      <guid>http://example.org/posts/sicp2.2.1/</guid>
+      <description>&lt;p&gt;Finally, the thing Lisp was named after.&lt;/p&gt;
+
+&lt;p&gt;Fix MIT Scheme to be like SICP scheme using this:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;define &lt;/span&gt;nil &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#39;&lt;/span&gt;())&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>SICP 2.1.4: Interval arithmetic</title>
