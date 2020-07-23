@@ -6,10 +6,21 @@
     <description>Recent content on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Jul 2020 23:07:22 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2020 20:21:19 +0200</lastBuildDate>
     
 	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SICP 2.2.3 Sequences as Conventional Interfaces</title>
+      <link>http://example.org/posts/sicp2.2.3/</link>
+      <pubDate>Thu, 23 Jul 2020 20:21:19 +0200</pubDate>
+      
+      <guid>http://example.org/posts/sicp2.2.3/</guid>
+      <description>&lt;p&gt;Here we become skilled in list manipulation and build a set of useful subroutines.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>SICP 2.2.2 Hierarchical structures</title>
