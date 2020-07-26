@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SICP 2.3.2 Symbolic differentiation</title>
+	<meta name="description" content="">
+	<meta name="generator" content="Hugo 0.48-DEV" />
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo" role="banner">
+			<a class="logo__link" href="/" title="Bunyk Taras" rel="home">
+				<div class="logo__title">Bunyk Taras</div>
+				
+			</a>
+		</div>
+	</div>
+	
+<nav class="menu">
+	<ul class="menu__list">
+		<li class="menu__item"><a class="menu__link" href="/">HOME</a></li>
+		<li class="menu__item"><a class="menu__link" href="/resume/">RESUME</a></li>
+		<li class="menu__item"><a class="menu__link" href="https://bunyk.wordpress.com/">OLD BLOG</a></li>
+	</ul>
+</nav>
+
+</header>
+		<div class="wrapper flex">
+			<section class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SICP 2.3.2 Symbolic differentiation</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2020-07-26T09:00:47">July 26, 2020</time></div>
+		</header><div class="content post__content clearfix">
+			<p>I decided to skip picture language, because of technical reasons. Also, 2.3.1 I&rsquo;ll do in this post, because it was just to short. Here we get one step clother to build interpreter, not yet for programming language, but at least for mathematical expressions.</p>
+
+<p>And now we are in the <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-16.html#%_sec_2.3">middle of second chapter</a>.</p>
+
+<p></p>
+
+<h2 id="exercise-2-54">Exercise 2.54</h2>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(equal? l1 l2)
+  (<span style="color:#66d9ef">if </span>(pair? l1)
+    (<span style="color:#66d9ef">if </span>(pair? l2)
+      (<span style="color:#66d9ef">if </span>(equal? (car l1) (car l2))
+        (equal? (cdr l1) (cdr l2))
+        <span style="color:#66d9ef">#f</span>
+      )
+      <span style="color:#66d9ef">#f</span>
+    )
+    (<span style="color:#66d9ef">if </span>(pair? l2)
+      <span style="color:#66d9ef">#f</span>
+      (eq? l1 l2) 
+    )
+  )
+)
+(equal? (list <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>))
+(equal? <span style="color:#f92672">&#39;</span>() <span style="color:#f92672">&#39;</span>())
+(equal? <span style="color:#e6db74">&#39;a</span> <span style="color:#e6db74">&#39;a</span>)
+(equal? <span style="color:#e6db74">&#39;a</span> <span style="color:#e6db74">&#39;b</span>)
+(equal? <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">&#39;</span>(list <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>))</code></pre></div>
+
+<h2 id="exercise-2-55">Exercise 2.55</h2>
+
+<p><code>''abracadabra</code> is actually a <code>(quote (quote abracadabra))</code> which has value <code>(quote abracadabra)</code>, and <code>car</code> of it is <code>quote</code>.</p>
+
+<h2 id="exercise-2-56">Exercise 2.56</h2>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(variable? x) (symbol? x))
+
+(<span style="color:#66d9ef">define </span>(same-variable? v1 v2)
+  (<span style="color:#66d9ef">and </span>(variable? v1) (variable? v2) (eq? v1 v2)))
+
+(<span style="color:#66d9ef">define </span>(=number? exp num)
+  (<span style="color:#66d9ef">and </span>(number? exp) (= exp num)))
+
+(<span style="color:#66d9ef">define </span>(make-sum a1 a2)
+  (<span style="color:#66d9ef">cond </span>((=number? a1 <span style="color:#ae81ff">0</span>) a2)
+        ((=number? a2 <span style="color:#ae81ff">0</span>) a1)
+        ((<span style="color:#66d9ef">and </span>(number? a1) (number? a2)) (+ a1 a2))
+        (<span style="color:#66d9ef">else </span>(list <span style="color:#e6db74">&#39;+</span> a1 a2))))
+
+(<span style="color:#66d9ef">define </span>(make-product m1 m2)
+  (<span style="color:#66d9ef">cond </span>((<span style="color:#66d9ef">or </span>(=number? m1 <span style="color:#ae81ff">0</span>) (=number? m2 <span style="color:#ae81ff">0</span>)) <span style="color:#ae81ff">0</span>)
+        ((=number? m1 <span style="color:#ae81ff">1</span>) m2)
+        ((=number? m2 <span style="color:#ae81ff">1</span>) m1)
+        ((<span style="color:#66d9ef">and </span>(number? m1) (number? m2)) (* m1 m2))
+        (<span style="color:#66d9ef">else </span>(list <span style="color:#e6db74">&#39;*</span> m1 m2))))
+
+(<span style="color:#66d9ef">define </span>(sum? x)
+  (<span style="color:#66d9ef">and </span>(pair? x) (eq? (car x) <span style="color:#e6db74">&#39;+</span>)))
+
+(<span style="color:#66d9ef">define </span>(addend s) (cadr s))
+
+(<span style="color:#66d9ef">define </span>(augend s) (caddr s))
+
+(<span style="color:#66d9ef">define </span>(product? x)
+  (<span style="color:#66d9ef">and </span>(pair? x) (eq? (car x) <span style="color:#e6db74">&#39;*</span>)))
+
+(<span style="color:#66d9ef">define </span>(multiplier p) (cadr p))
+
+(<span style="color:#66d9ef">define </span>(multiplicand p) (caddr p))
+
+(<span style="color:#66d9ef">define </span>(exponentiation? x)
+  (<span style="color:#66d9ef">and </span>(pair? x) (eq? (car x) <span style="color:#e6db74">&#39;**</span>)))
+
+(<span style="color:#66d9ef">define </span>(base e) (cadr e))
+
+(<span style="color:#66d9ef">define </span>(exponent e) (caddr e))
+ 
+(<span style="color:#66d9ef">define </span>(make-exponentiation base e)
+  (<span style="color:#66d9ef">cond </span>((=number? e <span style="color:#ae81ff">0</span>) <span style="color:#ae81ff">1</span>)
+        ((=number? e <span style="color:#ae81ff">1</span>) base)
+        (<span style="color:#66d9ef">else </span>(list <span style="color:#e6db74">&#39;**</span> base e))))
+
+(<span style="color:#66d9ef">define </span>(deriv exp var)
+  (<span style="color:#66d9ef">cond </span>((number? exp) <span style="color:#ae81ff">0</span>)
+        ((variable? exp)
+         (<span style="color:#66d9ef">if </span>(same-variable? exp var) <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span>))
+        ((sum? exp)
+         (make-sum (deriv (addend exp) var)
+                   (deriv (augend exp) var)))
+        ((product? exp)
+         (make-sum
+           (make-product (multiplier exp)
+                         (deriv (multiplicand exp) var))
+           (make-product (deriv (multiplier exp) var)
+                         (multiplicand exp))))
+        ((exponentiation? exp)
+         (make-product (exponent exp) (make-exponentiation 
+                (base exp)
+                (- (exponent exp) <span style="color:#ae81ff">1</span>)
+            )))
+        (else
+         (error <span style="color:#e6db74">&#34;unknown expression type -- DERIV&#34;</span> exp))))
+
+
+(deriv <span style="color:#f92672">&#39;</span>(+ (** x <span style="color:#ae81ff">3</span>) (** x <span style="color:#ae81ff">2</span>)) <span style="color:#e6db74">&#39;x</span>)</code></pre></div>
+
+<h2 id="exercise-2-57">Exercise 2.57</h2>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(make-sum a1 a2)
+  (<span style="color:#66d9ef">cond </span>((=number? a1 <span style="color:#ae81ff">0</span>) a2)
+        ((=number? a2 <span style="color:#ae81ff">0</span>) a1)
+        ((<span style="color:#66d9ef">and </span>(number? a1) (number? a2)) (+ a1 a2))
+        ((sum? a2) (append (list <span style="color:#e6db74">&#39;+</span> a1) (cdr a2)))
+        (<span style="color:#66d9ef">else </span>(list <span style="color:#e6db74">&#39;+</span> a1 a2))))
+
+(<span style="color:#66d9ef">define </span>(addend s) (cadr s))
+
+(<span style="color:#66d9ef">define </span>(augend s) 
+  (<span style="color:#66d9ef">if </span>(null? (cdddr s))
+    (caddr s)
+    (cons <span style="color:#e6db74">&#39;+</span> (cddr s))))
+
+(<span style="color:#66d9ef">define </span>(make-product m1 m2)
+  (<span style="color:#66d9ef">cond </span>((<span style="color:#66d9ef">or </span>(=number? m1 <span style="color:#ae81ff">0</span>) (=number? m2 <span style="color:#ae81ff">0</span>)) <span style="color:#ae81ff">0</span>)
+        ((=number? m1 <span style="color:#ae81ff">1</span>) m2)
+        ((=number? m2 <span style="color:#ae81ff">1</span>) m1)
+        ((<span style="color:#66d9ef">and </span>(number? m1) (number? m2)) (* m1 m2))
+        ((product? m2) (append (list <span style="color:#e6db74">&#39;*</span> m1) (cdr m2)))
+        (<span style="color:#66d9ef">else </span>(list <span style="color:#e6db74">&#39;*</span> m1 m2))))
+
+
+(<span style="color:#66d9ef">define </span>(multiplier p) (cadr p))
+
+(<span style="color:#66d9ef">define </span>(multiplicand s) 
+  (<span style="color:#66d9ef">if </span>(null? (cdddr s))
+    (caddr s)
+    (cons <span style="color:#e6db74">&#39;*</span> (cddr s))))
+
+(deriv <span style="color:#f92672">&#39;</span>(+ x (* x x x) (** x <span style="color:#ae81ff">3</span>)) <span style="color:#e6db74">&#39;x</span>)
+<span style="color:#75715e">;Value 30: (+ 1 (+ (* x (+ x x)) (* x x)) (* 3 (** x 2)))</span></code></pre></div>
+
+<h2 id="exercise-2-58">Exercise 2.58</h2>
+
+<p>So, we want this to work:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(deriv <span style="color:#f92672">&#39;</span>(x + x**2 + <span style="color:#ae81ff">3</span> * x**3) <span style="color:#e6db74">&#39;x</span>)</code></pre></div>
+
+<p>At first I wanted to add some parsing step that converts this to lisp, and then reread requirements, and found this: &ldquo;Can you design appropriate predicates, selectors, and constructors for this notation such that our derivative program still works?&rdquo;</p>
+
+<p>So, no transformation, this should be the format of data, and we need to change functions that work with it.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(priority sym)
+  (<span style="color:#66d9ef">cond </span>
+    ((eq? sym <span style="color:#e6db74">&#39;+</span>) <span style="color:#ae81ff">1</span>)
+    ((eq? sym <span style="color:#e6db74">&#39;*</span>) <span style="color:#ae81ff">2</span>)
+    ((eq? sym <span style="color:#e6db74">&#39;**</span>) <span style="color:#ae81ff">3</span>)
+    ((number? sym) <span style="color:#ae81ff">4</span>)
+    ((variable? sym) <span style="color:#ae81ff">4</span>)
+    ((pair? sym) <span style="color:#ae81ff">4</span>)
+    (<span style="color:#66d9ef">else </span>(error <span style="color:#e6db74">&#34;unknown symbol --priority&#34;</span> sym))
+  )
+)
+
+(<span style="color:#66d9ef">define </span>(least-priority-operation exp)
+    (<span style="color:#66d9ef">define </span>(iter op min-pr exp)
+        (<span style="color:#66d9ef">if </span>(null? exp)
+            op
+            (<span style="color:#66d9ef">let </span>((np (priority (car exp))))
+                (<span style="color:#66d9ef">if </span>(&lt; np min-pr)
+                    (iter (car exp) np (cdr exp))
+                    (iter op min-pr (cdr exp))
+                )
+            )
+        )
+    )
+    (iter (car exp) (priority (car exp)) (cdr exp))
+)
+
+(least-priority-operation <span style="color:#f92672">&#39;</span>(x + x**2 + <span style="color:#ae81ff">3</span> * x**3))
+(least-priority-operation <span style="color:#f92672">&#39;</span>(x * y ** <span style="color:#ae81ff">2</span>))
+(least-priority-operation <span style="color:#f92672">&#39;</span>(y ** <span style="color:#ae81ff">2</span>))
+
+(<span style="color:#66d9ef">define </span>(unwrap val) 
+    (<span style="color:#66d9ef">if </span>(<span style="color:#66d9ef">and </span>(pair? val) (null? (cdr val)))
+        (car val)
+        val
+    )
+)
+
+<span style="color:#75715e">; Return part of expression before first appearance of given symbol</span>
+(<span style="color:#66d9ef">define </span>(before sym exp)
+    (<span style="color:#66d9ef">if </span>(<span style="color:#66d9ef">or </span>(null? exp) (eq? (car exp) sym))
+        <span style="color:#f92672">&#39;</span>()
+        (cons
+            (car exp)
+            (before sym (cdr exp))
+        )
+    )
+)
+
+(before <span style="color:#e6db74">&#39;+</span> <span style="color:#f92672">&#39;</span>(y ** <span style="color:#ae81ff">2</span> + <span style="color:#ae81ff">3</span>))
+
+<span style="color:#75715e">; Return part of expression after symbol</span>
+<span style="color:#75715e">; BTW, for division to work properly we need to take last occurence here, but </span>
+<span style="color:#75715e">; as we don&#39;t have division - I&#39;ll leave it with first</span>
+(<span style="color:#66d9ef">define </span>(after sym exp)
+    (<span style="color:#66d9ef">if </span>(null? exp)
+        <span style="color:#f92672">&#39;</span>()
+        (<span style="color:#66d9ef">if </span>(eq? (car exp) sym)
+            (unwrap (cdr exp))
+            (after sym (cdr exp))
+        )
+    )
+)
+
+(after <span style="color:#e6db74">&#39;+</span> <span style="color:#f92672">&#39;</span>(y ** <span style="color:#ae81ff">2</span> + <span style="color:#ae81ff">3</span>))
+
+(<span style="color:#66d9ef">define </span>(make-sum a1 a2)
+  (<span style="color:#66d9ef">cond </span>((=number? a1 <span style="color:#ae81ff">0</span>) a2)
+        ((=number? a2 <span style="color:#ae81ff">0</span>) a1)
+        ((<span style="color:#66d9ef">and </span>(number? a1) (number? a2)) (+ a1 a2))
+        (<span style="color:#66d9ef">else </span>(list a1 <span style="color:#e6db74">&#39;+</span> a2))))
+
+(<span style="color:#66d9ef">define </span>(make-product m1 m2)
+  (<span style="color:#66d9ef">cond </span>((<span style="color:#66d9ef">or </span>(=number? m1 <span style="color:#ae81ff">0</span>) (=number? m2 <span style="color:#ae81ff">0</span>)) <span style="color:#ae81ff">0</span>)
+        ((=number? m1 <span style="color:#ae81ff">1</span>) m2)
+        ((=number? m2 <span style="color:#ae81ff">1</span>) m1)
+        ((<span style="color:#66d9ef">and </span>(number? m1) (number? m2)) (* m1 m2))
+        (<span style="color:#66d9ef">else </span>(list m1 <span style="color:#e6db74">&#39;*</span> m2))))
+
+(<span style="color:#66d9ef">define </span>(sum? x)
+  (<span style="color:#66d9ef">and </span>(pair? x) (eq? (least-priority-operation x) <span style="color:#e6db74">&#39;+</span>)))
+
+(<span style="color:#66d9ef">define </span>(addend s) (unwrap (before <span style="color:#e6db74">&#39;+</span> s)))
+
+(<span style="color:#66d9ef">define </span>(augend s) (after <span style="color:#e6db74">&#39;+</span> s))
+
+(<span style="color:#66d9ef">define </span>(product? x)
+  (<span style="color:#66d9ef">and </span>(pair? x) (eq? (least-priority-operation x) <span style="color:#e6db74">&#39;*</span>)))
+
+(<span style="color:#66d9ef">define </span>(multiplier p) (unwrap (before <span style="color:#e6db74">&#39;*</span> p)))
+
+(<span style="color:#66d9ef">define </span>(multiplicand p) (after <span style="color:#e6db74">&#39;*</span> p))
+
+(<span style="color:#66d9ef">define </span>(exponentiation? x)
+  (<span style="color:#66d9ef">and </span>(pair? x) (eq? (least-priority-operation x) <span style="color:#e6db74">&#39;**</span>)))
+
+(<span style="color:#66d9ef">define </span>(base e) (unwrap (before <span style="color:#e6db74">&#39;**</span> e)))
+
+(<span style="color:#66d9ef">define </span>(exponent e) (after <span style="color:#e6db74">&#39;**</span> e))
+ 
+(<span style="color:#66d9ef">define </span>(make-exponentiation base e)
+  (<span style="color:#66d9ef">cond </span>((=number? e <span style="color:#ae81ff">0</span>) <span style="color:#ae81ff">1</span>)
+        ((=number? e <span style="color:#ae81ff">1</span>) base)
+        (<span style="color:#66d9ef">else </span>(list base <span style="color:#e6db74">&#39;**</span> e))))
+
+(deriv <span style="color:#f92672">&#39;</span>(x + x ** <span style="color:#ae81ff">2</span> + <span style="color:#ae81ff">3</span> * x ** <span style="color:#ae81ff">3</span>) <span style="color:#e6db74">&#39;x</span>)</code></pre></div>
+
+<p>This is rather ugly (I don&rsquo;t like <code>before</code>, <code>after</code>, <code>unwrap</code> etc., it does not seem very performant to use them), but I see we will have another example Symbolic Algebra later, maybe there will be a chance to make it better.</p>
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/sicp/" rel="tag">SICP</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+
+
+			</section>
+			
+		</div>
+		<footer class="footer">
+	<div class="container">
+		<div class="footer__copyright">&copy; 2020 Bunyk Taras. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+	</div>
+</footer>
+	</div>
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+		label: "Menu",
+	});
+</script></body>
+</html>
