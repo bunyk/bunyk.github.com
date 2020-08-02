@@ -6,10 +6,21 @@
     <description>Recent content on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Jul 2020 23:59:22 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2020 18:20:22 +0200</lastBuildDate>
     
 	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SICP 2.3.4 Huffman encoding</title>
+      <link>http://example.org/posts/sicp2.3.4/</link>
+      <pubDate>Sun, 02 Aug 2020 18:20:22 +0200</pubDate>
+      
+      <guid>http://example.org/posts/sicp2.3.4/</guid>
+      <description>&lt;p&gt;Exercises to use sets and trees in practice. This topic reminds me of project in Scala course by Martin Odersky.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>SICP 2.3.3 Representing sets</title>
