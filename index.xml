@@ -6,10 +6,33 @@
     <description>Recent content on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 02 Aug 2020 18:20:22 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2020 19:03:55 +0200</lastBuildDate>
     
 	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SICP 2.4 Multiple representations for abstract data</title>
+      <link>http://example.org/posts/sicp2.4/</link>
+      <pubDate>Wed, 26 Aug 2020 19:03:55 +0200</pubDate>
+      
+      <guid>http://example.org/posts/sicp2.4/</guid>
+      <description>&lt;p&gt;I went on vacation and lost cadence on this project. Need to get back on track, remember how to lauch interpreter, etc. :)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-17.html&#34;&gt;Link to the chapter&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In this chapter we will need &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;put&lt;/code&gt; functions which could be implemented by similar system functions.&lt;/p&gt;
+
+&lt;p&gt;Found this on &lt;a href=&#34;https://stackoverflow.com/a/29465496/816449&#34;&gt;StackOverflow&lt;/a&gt;, of course.&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;define &lt;/span&gt;put &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;d-put!)
+(&lt;span style=&#34;color:#66d9ef&#34;&gt;define &lt;/span&gt;(get a b)
+    &lt;span style=&#34;color:#75715e&#34;&gt;;(display &amp;#34;get &amp;#34;) (display a) (display b) (newline)&lt;/span&gt;
+    (&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;d-get a b)
+)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>SICP 2.3.4 Huffman encoding</title>
