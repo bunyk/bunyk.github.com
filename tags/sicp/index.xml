@@ -6,10 +6,30 @@
     <description>Recent content in Sicp on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 Aug 2020 19:03:55 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 02 Sep 2020 19:27:13 +0200</lastBuildDate>
     
 	<atom:link href="http://example.org/tags/sicp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SICP 2.5.1 Generic arithmetic operations</title>
+      <link>http://example.org/posts/sicp2.5.1/</link>
+      <pubDate>Wed, 02 Sep 2020 19:27:13 +0200</pubDate>
+      
+      <guid>http://example.org/posts/sicp2.5.1/</guid>
+      <description>&lt;p&gt;In &lt;a href=&#34;http://example.org/posts/sicp2.4/&#34;&gt;previous post&lt;/a&gt; I have used wrong StackOverflow answer. :) Or, to be more precise, right answer for that section, but useless here, as we want to store in table functions for multiple arguments.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/a/19114031/816449&#34;&gt;Correct answer&lt;/a&gt; that supports lists looks like this:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;define &lt;/span&gt;*op-table* (make-hash-table))
+
+(&lt;span style=&#34;color:#66d9ef&#34;&gt;define &lt;/span&gt;(put op type proc)
+  (hash-table/put! *op-table* (list op type) proc))
+
+(&lt;span style=&#34;color:#66d9ef&#34;&gt;define &lt;/span&gt;(get op type)
+  (hash-table/get *op-table* (list op type) &lt;span style=&#34;color:#66d9ef&#34;&gt;#f&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>SICP 2.4 Multiple representations for abstract data</title>

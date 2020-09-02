@@ -46,6 +46,30 @@
 <main class="main list" role="main"><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
+			<a href="/posts/sicp2.5.1/" rel="bookmark">
+			SICP 2.5.1 Generic arithmetic operations
+			</a>
+		</h3><div class="list__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2020-09-02T19:27:13">September 02, 2020</time></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>In <a href="/posts/sicp2.4/">previous post</a> I have used wrong StackOverflow answer. :) Or, to be more precise, right answer for that section, but useless here, as we want to store in table functions for multiple arguments.</p>
+
+<p><a href="https://stackoverflow.com/a/19114031/816449">Correct answer</a> that supports lists looks like this:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>*op-table* (make-hash-table))
+
+(<span style="color:#66d9ef">define </span>(put op type proc)
+  (hash-table/put! *op-table* (list op type) proc))
+
+(<span style="color:#66d9ef">define </span>(get op type)
+  (hash-table/get *op-table* (list op type) <span style="color:#66d9ef">#f</span>))</code></pre></div></p>
+
+<p></p>
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
 			<a href="/posts/sicp2.4/" rel="bookmark">
 			SICP 2.4 Multiple representations for abstract data
 			</a>
@@ -195,23 +219,6 @@
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		<p>This section blows your mind by showing that data could be represented by functions. That&rsquo;s kid of obvious that array or assotiative array could be replaced by function that returns value by index, but here you replace with functions even the most basic data type - integer. Not for practical reasons, but I guess to achieve satory about lambda calculus.</p>
-
-<p></p>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/sicp2.1.2/" rel="bookmark">
-			SICP 2.1.2 Abstraction barriers
-			</a>
-		</h3><div class="list__meta meta">
-<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
-<time class="post__meta-date meta-date" datetime="2020-07-08T23:44:14">July 08, 2020</time></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>In this section I&rsquo;m starting to have strong need for types.</p>
-
-<p>Code in exercises becomes more verbose.</p>
 
 <p></p>
 	</div>
