@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://example.org/posts/typing/</loc>
+    <lastmod>2020-09-23T18:36:19+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://example.org/posts/sicp2.5.1/</loc>
     <lastmod>2020-09-02T19:27:13+02:00</lastmod>
   </url>
@@ -119,7 +124,7 @@
   
   <url>
     <loc>http://example.org/</loc>
-    <lastmod>2020-09-02T19:27:13+02:00</lastmod>
+    <lastmod>2020-09-23T18:36:19+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -129,8 +134,14 @@
   </url>
   
   <url>
+    <loc>http://example.org/tags/ideas/</loc>
+    <lastmod>2020-09-23T18:36:19+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://example.org/posts/</loc>
-    <lastmod>2020-09-02T19:27:13+02:00</lastmod>
+    <lastmod>2020-09-23T18:36:19+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -142,7 +153,7 @@
   
   <url>
     <loc>http://example.org/tags/</loc>
-    <lastmod>2020-09-02T19:27:13+02:00</lastmod>
+    <lastmod>2020-09-23T18:36:19+02:00</lastmod>
     <priority>0</priority>
   </url>
   

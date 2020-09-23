@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Sep 2020 19:27:13 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 23 Sep 2020 18:36:19 +0200</lastBuildDate>
     
 	<atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ideas</title>
+      <link>http://example.org/tags/ideas/</link>
+      <pubDate>Wed, 23 Sep 2020 18:36:19 +0200</pubDate>
+      
+      <guid>http://example.org/tags/ideas/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Sicp</title>

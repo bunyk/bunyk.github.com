@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Thoughs on typing</title>
+	<meta name="description" content="">
+	<meta name="generator" content="Hugo 0.48-DEV" />
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo" role="banner">
+			<a class="logo__link" href="/" title="Bunyk Taras" rel="home">
+				<div class="logo__title">Bunyk Taras</div>
+				
+			</a>
+		</div>
+	</div>
+	
+<nav class="menu">
+	<ul class="menu__list">
+		<li class="menu__item"><a class="menu__link" href="/">HOME</a></li>
+		<li class="menu__item"><a class="menu__link" href="/resume/">RESUME</a></li>
+		<li class="menu__item"><a class="menu__link" href="https://bunyk.wordpress.com/">OLD BLOG</a></li>
+	</ul>
+</nav>
+
+</header>
+		<div class="wrapper flex">
+			<section class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Thoughs on typing</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2020-09-23T18:36:19">September 23, 2020</time></div>
+		</header><div class="content post__content clearfix">
+			<p>I was searching for something related to SICP, found <a href="https://irreal.org/blog/?p=6019">this post</a>, and noticed another article on that blog, <a href="https://irreal.org/blog/?p=9115">about typing speed</a>.</p>
+
+<p>That article argues that even though typing speed usually is considered to not be a bottleneck in the developer&rsquo;s productivity, it really is. Because, even if we agree that typing code is a small fraction of all the work that software developer is doing, developers type a lot, and it&rsquo;s mostly communication: chats, Jira, emails, documentation, etc.</p>
+
+<p></p>
+
+<p>Which got me thinking that on last performance review often mentioned area of improvement for me was communication. So, I went through <a href="https://developers.google.com/tech-writing/overview">Google technical writing course</a> and did exercises there on how to write better text. Did I start to communicate better? Barely, I still prefer to write code instead of long Jira issue descriptions or design documents with proposals for new features. Maybe it is because I type slowly (60 wpm). This is better than 90% or something of the population, but the general population does not spend most of their working day behind the keyboard.</p>
+
+<p>There was another article on that blog, <a href="https://irreal.org/blog/?p=9087">how to increase your typing speed</a>, which linked to <a href="https://www.youtube.com/watch?v=1ArVtCQqQRE">a video with tips to improve typing speed</a>, and <a href="https://www.youtube.com/watch?v=hnX63qh0EfM">video blog of a guy who increased his speed from 50 wpm to 100 wpm</a>, and I thought that maybe I should to try to reach 100 wpm speed too.</p>
+
+<p>So, I went to <a href="https://www.keybr.com/">keybr.com</a>, and already spent in a total of 2 hours practicing there, and my current record is 90.6 wpm. Not yet 100, but very close.</p>
+
+<p>Keybr generates random texts (with &ldquo;words&rdquo; made from random characters) by using statistics on how you type, to train your weakest keys. I think this approach is good and will get me to 100 wpm there in a month or so of focused practice. But it could be improved further.</p>
+
+<p>First, keybr.com has no special characters, which are critical for a programmer. And even for a writer. When I write this in markdown, I use square brackets to add links, for example.</p>
+
+<p>Second, the text is different every time, and you could not repeat the same text to see how you improved.</p>
+
+<p>I also have read about <a href="https://forum.colemak.com/topic/2201-training-with-amphetype/">an interesting method on the forum about Colemak keyboard layout</a>, called &ldquo;type-reading&rdquo;, where you type some interesting book paragraph by paragraph, so you train your typing at the same time as you read it. And suggestion to use this to learn some poems. I think it is a very nice idea, which could help me to learn some German. (If you are wondering, no, I&rsquo;m not going to learn Colemak or Dvorak, I switch Ctrl and Fn keys on my computers, to have Ctrl on the lower-left corner, and that is enough pain when I&rsquo;m using someone&rsquo;s computer, or when someone uses mine).</p>
+
+<p>And third, it would be nice to have statistics on only on separate keys, but for trigrams or some kind of n-grams (I&rsquo;m not sure which n would be optimal). And given some text, it should calculate optimal exercise to speed-up typing that text the most. Keeping in the account that the fastest trigrams are hardest to speedup, but the most frequent ones will influence overall typing speed at most.</p>
+
+<p>And it should be some console program, so anytime I could type the command:</p>
+
+<pre><code>typetrainer add if_kipling if.txt
+</code></pre>
+
+<p>And it will add lessons based on that poem to the set of lessons. And then to test &amp; train run:</p>
+
+<pre><code>typetrainer test if_kipling
+typetrainer train if_kipling
+</code></pre>
+
+<p>And training session will be generated with randomly selected trigrams, where the probability of each trigram to appear next is probably the frequency of that trigram in sample text divided by the speed with which it is typed measured in our average trigram speed (the faster we type the less it is needed to be improved).</p>
+
+<p>And for each trigram, we keep per-lesson stats, and global stats, of maybe 10 last typing speeds in the ring buffer, so we have a moving average of 10 values instead of the last value, which could get pretty noisy.</p>
+
+<p>Maybe <a href="https://github.com/pb-/gotypist">https://github.com/pb-/gotypist</a> could be updated to be like that.</p>
+
+<p>But maybe I should fist focus on achieving 100 wpm speed on keybr.com, and finishing SICP. I have many interests, sometimes they conflict, as Smixx would rap in &ldquo;Developers&rdquo;.</p>
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/ideas/" rel="tag">ideas</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+
+
+			</section>
+			
+		</div>
+		<footer class="footer">
+	<div class="container">
+		<div class="footer__copyright">&copy; 2020 Bunyk Taras. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+	</div>
+</footer>
+	</div>
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+		label: "Menu",
+	});
+</script></body>
+</html>
