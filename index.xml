@@ -6,10 +6,35 @@
     <description>Recent content on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 23 Sep 2020 18:36:19 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 04 Dec 2020 17:11:00 +0100</lastBuildDate>
     
 	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Machine Translation course notes</title>
+      <link>http://example.org/posts/coursera_mt/</link>
+      <pubDate>Fri, 04 Dec 2020 17:11:00 +0100</pubDate>
+      
+      <guid>http://example.org/posts/coursera_mt/</guid>
+      <description>&lt;p&gt;Recently finished Coursera course on &lt;a href=&#34;https://www.coursera.org/learn/machinetranslation/&#34;&gt;Machine Translation&lt;/a&gt;. That was mostly overwiew course without any programming practice, but with a lot of links to scientific papers. So it is somewhat theoretical, but I would probably recommend if you want to dive into that field from research point of view.&lt;/p&gt;
+
+&lt;p&gt;So for example you get quizzed with questions like:
+One important difference between phrase-based MT and n-gram based MT is:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;N-gram based MT has a fixed segmentation into units.&lt;/li&gt;
+&lt;li&gt;..&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;But you will not be taught how to implement any of those. Instead you will get links to &lt;a href=&#34;http://www.statmt.org/moses/&#34;&gt;MOSES&lt;/a&gt; &amp;amp; &lt;a href=&#34;http://www.statmt.org/moses/giza/GIZA++.html&#34;&gt;GIZA&lt;/a&gt; projects. But probably course will help to understand that project.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m not at all a researcher, have no skill of reading the papers, and to get most of that course, tried to just write down notes. I have couple of promising areas into which I should dive deeper and experiment, to help me with my job of automating content creation for multilingual e-commerce site. And just on listening lectures, writing down notes and doing quizzes took me 14 hours measured in pomodoros to complete (already more than SICP, I should return back to it eventually). Then I&amp;rsquo;ll probably try some hands-on experimentation &lt;a href=&#34;https://www.tensorflow.org/tutorials/text/nmt_with_attention&#34;&gt;with TensorFlow&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;So, here are typed notes made of my handwritten notes. They probably will not make much sense for you, especially because I&amp;rsquo;m to lazy to digitize hand-drawn diagrams, but maybe will help you to figure out what is inside the course and if you need to enroll into it yourself.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Thoughs on typing</title>
