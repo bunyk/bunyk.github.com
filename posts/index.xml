@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Bunyk Taras</title>
-    <link>http://example.org/posts/</link>
+    <link>http://bunyk.github.io/posts/</link>
     <description>Recent content in Posts on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 04 Dec 2020 17:11:00 +0100</lastBuildDate>
     
-	<atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://bunyk.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Machine Translation course notes</title>
-      <link>http://example.org/posts/coursera_mt/</link>
+      <link>http://bunyk.github.io/posts/coursera_mt/</link>
       <pubDate>Fri, 04 Dec 2020 17:11:00 +0100</pubDate>
       
-      <guid>http://example.org/posts/coursera_mt/</guid>
+      <guid>http://bunyk.github.io/posts/coursera_mt/</guid>
       <description>&lt;p&gt;Recently finished Coursera course on &lt;a href=&#34;https://www.coursera.org/learn/machinetranslation/&#34;&gt;Machine Translation&lt;/a&gt;. That was mostly overwiew course without any programming practice, but with a lot of links to scientific papers. So it is somewhat theoretical, but I would probably recommend if you want to dive into that field from research point of view.&lt;/p&gt;
 
 &lt;p&gt;So for example you get quizzed with questions like:
@@ -38,10 +38,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>Thoughs on typing</title>
-      <link>http://example.org/posts/typing/</link>
+      <link>http://bunyk.github.io/posts/typing/</link>
       <pubDate>Wed, 23 Sep 2020 18:36:19 +0200</pubDate>
       
-      <guid>http://example.org/posts/typing/</guid>
+      <guid>http://bunyk.github.io/posts/typing/</guid>
       <description>&lt;p&gt;I was searching for something related to SICP, found &lt;a href=&#34;https://irreal.org/blog/?p=6019&#34;&gt;this post&lt;/a&gt;, and noticed another article on that blog, &lt;a href=&#34;https://irreal.org/blog/?p=9115&#34;&gt;about typing speed&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;That article argues that even though typing speed usually is considered to not be a bottleneck in the developer&amp;rsquo;s productivity, it really is. Because, even if we agree that typing code is a small fraction of all the work that software developer is doing, developers type a lot, and it&amp;rsquo;s mostly communication: chats, Jira, emails, documentation, etc.&lt;/p&gt;
@@ -51,11 +51,11 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 2.5.1 Generic arithmetic operations</title>
-      <link>http://example.org/posts/sicp2.5.1/</link>
+      <link>http://bunyk.github.io/posts/sicp2.5.1/</link>
       <pubDate>Wed, 02 Sep 2020 19:27:13 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp2.5.1/</guid>
-      <description>&lt;p&gt;In &lt;a href=&#34;http://example.org/posts/sicp2.4/&#34;&gt;previous post&lt;/a&gt; I have used wrong StackOverflow answer. :) Or, to be more precise, right answer for that section, but useless here, as we want to store in table functions for multiple arguments.&lt;/p&gt;
+      <guid>http://bunyk.github.io/posts/sicp2.5.1/</guid>
+      <description>&lt;p&gt;In &lt;a href=&#34;http://bunyk.github.io/posts/sicp2.4/&#34;&gt;previous post&lt;/a&gt; I have used wrong StackOverflow answer. :) Or, to be more precise, right answer for that section, but useless here, as we want to store in table functions for multiple arguments.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/a/19114031/816449&#34;&gt;Correct answer&lt;/a&gt; that supports lists looks like this:
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;define &lt;/span&gt;*op-table* (make-hash-table))
@@ -71,10 +71,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 2.4 Multiple representations for abstract data</title>
-      <link>http://example.org/posts/sicp2.4/</link>
+      <link>http://bunyk.github.io/posts/sicp2.4/</link>
       <pubDate>Wed, 26 Aug 2020 19:03:55 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp2.4/</guid>
+      <guid>http://bunyk.github.io/posts/sicp2.4/</guid>
       <description>&lt;p&gt;I went on vacation and lost cadence on this project. Need to get back on track, remember how to lauch interpreter, etc. :)&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-17.html&#34;&gt;Link to the chapter&lt;/a&gt;&lt;/p&gt;
@@ -94,10 +94,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 2.3.4 Huffman encoding</title>
-      <link>http://example.org/posts/sicp2.3.4/</link>
+      <link>http://bunyk.github.io/posts/sicp2.3.4/</link>
       <pubDate>Sun, 02 Aug 2020 18:20:22 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp2.3.4/</guid>
+      <guid>http://bunyk.github.io/posts/sicp2.3.4/</guid>
       <description>&lt;p&gt;Exercises to use sets and trees in practice. This topic reminds me of project in Scala course by Martin Odersky.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -105,10 +105,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 2.3.3 Representing sets</title>
-      <link>http://example.org/posts/sicp2.3.3/</link>
+      <link>http://bunyk.github.io/posts/sicp2.3.3/</link>
       <pubDate>Tue, 28 Jul 2020 23:59:22 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp2.3.3/</guid>
+      <guid>http://bunyk.github.io/posts/sicp2.3.3/</guid>
       <description>&lt;p&gt;This was more boring in comparison to previous section, probably because it required writing less code, and just writing more explanations. Writing is thinking, so I tried to do that. Or maybe it was boring because sets are not as exciting as symbolic differentiation. At least when you have high level language.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -116,10 +116,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 2.3.2 Symbolic differentiation</title>
-      <link>http://example.org/posts/sicp2.3.2/</link>
+      <link>http://bunyk.github.io/posts/sicp2.3.2/</link>
       <pubDate>Sun, 26 Jul 2020 09:00:47 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp2.3.2/</guid>
+      <guid>http://bunyk.github.io/posts/sicp2.3.2/</guid>
       <description>&lt;p&gt;I decided to skip picture language, because of technical reasons. Also, 2.3.1 I&amp;rsquo;ll do in this post, because it was just to short. Here we get one step clother to build interpreter, not yet for programming language, but at least for mathematical expressions.&lt;/p&gt;
 
 &lt;p&gt;And now we are in the &lt;a href=&#34;https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-16.html#%_sec_2.3&#34;&gt;middle of second chapter&lt;/a&gt;.&lt;/p&gt;
@@ -129,10 +129,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 2.2.3 Sequences as Conventional Interfaces</title>
-      <link>http://example.org/posts/sicp2.2.3/</link>
+      <link>http://bunyk.github.io/posts/sicp2.2.3/</link>
       <pubDate>Thu, 23 Jul 2020 20:21:19 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp2.2.3/</guid>
+      <guid>http://bunyk.github.io/posts/sicp2.2.3/</guid>
       <description>&lt;p&gt;Here we become skilled in list manipulation and build a set of useful subroutines.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -140,10 +140,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 2.2.2 Hierarchical structures</title>
-      <link>http://example.org/posts/sicp2.2.2/</link>
+      <link>http://bunyk.github.io/posts/sicp2.2.2/</link>
       <pubDate>Sun, 19 Jul 2020 23:07:22 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp2.2.2/</guid>
+      <guid>http://bunyk.github.io/posts/sicp2.2.2/</guid>
       <description>&lt;p&gt;AKA trees. Here I learned to debug Scheme a little bit, because I wrote code that not just worked from the first try.&lt;/p&gt;
 
 &lt;p&gt;Also here some trivial exercises are skipped, because one with drawing I done on paper and won&amp;rsquo;t upload it here because it is useless, and another is &amp;ldquo;What would interpreter print&amp;rdquo;, which I guessed, tested with interpreter and it was right. If you want to have solution - ask your interpreter.&lt;/p&gt;
@@ -153,10 +153,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 2.2.1 Sequences</title>
-      <link>http://example.org/posts/sicp2.2.1/</link>
+      <link>http://bunyk.github.io/posts/sicp2.2.1/</link>
       <pubDate>Thu, 16 Jul 2020 23:39:38 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp2.2.1/</guid>
+      <guid>http://bunyk.github.io/posts/sicp2.2.1/</guid>
       <description>&lt;p&gt;Finally, the thing Lisp was named after.&lt;/p&gt;
 
 &lt;p&gt;Fix MIT Scheme to be like SICP scheme using this:&lt;/p&gt;
@@ -168,10 +168,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 2.1.4: Interval arithmetic</title>
-      <link>http://example.org/posts/sicp2.1.4/</link>
+      <link>http://bunyk.github.io/posts/sicp2.1.4/</link>
       <pubDate>Wed, 15 Jul 2020 20:36:52 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp2.1.4/</guid>
+      <guid>http://bunyk.github.io/posts/sicp2.1.4/</guid>
       <description>&lt;p&gt;Less mind-blowing ideas, more practice.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -179,10 +179,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 2.1.3 Meaning of data</title>
-      <link>http://example.org/posts/sicp2.1.3/</link>
+      <link>http://bunyk.github.io/posts/sicp2.1.3/</link>
       <pubDate>Fri, 10 Jul 2020 21:02:43 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp2.1.3/</guid>
+      <guid>http://bunyk.github.io/posts/sicp2.1.3/</guid>
       <description>&lt;p&gt;This section blows your mind by showing that data could be represented by functions. That&amp;rsquo;s kid of obvious that array or assotiative array could be replaced by function that returns value by index, but here you replace with functions even the most basic data type - integer. Not for practical reasons, but I guess to achieve satory about lambda calculus.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -190,10 +190,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 2.1.2 Abstraction barriers</title>
-      <link>http://example.org/posts/sicp2.1.2/</link>
+      <link>http://bunyk.github.io/posts/sicp2.1.2/</link>
       <pubDate>Wed, 08 Jul 2020 23:44:14 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp2.1.2/</guid>
+      <guid>http://bunyk.github.io/posts/sicp2.1.2/</guid>
       <description>&lt;p&gt;In this section I&amp;rsquo;m starting to have strong need for types.&lt;/p&gt;
 
 &lt;p&gt;Code in exercises becomes more verbose.&lt;/p&gt;
@@ -203,10 +203,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SISP 2.1.1: Rational numbers</title>
-      <link>http://example.org/posts/sicp2.1.1/</link>
+      <link>http://bunyk.github.io/posts/sicp2.1.1/</link>
       <pubDate>Wed, 08 Jul 2020 23:41:33 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp2.1.1/</guid>
+      <guid>http://bunyk.github.io/posts/sicp2.1.1/</guid>
       <description>&lt;h2 id=&#34;exercise-2-1&#34;&gt;Exercise 2.1&lt;/h2&gt;
 
 &lt;p&gt;Here is how you construct rational number:&lt;/p&gt;
@@ -216,10 +216,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 1.3.4 Procedures as returned values</title>
-      <link>http://example.org/posts/sicp1.3.4/</link>
+      <link>http://bunyk.github.io/posts/sicp1.3.4/</link>
       <pubDate>Thu, 02 Jul 2020 23:43:40 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp1.3.4/</guid>
+      <guid>http://bunyk.github.io/posts/sicp1.3.4/</guid>
       <description>&lt;p&gt;Today I have learned that John Carmack was also challenged by SICP:&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -233,10 +233,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 1.3.3 Procedures as general methods</title>
-      <link>http://example.org/posts/sicp1.3.3/</link>
+      <link>http://bunyk.github.io/posts/sicp1.3.3/</link>
       <pubDate>Mon, 29 Jun 2020 23:32:06 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp1.3.3/</guid>
+      <guid>http://bunyk.github.io/posts/sicp1.3.3/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ll attach solution from previous section to this post as it was the only exercise there.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -244,10 +244,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 1.3.1 Procedures as arguments</title>
-      <link>http://example.org/posts/sicp1.3.1/</link>
+      <link>http://bunyk.github.io/posts/sicp1.3.1/</link>
       <pubDate>Sat, 27 Jun 2020 19:32:06 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp1.3.1/</guid>
+      <guid>http://bunyk.github.io/posts/sicp1.3.1/</guid>
       <description>&lt;p&gt;Solving more exercises, trying not to skip to be able to learn next chapters better.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -255,10 +255,10 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 1.2.6 Primes</title>
-      <link>http://example.org/posts/sicp1.2.6/</link>
+      <link>http://bunyk.github.io/posts/sicp1.2.6/</link>
       <pubDate>Sun, 21 Jun 2020 18:22:37 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp1.2.6/</guid>
+      <guid>http://bunyk.github.io/posts/sicp1.2.6/</guid>
       <description>&lt;p&gt;A little bit of number theory.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -266,30 +266,30 @@ One important difference between phrase-based MT and n-gram based MT is:&lt;/p&g
     
     <item>
       <title>SICP 1.2.4 Exponentiation</title>
-      <link>http://example.org/posts/sicp1.2.4/</link>
+      <link>http://bunyk.github.io/posts/sicp1.2.4/</link>
       <pubDate>Sat, 20 Jun 2020 19:04:58 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp1.2.4/</guid>
+      <guid>http://bunyk.github.io/posts/sicp1.2.4/</guid>
       <description>Today I learned that ancient mit-scheme REPL could be improved with history &amp;amp; tab completion. Thanks to this StackOverflow answer. sudo apt-get install rlwrap, and then run scheme as rlwrap scheme That answer is not very recent too, but here we are trying to learn really ancient magic.
 And this section really starts to feel like magic. In the end, I learned that there is a way to compute n-th Fibonacci number with time complexity O(log(n)).</description>
     </item>
     
     <item>
       <title>SICP 1.2.2 Tree recursion</title>
-      <link>http://example.org/posts/sicp1.2.2/</link>
+      <link>http://bunyk.github.io/posts/sicp1.2.2/</link>
       <pubDate>Sun, 14 Jun 2020 21:06:09 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp1.2.2/</guid>
+      <guid>http://bunyk.github.io/posts/sicp1.2.2/</guid>
       <description>I like how they did not shown yet how to work with any data structures, but wrote function that behaves like a immutable array:
 (define (first-denomination kinds-of-coins) (cond ((= kinds-of-coins 1) 1) ((= kinds-of-coins 2) 5) ((= kinds-of-coins 3) 10) ((= kinds-of-coins 4) 25) ((= kinds-of-coins 5) 50))) Exercise 1.11 Functions should produce following sequence: 1, 2, 4, 11, 25, 59, 142 (Sequence A100550 in the On-Line Encyclopedia of Integer Sequences)</description>
     </item>
     
     <item>
       <title>SICP1.2.1 Recursion &amp; Iteration</title>
-      <link>http://example.org/posts/sicp1.2.1/</link>
+      <link>http://bunyk.github.io/posts/sicp1.2.1/</link>
       <pubDate>Sun, 14 Jun 2020 20:28:16 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp1.2.1/</guid>
+      <guid>http://bunyk.github.io/posts/sicp1.2.1/</guid>
       <description>&lt;p&gt;Ok, second subchapter is more challenging, so I&amp;rsquo;ll go by subsections.&lt;/p&gt;
 
 &lt;p&gt;Here is &lt;a href=&#34;https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.1&#34;&gt;link to the chapter of the book I would solve today&lt;/a&gt;&lt;/p&gt;
@@ -299,10 +299,10 @@ And this section really starts to feel like magic. In the end, I learned that th
     
     <item>
       <title>SICP 1.1 The Elements of Programming</title>
-      <link>http://example.org/posts/sicp1.1/</link>
+      <link>http://bunyk.github.io/posts/sicp1.1/</link>
       <pubDate>Sat, 13 Jun 2020 23:22:32 +0200</pubDate>
       
-      <guid>http://example.org/posts/sicp1.1/</guid>
+      <guid>http://bunyk.github.io/posts/sicp1.1/</guid>
       <description>&lt;p&gt;Decided to finally try and go through this book. Will try to keep journal with notes here.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -310,10 +310,10 @@ And this section really starts to feel like magic. In the end, I learned that th
     
     <item>
       <title>HTTP2 vs WebSockets: a study of dashboard performance</title>
-      <link>http://example.org/posts/http2-vs-websockets/</link>
+      <link>http://bunyk.github.io/posts/http2-vs-websockets/</link>
       <pubDate>Thu, 20 Dec 2018 15:48:50 +0200</pubDate>
       
-      <guid>http://example.org/posts/http2-vs-websockets/</guid>
+      <guid>http://bunyk.github.io/posts/http2-vs-websockets/</guid>
       <description>&lt;p&gt;In this post, we will compare the performance of different approaches to load data for analytics dashboards, or any page where we have lots of different requests to the same server.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -321,10 +321,10 @@ And this section really starts to feel like magic. In the end, I learned that th
     
     <item>
       <title>Hello World</title>
-      <link>http://example.org/posts/hello-world/</link>
+      <link>http://bunyk.github.io/posts/hello-world/</link>
       <pubDate>Mon, 27 Aug 2018 23:12:23 +0300</pubDate>
       
-      <guid>http://example.org/posts/hello-world/</guid>
+      <guid>http://bunyk.github.io/posts/hello-world/</guid>
       <description>This is hello world in posts directory</description>
     </item>
     

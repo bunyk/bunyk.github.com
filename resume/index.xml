@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Resume on Bunyk Taras</title>
-    <link>http://example.org/resume/</link>
+    <link>http://bunyk.github.io/resume/</link>
     <description>Recent content in Resume on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 27 Aug 2018 23:47:07 +0300</lastBuildDate>
     
-	<atom:link href="http://example.org/resume/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://bunyk.github.io/resume/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
