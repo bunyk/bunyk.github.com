@@ -2,3 +2,13 @@
 	color: blue;
 	text-decoration: underline;
 }
+.toc {
+    float: left;
+    margin-right: 2em;
+    border-bottom-width: 1px;
+}
+.toc__menu a {
+    border-bottom: none;
+	color: blue;
+	text-decoration: underline;
+}

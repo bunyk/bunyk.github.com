@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notes on Bunyk Taras</title>
+    <link>http://bunyk.github.io/tags/notes/</link>
+    <description>Recent content in Notes on Bunyk Taras</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Jan 2021 13:43:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://bunyk.github.io/tags/notes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Academic and Business Writing course notes</title>
+      <link>http://bunyk.github.io/posts/edx_writing/</link>
+      <pubDate>Fri, 01 Jan 2021 13:43:00 +0100</pubDate>
+      
+      <guid>http://bunyk.github.io/posts/edx_writing/</guid>
+      <description>&lt;p&gt;This post will contain my notes and assignments from the edX course &lt;a href=&#34;https://courses.edx.org/courses/course-v1:BerkeleyX+ColWri2.2x+1T2020/course/&#34;&gt;Academic and Business Writing&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I would rearrange notes in order that seems more logical for the writing process, not in the order information was provided in course.&lt;/p&gt;
+
+&lt;p&gt;In general writing process could be organized in following steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Reading. To be a good writer you need to be active reader.&lt;/li&gt;
+&lt;li&gt;Prewriting. All the stuff you do before you get down to actual writing.&lt;/li&gt;
+&lt;li&gt;Writing draft, trying to use correct vocabulary.&lt;/li&gt;
+&lt;li&gt;Revision of that draft to produce next draft with fixed writing problems.&lt;/li&gt;
+&lt;li&gt;Repeating step 4 again for more low-level improvements of text (editing).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This steps and ways to get better at them will be detailed in sections below.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Machine Translation course notes</title>
+      <link>http://bunyk.github.io/posts/coursera_mt/</link>
+      <pubDate>Fri, 04 Dec 2020 17:11:00 +0100</pubDate>
+      
+      <guid>http://bunyk.github.io/posts/coursera_mt/</guid>
+      <description>&lt;p&gt;Recently finished Coursera course on &lt;a href=&#34;https://www.coursera.org/learn/machinetranslation/&#34;&gt;Machine Translation&lt;/a&gt;. That was mostly overwiew course without any programming practice, but with a lot of links to scientific papers. So it is somewhat theoretical, but I would probably recommend if you want to dive into that field from research point of view.&lt;/p&gt;
+
+&lt;p&gt;So for example you get quizzed with questions like:
+One important difference between phrase-based MT and n-gram based MT is:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;N-gram based MT has a fixed segmentation into units.&lt;/li&gt;
+&lt;li&gt;..&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;But you will not be taught how to implement any of those. Instead you will get links to &lt;a href=&#34;http://www.statmt.org/moses/&#34;&gt;MOSES&lt;/a&gt; &amp;amp; &lt;a href=&#34;http://www.statmt.org/moses/giza/GIZA++.html&#34;&gt;GIZA&lt;/a&gt; projects. But probably course will help to understand that project.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m not at all a researcher, have no skill of reading the papers, and to get most of that course, tried to just write down notes. I have couple of promising areas into which I should dive deeper and experiment, to help me with my job of automating content creation for multilingual e-commerce site. And just on listening lectures, writing down notes and doing quizzes took me 14 hours measured in pomodoros to complete (already more than SICP, I should return back to it eventually). Then I&amp;rsquo;ll probably try some hands-on experimentation &lt;a href=&#34;https://www.tensorflow.org/tutorials/text/nmt_with_attention&#34;&gt;with TensorFlow&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;So, here are typed notes made of my handwritten notes. They probably will not make much sense for you, especially because I&amp;rsquo;m to lazy to digitize hand-drawn diagrams, but maybe will help you to figure out what is inside the course and if you need to enroll into it yourself.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

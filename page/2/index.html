@@ -46,6 +46,25 @@
 <main class="main list" role="main"><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
+			<a href="/posts/sicp2.2.1/" rel="bookmark">
+			SICP 2.2.1 Sequences
+			</a>
+		</h3><div class="list__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2020-07-16T23:39:38">July 16, 2020</time></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>Finally, the thing Lisp was named after.</p>
+
+<p>Fix MIT Scheme to be like SICP scheme using this:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>nil <span style="color:#f92672">&#39;</span>())</code></pre></div>
+
+<p></p>
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
 			<a href="/posts/sicp2.1.4/" rel="bookmark">
 			SICP 2.1.4: Interval arithmetic
 			</a>
@@ -187,20 +206,6 @@
 		Today I learned that ancient mit-scheme REPL could be improved with history &amp; tab completion. Thanks to this StackOverflow answer. sudo apt-get install rlwrap, and then run scheme as rlwrap scheme That answer is not very recent too, but here we are trying to learn really ancient magic.
 And this section really starts to feel like magic. In the end, I learned that there is a way to compute n-th Fibonacci number with time complexity O(log(n)).
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/sicp1.2.2/" rel="bookmark">
-			SICP 1.2.2 Tree recursion
-			</a>
-		</h3><div class="list__meta meta">
-<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
-<time class="post__meta-date meta-date" datetime="2020-06-14T21:06:09">June 14, 2020</time></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		I like how they did not shown yet how to work with any data structures, but wrote function that behaves like a immutable array:
-(define (first-denomination kinds-of-coins) (cond ((= kinds-of-coins 1) 1) ((= kinds-of-coins 2) 5) ((= kinds-of-coins 3) 10) ((= kinds-of-coins 4) 25) ((= kinds-of-coins 5) 50))) Exercise 1.11 Functions should produce following sequence: 1, 2, 4, 11, 25, 59, 142 (Sequence A100550 in the On-Line Encyclopedia of Integer Sequences)
-	</div>
 </article>
 </main>
 
@@ -216,7 +221,7 @@ And this section really starts to feel like magic. In the end, I learned that th
 		</div>
 		<footer class="footer">
 	<div class="container">
-		<div class="footer__copyright">&copy; 2020 Bunyk Taras. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+		<div class="footer__copyright">&copy; 2021 Bunyk Taras. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
 	</div>
 </footer>
 	</div>

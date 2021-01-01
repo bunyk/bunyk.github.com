@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://bunyk.github.io/posts/edx_writing/</loc>
+    <lastmod>2021-01-01T13:43:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://bunyk.github.io/posts/coursera_mt/</loc>
     <lastmod>2020-12-04T17:11:00+01:00</lastmod>
   </url>
@@ -129,7 +134,7 @@
   
   <url>
     <loc>http://bunyk.github.io/</loc>
-    <lastmod>2020-12-04T17:11:00+01:00</lastmod>
+    <lastmod>2021-01-01T13:43:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -145,8 +150,20 @@
   </url>
   
   <url>
+    <loc>http://bunyk.github.io/tags/mooc/</loc>
+    <lastmod>2021-01-01T13:43:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://bunyk.github.io/tags/notes/</loc>
+    <lastmod>2021-01-01T13:43:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://bunyk.github.io/posts/</loc>
-    <lastmod>2020-12-04T17:11:00+01:00</lastmod>
+    <lastmod>2021-01-01T13:43:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
