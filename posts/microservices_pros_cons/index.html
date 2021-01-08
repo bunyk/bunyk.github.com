@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>To split or not to split? What are microservices and should you use them.</title>
+	<meta name="description" content="">
+	<meta name="generator" content="Hugo 0.48-DEV" />
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo" role="banner">
+			<a class="logo__link" href="/" title="Bunyk Taras" rel="home">
+				<div class="logo__title">Bunyk Taras</div>
+				
+			</a>
+		</div>
+	</div>
+	
+<nav class="menu">
+	<ul class="menu__list">
+		<li class="menu__item"><a class="menu__link" href="/">HOME</a></li>
+		<li class="menu__item"><a class="menu__link" href="/resume/">RESUME</a></li>
+		<li class="menu__item"><a class="menu__link" href="https://bunyk.wordpress.com/">OLD BLOG</a></li>
+	</ul>
+</nav>
+
+</header>
+		<div class="wrapper flex">
+			<section class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">To split or not to split? What are microservices and should you use them.</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2021-01-08T20:53:45">January 08, 2021</time></div>
+		</header><div class="content post__content clearfix">
+			<p>Notes from reading early 2nd edition release of book <strong>Building Microservices</strong> by <em>Sam Newman</em>.</p>
+
+<p></p>
+
+<h2 id="microservices">Microservices</h2>
+
+<p><strong>Microservices</strong> are independently releasable services modelled around business domain. <strong>Services</strong> are programs that encapsulate some functionality and make it available to other services over network.</p>
+
+<p>There is related concept of Service Oriented Architecture (SOA). Microservices is one of the approaches to SOA in the same way as Scrum is one of the Agine approaches to development. In SOA you have multiple services that collaborate with each other, but they are not necessary independently deployable. For microservices independent deployment is a must.</p>
+
+<p>Independent deployment means that you could deploy your microservices without having to deploy any other service. This could be achieved by designing service boundaries properly.</p>
+
+<p>To have proper boundaries, you should model your services around business domain, so the changes that involve different services become less likely.</p>
+
+<p>Popular 3-layer architecture of front-end (UI), back-end (business logic) and storage (Database), is contrast to this, because most of the time adding some new feature involves changing each layer. For example to display new field, it needs to be added to UI, to backend for processing, and to database schema. But this architecture is so popular because of Conway&rsquo;s law: &ldquo;Any organization that designs a system will produce a design whose structure is a copy of the organization&rsquo;s communication structure&rdquo;, and the fact that organisations often had developers grouped into departments by their qualification - database administration, UI design, etc&hellip; Instead it&rsquo;s better to build around business departments - warehouse, sales, accounting, etc&hellip;</p>
+
+<p>From the outside of the service boundary microservice should look like a black box. It should hide as much information as possible and share as little as possible. Information could be shared by API endpoints or messages in message queues. Each microservice should own their own state. Sharing single database between different microservices is a big no no. This is intended to make changing internal implementation very easy, and is similar to concept of encapsulation in OOP.</p>
+
+<p>What size should microservices be? Well, small, so they could be easily understood, but there is no exact measure. Size should depend on purpose and architecture and is not very important concern.</p>
+
+<p>Microservices require some supporting tech:</p>
+
+<ul>
+<li>Log aggregation</li>
+<li>Distributed tracing</li>
+<li>Containers and orchestration</li>
+<li>Streaming (event queues)</li>
+<li>Cloud infrastructure</li>
+</ul>
+
+<h2 id="monoliths">Monoliths</h2>
+
+<p><strong>Monolith</strong> is opposite concept - anything that is not independenly deployed. Monolith could be implemented in many ways: it could be developed as single application, it could be built from multiple independently developed modules or it could be <strong>distributed monolith</strong>: bunch of services that does not share code, and could be located on different hosts but still have to be de deployed together.</p>
+
+<p>Contrary to popular opinion that monolith is a bad thing and often associated with legacy, it is not legacy. Actually, it should be default choice, and you should have reasons to not use monolit.</p>
+
+<p>Monolits have lots of servious advantages, like simplicity, avoiding problems of distributed systems, better code reuse inside monolith (if you need function, you just call it, no need for copypaste or creating external library).</p>
+
+<h2 id="how-to-choose">How to choose?</h2>
+
+<h3 id="advantages-of-microservices">Advantages of microservices</h3>
+
+<p>You should use microservices if you want to allow developers independently work on their parts of the software, so they don&rsquo;t get in each ones way. One developer could want to do a deployment to fix a bug, but other could want to wait with deployment, because there is unfixed bug in master branch that needs to be fixed first. If you have company with hundreds of employees, you should definitely consider them.</p>
+
+<ul>
+<li>They allow <strong>heterogenity</strong>. You will not be constrained by one language or framework.</li>
+<li><strong>Robustness</strong>. Failure of one microservices should cause less harm than failure of whole monolith and not bring system down.</li>
+<li><strong>Precise scallability</strong>. You scale only what needs to be scaled. If you see that you need more performance, you could start more instances of the service that is bottleneck, and not deploy whole app couple of times.</li>
+<li><strong>Faster deployment</strong>. Deploying one-line change in million-code app will take more time and resurces than in small microservice.</li>
+</ul>
+
+<h3 id="pain-points">Pain points</h3>
+
+<p>You should better not use microservices for new products and in startups where domain is not yet precisely defined and could quickly change. If your team consists only from 5 people, you definitely don&rsquo;t need them.</p>
+
+<ul>
+<li><strong>More overhead work</strong> to develop and support microservices.</li>
+<li>Problems with <strong>data consistency</strong></li>
+<li><strong>Techology overload</strong></li>
+<li><strong>Hard to develop</strong>. You will no longer be able to run whole system on your local machine.</li>
+<li><strong>Hard to do reporting</strong> and queries across data in different services.</li>
+<li><strong>Hard to troubleshoot and monitor</strong>. To find failure in a system you will need to look into multiple services.</li>
+<li><strong>Hard to test</strong>. It is hard to create fixtures and environment to run system test. Often false positives would be caused by configuration of test environment.</li>
+<li><strong>Increased latency</strong>. What before would have been call to a function or readind a RAM, now would be a network request, which significantly slows things down.</li>
+</ul>
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/notes/" rel="tag">notes</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "bunykshumblehomepage" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</section>
+			
+		</div>
+		<footer class="footer">
+	<div class="container">
+		<div class="footer__copyright">&copy; 2021 Bunyk Taras. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+	</div>
+</footer>
+	</div>
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+		label: "Menu",
+	});
+</script></body>
+</html>
