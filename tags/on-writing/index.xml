@@ -6,10 +6,23 @@
     <description>Recent content in On Writing on Bunyk Taras</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Jan 2021 23:32:22 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 29 Jan 2021 00:07:06 +0100</lastBuildDate>
     
 	<atom:link href="http://bunyk.github.io/tags/on-writing/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Revision checklist from Technical Writing One</title>
+      <link>http://bunyk.github.io/posts/revision_checklist/</link>
+      <pubDate>Fri, 29 Jan 2021 00:07:06 +0100</pubDate>
+      
+      <guid>http://bunyk.github.io/posts/revision_checklist/</guid>
+      <description>&lt;p&gt;Google has nice course on technical writing. It&amp;rsquo;s text itself is example on how to apply advice you will learn there. I finished first part twice, because first time I just did exercises and not made any notes. Before starting second part I noticed that I forgot almost everything, so I retook it with also taking some notes.&lt;/p&gt;
+
+&lt;p&gt;End of the course gives &lt;a href=&#34;https://developers.google.com/tech-writing/one/summary&#34;&gt;short summary&lt;/a&gt;, but here I&amp;rsquo;ll give you mine checklist, which is a nice addition to &lt;a href=&#34;http://bunyk.github.io/posts/edx_writing/#drafting-and-revision&#34;&gt;revision checklist from Academic and Business Writing&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Evergreen notes</title>
