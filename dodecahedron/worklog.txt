@@ -1,4 +1,0 @@
-How to use if inside templates? Use if to switch text on button.
-
-How to get value of number spinner?
-Value of range?
