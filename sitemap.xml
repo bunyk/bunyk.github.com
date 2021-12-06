@@ -1,203 +1,197 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/revision_checklist/</loc>
-    <lastmod>2021-01-29T00:07:06+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/evergreen_notes/</loc>
-    <lastmod>2021-01-27T23:32:22+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/microservices_pros_cons/</loc>
-    <lastmod>2021-01-08T20:53:45+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/edx_writing/</loc>
-    <lastmod>2021-01-01T13:43:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/coursera_mt/</loc>
-    <lastmod>2020-12-04T17:11:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/typing/</loc>
-    <lastmod>2020-09-23T18:36:19+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp2.5.1/</loc>
-    <lastmod>2020-09-02T19:27:13+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp2.4/</loc>
-    <lastmod>2020-08-26T19:03:55+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp2.3.4/</loc>
-    <lastmod>2020-08-02T18:20:22+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp2.3.3/</loc>
-    <lastmod>2020-07-28T23:59:22+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp2.3.2/</loc>
-    <lastmod>2020-07-26T09:00:47+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp2.2.3/</loc>
-    <lastmod>2020-07-23T20:21:19+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp2.2.2/</loc>
-    <lastmod>2020-07-19T23:07:22+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp2.2.1/</loc>
-    <lastmod>2020-07-16T23:39:38+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp2.1.4/</loc>
-    <lastmod>2020-07-15T20:36:52+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp2.1.3/</loc>
-    <lastmod>2020-07-10T21:02:43+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp2.1.2/</loc>
-    <lastmod>2020-07-08T23:44:14+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp2.1.1/</loc>
-    <lastmod>2020-07-08T23:41:33+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp1.3.4/</loc>
-    <lastmod>2020-07-02T23:43:40+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp1.3.3/</loc>
-    <lastmod>2020-06-29T23:32:06+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp1.3.1/</loc>
-    <lastmod>2020-06-27T19:32:06+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp1.2.6/</loc>
-    <lastmod>2020-06-21T18:22:37+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp1.2.4/</loc>
-    <lastmod>2020-06-20T19:04:58+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp1.2.2/</loc>
-    <lastmod>2020-06-14T21:06:09+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp1.2.1/</loc>
-    <lastmod>2020-06-14T20:28:16+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/sicp1.1/</loc>
-    <lastmod>2020-06-13T23:22:32+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/http2-vs-websockets/</loc>
-    <lastmod>2018-12-20T15:48:50+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/resume/</loc>
-    <lastmod>2018-08-27T23:47:07+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/hello-world/</loc>
-    <lastmod>2018-08-27T23:12:23+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/</loc>
-    <lastmod>2021-01-29T00:07:06+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/tags/ideas/</loc>
-    <lastmod>2020-09-23T18:36:19+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/tags/mooc/</loc>
-    <lastmod>2021-01-01T13:43:00+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/tags/notes/</loc>
-    <lastmod>2021-01-29T00:07:06+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/tags/on-writing/</loc>
-    <lastmod>2021-01-29T00:07:06+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/posts/</loc>
-    <lastmod>2021-01-29T00:07:06+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/tags/sicp/</loc>
-    <lastmod>2020-09-02T19:27:13+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://bunyk.github.io/tags/</loc>
-    <lastmod>2020-09-23T18:36:19+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-</urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        <url>
+        	<loc>https://bunyk.github.io/</loc>
+          <lastmod>2021-12-06T19:28:45.686Z</lastmod>
+      	<changefreq>weekly</changefreq>
+      	<priority>1.0</priority>
+        </url>
+        
+              <url>
+                <loc>https://bunyk.github.io/posts/go_embed</loc>
+                <lastmod>2021-11-28T23:14:56+01:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/redesign_with_nextjs</loc>
+                <lastmod>2021-11-28T17:47:57+01:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/bare_metal_fizz_buzz</loc>
+                <lastmod>2021-10-31T19:56:45+01:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/bare_metal_hello_world</loc>
+                <lastmod>2021-10-23T21:44:30+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/revision_checklist</loc>
+                <lastmod>2021-04-09T22:23:31+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/evergreen_notes</loc>
+                <lastmod>2021-01-27T23:38:25+01:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/microservices_pros_cons</loc>
+                <lastmod>2021-12-06T18:36:52+01:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/edx_writing</loc>
+                <lastmod>2021-01-27T23:38:25+01:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/coursera_mt</loc>
+                <lastmod>2021-01-01T15:10:58+01:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/typing</loc>
+                <lastmod>2020-09-23T22:42:59+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp2.5.1</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp2.4</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp2.3.4</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp2.3.3</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp2.3.2</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp2.2.3</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp2.2.2</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp2.2.1</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp2.1.4</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp2.1.3</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp2.1.2</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp2.1.1</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp1.3.4</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp1.3.3</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp1.3.1</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp1.2.6</loc>
+                <lastmod>2021-05-04T10:23:43+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp1.2.4</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp1.2.2</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp1.2.1</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp1.1</loc>
+                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/http2-vs-websockets</loc>
+                <lastmod>2021-05-05T10:48:13+02:00</lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+      </urlset>
+    
