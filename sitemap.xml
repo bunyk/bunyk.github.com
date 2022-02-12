@@ -2,14 +2,20 @@
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         <url>
         	<loc>https://bunyk.github.io/</loc>
-          <lastmod>2021-12-07T17:49:45.813Z</lastmod>
+          <lastmod>2022-02-12T16:57:40.850Z</lastmod>
       	<changefreq>weekly</changefreq>
       	<priority>1.0</priority>
         </url>
         
               <url>
-                <loc>https://bunyk.github.io/posts/meditation</loc>
+                <loc>https://bunyk.github.io/posts/reverse_engineering_game_archive</loc>
                 <lastmod></lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
+              <url>
+                <loc>https://bunyk.github.io/posts/meditation</loc>
+                <lastmod>2021-12-07T18:50:58+01:00</lastmod>
                 <changefreq>monthly</changefreq>
               </url>
             
