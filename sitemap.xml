@@ -2,7 +2,7 @@
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         <url>
         	<loc>https://bunyk.github.io/</loc>
-          <lastmod>2022-10-10T10:55:03.187Z</lastmod>
+          <lastmod>2022-10-10T20:49:59.468Z</lastmod>
       	<changefreq>weekly</changefreq>
       	<priority>1.0</priority>
         </url>
@@ -87,13 +87,13 @@
             
               <url>
                 <loc>https://bunyk.github.io/posts/sicp2.5.1</loc>
-                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <lastmod>2022-10-10T22:49:27+02:00</lastmod>
                 <changefreq>monthly</changefreq>
               </url>
             
               <url>
                 <loc>https://bunyk.github.io/posts/sicp2.4</loc>
-                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <lastmod>2022-10-10T22:49:27+02:00</lastmod>
                 <changefreq>monthly</changefreq>
               </url>
             
@@ -111,7 +111,7 @@
             
               <url>
                 <loc>https://bunyk.github.io/posts/sicp2.3.2</loc>
-                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <lastmod>2022-10-10T22:49:27+02:00</lastmod>
                 <changefreq>monthly</changefreq>
               </url>
             
@@ -183,7 +183,7 @@
             
               <url>
                 <loc>https://bunyk.github.io/posts/sicp1.2.4</loc>
-                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <lastmod>2022-10-10T22:49:27+02:00</lastmod>
                 <changefreq>monthly</changefreq>
               </url>
             
@@ -195,7 +195,7 @@
             
               <url>
                 <loc>https://bunyk.github.io/posts/sicp1.2.1</loc>
-                <lastmod>2021-04-20T00:38:16+02:00</lastmod>
+                <lastmod>2022-10-10T22:49:27+02:00</lastmod>
                 <changefreq>monthly</changefreq>
               </url>
             
