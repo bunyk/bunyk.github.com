@@ -2,11 +2,17 @@
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         <url>
         	<loc>https://bunyk.github.io/</loc>
-          <lastmod>2022-10-10T20:49:59.468Z</lastmod>
+          <lastmod>2022-10-19T14:30:50.169Z</lastmod>
       	<changefreq>weekly</changefreq>
       	<priority>1.0</priority>
         </url>
         
+              <url>
+                <loc>https://bunyk.github.io/posts/write_more_but_shorter</loc>
+                <lastmod></lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
               <url>
                 <loc>https://bunyk.github.io/posts/testcontainers_go</loc>
                 <lastmod>2022-10-10T11:34:45+02:00</lastmod>
