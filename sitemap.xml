@@ -2,11 +2,17 @@
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         <url>
         	<loc>https://bunyk.github.io/</loc>
-          <lastmod>2022-10-25T14:53:03.010Z</lastmod>
+          <lastmod>2022-10-31T17:30:10.388Z</lastmod>
       	<changefreq>weekly</changefreq>
       	<priority>1.0</priority>
         </url>
         
+              <url>
+                <loc>https://bunyk.github.io/posts/sicp3.3.1</loc>
+                <lastmod></lastmod>
+                <changefreq>monthly</changefreq>
+              </url>
+            
               <url>
                 <loc>https://bunyk.github.io/posts/sicp3.1</loc>
                 <lastmod></lastmod>
@@ -21,7 +27,7 @@
             
               <url>
                 <loc>https://bunyk.github.io/posts/testcontainers_go</loc>
-                <lastmod>2022-10-10T11:34:45+02:00</lastmod>
+                <lastmod>2022-10-25T16:53:30+02:00</lastmod>
                 <changefreq>monthly</changefreq>
               </url>
             
