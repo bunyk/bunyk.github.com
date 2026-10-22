@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table Trainer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            background-color: #23272d;
+            color: #fff;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .header-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #user-select, #lang-select, #new-username {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .session-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        #session-buttons {
+            display: flex;
+            gap: 20px;
+        }
+        #session-timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+        .problem-section {
+            text-align: center;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #problem {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        #answer-input {
+            padding: 12px;
+            font-size: 24px;
+            width: 100px;
+            text-align: center;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            margin: 0 10px;
+        }
+        #answer-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        #answer-panel {
+            font-size: 64px;
+            font-weight: bold;
+            color: #f44336;
+            padding: 60px 0;
+        }
+        .spark-glow {
+            fill: rgba(255, 152, 0, 0.3);
+        }
+        .spark-core {
+            fill: #ff9800;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: spark-flicker 0.25s infinite alternate;
+        }
+        .spark-ray {
+            stroke: #ff9800;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            animation: spark-flicker 0.2s infinite alternate;
+        }
+        #spark line:nth-of-type(2) { animation-delay: -0.05s; }
+        #spark line:nth-of-type(3) { animation-delay: -0.09s; }
+        #spark line:nth-of-type(4) { animation-delay: -0.13s; }
+        #spark line:nth-of-type(5) { animation-delay: -0.17s; }
+        @keyframes spark-flicker {
+            from { opacity: 0.4; }
+            to { opacity: 1; }
+        }
+        #kaboom {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: kaboom-pop 1s ease-out forwards;
+        }
+        .kaboom-outer {
+            fill: #ff5722;
+        }
+        .kaboom-inner {
+            fill: #ffca28;
+        }
+        @keyframes kaboom-pop {
+            0% { transform: scale(0.1); opacity: 1; }
+            25% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+        .session-results {
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .session-stat {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+        .stats-section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .stats-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .heatmap {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 4px;
+            margin-top: 10px;
+        }
+        .heatmap-cell {
+            aspect-ratio: 1;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        .heatmap-cell.session-preview {
+            box-shadow: 0 0 0 3px #2196F3;
+        }
+        .average-score {
+            font-size: 18px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="header-title" id="app-title">Multiplication Table Trainer</span>
+        <div class="header-controls">
+            <select id="user-select" onchange="onUserSelectChange()"></select>
+            <select id="lang-select" onchange="onLangSelectChange()"></select>
+            <input type="text" id="new-username" class="hidden" placeholder="Enter new username" onkeydown="handleUsernameKeyDown(event)">
+            <button id="confirm-add-user-btn" class="hidden" onclick="addUser()">Add User</button>
+            <button id="cancel-add-user-btn" class="hidden" onclick="cancelAddUser()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="session-controls">
+        <div id="session-buttons"></div>
+        <div id="session-timer"></div>
+    </div>
+    
+    <div class="problem-section" id="problem-section" style="display: none;">
+        <div id="exercise-content">
+            <div id="problem">? × ? = ?</div>
+            <div>
+                <input type="number" id="answer-input" onkeydown="handleKeyDown(event)">
+            </div>
+        </div>
+        <div id="answer-panel" class="hidden"></div>
+        <svg id="bomb-timer" width="360" height="150" viewBox="0 0 240 100">
+            <g id="bomb-parts">
+                <circle cx="36" cy="64" r="26" fill="#23272d"/>
+                <circle cx="27" cy="55" r="5" fill="#fff" opacity="0.2"/>
+                <path id="fuse-path" d="M 36 38 Q 60 14 84 36 Q 108 58 132 36 Q 156 14 180 36 Q 204 58 228 36" fill="none" stroke="#8B4513" stroke-width="3" stroke-linecap="round"/>
+                <g id="spark">
+                    <line class="spark-ray" x1="4" y1="0" x2="9" y2="0"/>
+                    <line class="spark-ray" x1="-4" y1="0" x2="-9" y2="0"/>
+                    <line class="spark-ray" x1="0" y1="-4" x2="0" y2="-9"/>
+                    <line class="spark-ray" x1="3" y1="3" x2="7" y2="7"/>
+                    <line class="spark-ray" x1="-3" y1="3" x2="-7" y2="7"/>
+                    <circle class="spark-glow" r="6"/>
+                    <circle class="spark-core" r="3"/>
+                </g>
+            </g>
+            <g id="kaboom" class="hidden">
+                <polygon class="kaboom-outer" points="36,30 40.4,51.8 57.9,38 47.3,57.5 69.5,58.1 48.8,66.3 65.4,81 44.4,74 47.6,95.9 36,77 24.4,95.9 27.6,74 6.6,81 23.2,66.3 2.5,58.1 24.7,57.5 14.1,38 31.6,51.8"/>
+                <polygon class="kaboom-inner" points="36,46 38.4,57.4 47.6,50.2 42.1,60.5 53.7,60.9 42.9,65.2 51.6,73 40.5,69.4 42.2,80.9 36,71 29.8,80.9 31.5,69.4 20.4,73 29.1,65.2 18.3,60.9 29.9,60.5 24.4,50.2 33.6,57.4"/>
+            </g>
+        </svg>
+    </div>
+    
+    <div class="session-results" id="session-results" style="display: none;">
+        <h2 id="session-results-title">Session Results</h2>
+        <div class="session-stat" id="session-stat"></div>
+    </div>
+    
+    <div class="stats-section" id="stats-section" style="display: none;">
+        <div class="heatmap" id="heatmap"></div>
+        <div class="stats-header">
+            <div class="average-score" id="average-score">Average time: N/A</div>
+        </div>
+    </div>
+    </div>
+
+    <script src="einmaleins.js"></script>
+</body>
+</html>
